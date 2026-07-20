@@ -6,7 +6,6 @@
 }
 
 @media (max-width: 768px) {
-  .navbar-links { display: none; }
   .hero h1 { font-size: 26px; }
   .search-bar { flex-direction: column; }
   .property-gallery { grid-template-columns: 1fr; }
