@@ -16,6 +16,30 @@
 .navbar-links { display: flex; gap: var(--spacing-lg); }
 .navbar-links a:hover { color: var(--color-primary); }
 
+.navbar-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar-toggle { display: block; }
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #fff;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .navbar-links.open { display: flex; }
+}
+
 .hero {
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/assets/images/hero-bg.jpg') center/cover;
   color: #fff;
@@ -61,4 +85,4 @@
   background: #1a1a2e;
   color: #cfcfe8;
   padding: var(--spacing-xl) var(--spacing-lg);
-    }
+  }
