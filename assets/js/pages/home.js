@@ -1,9 +1,12 @@
-/* Home page logic — Hero Search + Filters + Latest/Recent Properties */
+/* Home page logic — Hero Search + Filters + Property Sections */
 
 document.addEventListener('DOMContentLoaded', () => {
   populateFilterOptions();
   handleSearchSubmit();
   renderPropertySections();
+  renderFeaturedCities();
+  renderPropertyCategories();
+  renderWhyChooseUs();
 });
 
 function populateFilterOptions() {
@@ -64,14 +67,13 @@ function handleSearchSubmit() {
 }
 
 /* ============================================
-   LATEST + RECENT PROPERTIES SECTIONS
+   LATEST + RECENT PROPERTIES
    ============================================ */
 
 function renderPropertySections() {
   const root = document.getElementById('homeSectionsRoot');
   if (!root || typeof dummyProperties === 'undefined') return;
 
-  // Latest = sabse naye postedDate wale, Recent = ulta order (dummy logic abhi ke liye)
   const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 4);
   const recent = [...dummyProperties].slice(0, 4);
 
@@ -84,6 +86,21 @@ function renderPropertySections() {
     <section class="section" id="recentPropertiesSection">
       <h2 class="section-title">Recently Added</h2>
       <div class="property-grid" id="recentPropertiesGrid"></div>
+    </section>
+
+    <section class="section" id="featuredCitiesSection">
+      <h2 class="section-title">Featured Cities</h2>
+      <div class="city-grid" id="featuredCitiesGrid"></div>
+    </section>
+
+    <section class="section" id="propertyCategoriesSection">
+      <h2 class="section-title">Property Categories</h2>
+      <div class="category-grid" id="propertyCategoriesGrid"></div>
+    </section>
+
+    <section class="section" id="whyChooseUsSection">
+      <h2 class="section-title">Why Choose Us</h2>
+      <div class="why-grid" id="whyChooseUsGrid"></div>
     </section>
   `;
 
@@ -116,4 +133,65 @@ function renderPropertyCards(gridId, properties) {
       </div>
     </a>
   `).join('');
-    }
+}
+
+/* ============================================
+   FEATURED CITIES
+   ============================================ */
+
+function renderFeaturedCities() {
+  const grid = document.getElementById('featuredCitiesGrid');
+  if (!grid || typeof CITIES === 'undefined' || typeof dummyProperties === 'undefined') return;
+
+  grid.innerHTML = CITIES.map(city => {
+    const count = dummyProperties.filter(p => p.city === city).length;
+    return `
+      <a href="./pages/property.html?city=${encodeURIComponent(city)}" class="city-card">
+        <h3>${city}</h3>
+        <p>${count} Properties</p>
+      </a>
+    `;
+  }).join('');
+}
+
+/* ============================================
+   PROPERTY CATEGORIES
+   ============================================ */
+
+function renderPropertyCategories() {
+  const grid = document.getElementById('propertyCategoriesGrid');
+  if (!grid || typeof PROPERTY_TYPES === 'undefined') return;
+
+  const icons = { House: '🏠', Flat: '🏢', Apartment: '🏬', Plot: '📐', Commercial: '🏪' };
+
+  grid.innerHTML = PROPERTY_TYPES.map(type => `
+    <a href="./pages/property.html?type=${encodeURIComponent(type)}" class="category-card">
+      <div class="category-icon">${icons[type] || '🏘️'}</div>
+      <h3>${type}</h3>
+    </a>
+  `).join('');
+}
+
+/* ============================================
+   WHY CHOOSE US
+   ============================================ */
+
+function renderWhyChooseUs() {
+  const grid = document.getElementById('whyChooseUsGrid');
+  if (!grid) return;
+
+  const points = [
+    { icon: '✅', title: 'Verified Listings', desc: 'Har property manually check ki jaati hai.' },
+    { icon: '🤝', title: 'Trusted Sellers', desc: 'Sirf verified buyers/sellers se deal karein.' },
+    { icon: '🔍', title: 'Easy Search', desc: 'Powerful filters se jaldi property dhoondhein.' },
+    { icon: '📞', title: '24/7 Support', desc: 'Hamari team hamesha aapki madad ke liye ready hai.' }
+  ];
+
+  grid.innerHTML = points.map(p => `
+    <div class="why-card">
+      <div class="why-icon">${p.icon}</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+    </div>
+  `).join('');
+      }
