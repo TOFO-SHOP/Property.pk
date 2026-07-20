@@ -6,7 +6,8 @@ function renderNavbar(targetId = 'navbar-root') {
   target.innerHTML = `
     <nav class="navbar">
       <a href="/index.html" class="navbar-logo">Property.pk</a>
-      <ul class="navbar-links">
+      <button class="navbar-toggle" id="navbarToggle" aria-label="Toggle menu">&#9776;</button>
+      <ul class="navbar-links" id="navbarLinks">
         <li><a href="/index.html">Home</a></li>
         <li><a href="/pages/property.html">Properties</a></li>
         <li><a href="/pages/about.html">About Us</a></li>
@@ -21,6 +22,12 @@ function renderNavbar(targetId = 'navbar-root') {
       </div>
     </nav>
   `;
+
+  const toggleBtn = document.getElementById('navbarToggle');
+  const links = document.getElementById('navbarLinks');
+  if (toggleBtn && links) {
+    toggleBtn.addEventListener('click', () => links.classList.toggle('open'));
+  }
 
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
