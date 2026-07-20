@@ -1,1 +1,74 @@
+/* Buyer / Seller / Admin Dashboard styles */
 
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: var(--color-bg-light);
+  border-right: 1px solid var(--color-border);
+  padding: var(--spacing-lg) var(--spacing-md);
+}
+
+.sidebar-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  margin-bottom: var(--spacing-sm);
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: var(--spacing-xl);
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.dashboard-card h3 {
+  font-size: 28px;
+  color: var(--color-primary);
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+.status-pending { background: #fff3cd; color: var(--color-warning); }
+.status-approved { background: #d1fae5; color: var(--color-success); }
+.status-rejected { background: #fee2e2; color: var(--color-danger); }
+.status-sold { background: #e0e7ff; color: var(--color-primary); }
