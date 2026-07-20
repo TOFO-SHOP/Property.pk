@@ -1,1 +1,21 @@
+/* Mobile / Tablet breakpoints — sabse aakhri mein load hogi */
 
+@media (max-width: 992px) {
+  .property-info-grid { grid-template-columns: 1fr; }
+  .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .navbar-links { display: none; }
+  .hero h1 { font-size: 26px; }
+  .search-bar { flex-direction: column; }
+  .property-gallery { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .dashboard-layout { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+  .dashboard-cards { grid-template-columns: 1fr; }
+  .property-grid { grid-template-columns: 1fr; }
+  .auth-card { padding: var(--spacing-lg); }
+}
