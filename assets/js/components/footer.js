@@ -8,8 +8,8 @@ function renderFooter(targetId = 'footer-root') {
       <div class="container">
         <p>&copy; ${year} Property.pk — All rights reserved.</p>
         <div>
-          <a href="/pages/privacy-policy.html">Privacy Policy</a> |
-          <a href="/pages/terms.html">Terms & Conditions</a>
+          <a href="./pages/privacy-policy.html">Privacy Policy</a> |
+          <a href="./pages/terms.html">Terms & Conditions</a>
         </div>
       </div>
     </footer>
