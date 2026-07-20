@@ -1,1 +1,49 @@
+/* Property card + Property details page styles */
 
+.property-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.property-card img { height: 180px; width: 100%; object-fit: cover; }
+.property-card-body { padding: var(--spacing-md); }
+.property-card-price { color: var(--color-primary); font-weight: 700; font-size: 18px; }
+.property-card-title { margin: var(--spacing-sm) 0; font-size: 16px; }
+.property-card-meta { display: flex; gap: var(--spacing-md); color: var(--color-text-muted); font-size: 13px; }
+
+.property-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.property-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+.property-gallery img { border-radius: var(--radius-md); height: 100%; object-fit: cover; }
+
+.property-info-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.seller-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.property-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  }
