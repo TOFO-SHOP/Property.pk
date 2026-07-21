@@ -53,6 +53,7 @@ function handleSearchSubmit() {
 const ICONS = {
   bed: `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 18h18"/><path d="M3 12V6a2 2 0 0 1 2-2h4v6"/></svg>`,
   bath: `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2Z"/><path d="M7 12V6a2 2 0 0 1 3-1.7"/><line x1="4" y1="19" x2="4" y2="21"/><line x1="18" y1="19" x2="18" y2="21"/></svg>`,
+  ruler: `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v12H3z"/><path d="M7 6v4"/><path d="M11 6v4"/><path d="M15 6v4"/><path d="M19 6v4"/></svg>`,
   house: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>`,
   flat: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="7" x2="8" y2="7.01"/><line x1="12" y1="7" x2="12" y2="7.01"/><line x1="16" y1="7" x2="16" y2="7.01"/><line x1="8" y1="11" x2="8" y2="11.01"/><line x1="12" y1="11" x2="12" y2="11.01"/><line x1="16" y1="11" x2="16" y2="11.01"/><line x1="9" y1="21" x2="9" y2="15"/><line x1="15" y1="21" x2="15" y2="15"/></svg>`,
   apartment: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>`,
@@ -135,14 +136,17 @@ function renderPropertyCards(gridId, properties) {
         <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
         <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
         <div class="property-card-meta">
-          <span>${ICONS.bed} ${p.bedrooms} Beds</span>
+          <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
           <span>${ICONS.bath} ${p.bathrooms} Baths</span>
+        </div>
+        <div class="property-card-meta">
+          <span>${ICONS.ruler} ${p.marla ?? p.size ?? '—'} Marla</span>
         </div>
       </div>
     </a>
-  `).join('') + `
-    <a href="./pages/property.html" class="property-card-viewall">View All →</a>
-  `;
+  `).join('');
+
+  initAutoScroll(gridId);
 }
 
 function renderPropertyCategories() {
@@ -175,4 +179,35 @@ function renderWhyChooseUs() {
       <p>${p.desc}</p>
     </div>
   `).join('');
-      }
+}
+
+/* ============================================
+   AUTO-SCROLL CAROUSEL
+   ============================================ */
+function initAutoScroll(gridId) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+
+  let paused = false;
+  let resumeTimer = null;
+
+  grid.addEventListener('pointerdown', () => {
+    paused = true;
+    clearTimeout(resumeTimer);
+  });
+  grid.addEventListener('pointerup', () => {
+    resumeTimer = setTimeout(() => { paused = false; }, 2000);
+  });
+  grid.addEventListener('mouseenter', () => { paused = true; });
+  grid.addEventListener('mouseleave', () => { paused = false; });
+
+  setInterval(() => {
+    if (paused) return;
+    const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
+    if (atEnd) {
+      grid.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      grid.scrollBy({ left: 160, behavior: 'smooth' });
+    }
+  }, 3000);
+}
