@@ -147,7 +147,7 @@ function renderPropertyCards(gridId, properties) {
     <a href="./pages/property-details.html?id=${p.id}" class="property-card">
       <img src="${p.image}" alt="${p.title}">
       <div class="property-card-body">
-        <div class="property-card-price">PKR ${formatPrice(p.price)}</div>
+        <div class="property-card-price">RS ${formatPrice(p.price)}</div>
 
 <h3 class="property-card-title">
   ${truncateText(p.title, 40)}
