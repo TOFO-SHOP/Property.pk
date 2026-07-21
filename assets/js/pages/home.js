@@ -109,8 +109,8 @@ function renderHomeSections() {
     </section>
   `;
 
-  const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 4);
-  const recent = [...dummyProperties].slice(0, 4);
+  const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
+  const recent = [...dummyProperties].slice(0, 8);
 
   renderPropertyCards('latestPropertiesGrid', latest);
   renderPropertyCards('recentPropertiesGrid', recent);
@@ -129,10 +129,10 @@ function renderPropertyCards(gridId, properties) {
 
   grid.innerHTML = properties.map(p => `
     <a href="./pages/property-details.html?id=${p.id}" class="property-card">
-      <img src="${p.image}" alt="${p.title}">
+      <img src="${p.image}" alt="${p.title}" loading="lazy">
       <div class="property-card-body">
         <div class="property-card-price">${formatPrice(p.price)}</div>
-        <h3 class="property-card-title">${truncateText(p.title, 40)}</h3>
+        <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
         <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
         <div class="property-card-meta">
           <span>${ICONS.bed} ${p.bedrooms} Beds</span>
@@ -140,7 +140,9 @@ function renderPropertyCards(gridId, properties) {
         </div>
       </div>
     </a>
-  `).join('');
+  `).join('') + `
+    <a href="./pages/property.html" class="property-card-viewall">View All →</a>
+  `;
 }
 
 function renderPropertyCategories() {
@@ -173,4 +175,4 @@ function renderWhyChooseUs() {
       <p>${p.desc}</p>
     </div>
   `).join('');
-  }
+      }
