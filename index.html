@@ -14,13 +14,17 @@
 
   <div id="navbar-root"></div>
 
-<main>
-    <!-- Hero Banner + Search Bar + Filters -->
+  <main>
     <section class="hero">
-      <div class="container">
-        <h1>Find Your Dream Property in Pakistan</h1>
-        <p>Buy, sell or rent — search thousands of verified listings</p>
+      <div class="hero-inner">
+        <span class="hero-eyebrow">Pakistan's Property Marketplace</span>
+        <h1>Find Your Next Home, With Confidence</h1>
+        <p class="hero-sub">Verified listings across Pakistan's major cities — buy, sell or rent with ease.</p>
+      </div>
+    </section>
 
+    <div class="container">
+      <div class="search-card">
         <form class="search-bar" id="searchForm">
           <input type="text" id="searchInput" placeholder="Search by title, city, or area...">
           <button type="submit" class="btn btn-primary">Search</button>
@@ -30,15 +34,12 @@
           <select id="filterCity">
             <option value="">All Cities</option>
           </select>
-
           <select id="filterType">
             <option value="">All Types</option>
           </select>
-
           <select id="filterStatus">
             <option value="">Buy / Rent</option>
           </select>
-
           <select id="filterBedrooms">
             <option value="">Bedrooms</option>
             <option value="1">1+</option>
@@ -48,11 +49,10 @@
           </select>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Baaki sections (Latest/Recent Properties, Featured Cities, etc) Step 2/3 mein yahan add honge -->
     <div class="container" id="homeSectionsRoot"></div>
-</main>
+  </main>
 
   <div id="footer-root"></div>
 
