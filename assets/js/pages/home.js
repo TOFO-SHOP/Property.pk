@@ -67,12 +67,6 @@ const ICONS = {
 
 const CATEGORY_ICON_MAP = { House: 'house', Flat: 'flat', Apartment: 'apartment', Plot: 'plot', Commercial: 'commercial' };
 
-const CITY_IMAGES = {
-  Karachi: 'https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?auto=format&fit=crop&w=500&q=60',
-  Lahore: 'https://images.unsplash.com/photo-1600100397608-f188cf59d7f9?auto=format&fit=crop&w=500&q=60',
-  Islamabad: 'https://images.unsplash.com/photo-1580746738099-1a1e6db8b6d1?auto=format&fit=crop&w=500&q=60',
-  Rawalpindi: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=500&q=60',
-  Faisalabad: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=500&q=60'
 };
 
 /* ============================================
@@ -100,13 +94,6 @@ function renderHomeSections() {
       </div>
     </section>
 
-    <section class="section" id="featuredCitiesSection">
-      <div class="section-head">
-        <div><span class="section-eyebrow">Explore by location</span><h2 class="section-title">Featured Cities</h2></div>
-      </div>
-      <div class="city-grid" id="featuredCitiesGrid"></div>
-    </section>
-
     <section class="section section-alt" id="propertyCategoriesSection">
       <div class="container">
         <div class="section-head">
@@ -129,7 +116,6 @@ function renderHomeSections() {
 
   renderPropertyCards('latestPropertiesGrid', latest);
   renderPropertyCards('recentPropertiesGrid', recent);
-  renderFeaturedCities();
   renderPropertyCategories();
   renderWhyChooseUs();
 }
@@ -165,24 +151,6 @@ function renderPropertyCards(gridId, properties) {
       </div>
     </a>
   `).join('');
-}
-
-function renderFeaturedCities() {
-  const grid = document.getElementById('featuredCitiesGrid');
-  if (!grid || typeof CITIES === 'undefined' || typeof dummyProperties === 'undefined') return;
-
-  grid.innerHTML = CITIES.map(city => {
-    const count = dummyProperties.filter(p => p.city === city).length;
-    const bg = CITY_IMAGES[city] || '';
-    return `
-      <a href="./pages/property.html?city=${encodeURIComponent(city)}" class="city-card" style="--city-bg:url('${bg}')">
-        <div>
-          <h3>${city}</h3>
-          <p>${count} Properties</p>
-        </div>
-      </a>
-    `;
-  }).join('');
 }
 
 function renderPropertyCategories() {
