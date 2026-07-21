@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +9,71 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
+
 <body>
 
   <div id="navbar-root"></div>
   <div id="page-header-root"></div>
 
-  <main class="container" style="padding: var(--spacing-2xl) var(--spacing-md); max-width:760px;">
-    <span class="section-eyebrow">Legal</span>
-    <h1 style="font-size:30px; margin:6px 0;">Privacy Policy</h1>
-    <p style="color:var(--color-text-muted); margin-bottom:var(--spacing-lg); font-size:14px;">Last updated: July 2026</p>
+  <main class="container static-page">
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">1. Information We Collect</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      We collect your name, email, phone number, and property-related information when you create
-      an account or list/search for a property.
+    <span class="page-eyebrow">Legal</span>
+
+    <h1>Privacy Policy</h1>
+
+    <p>Last updated: July 2026</p>
+
+    <h2>1. Information We Collect</h2>
+
+    <p>
+      We collect your name, email address, phone number, and property-related
+      information when you create an account, list a property, or search for
+      properties on Property.pk.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">2. How We Use It</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      Your information is used only to improve our services, connect buyers with sellers, and send
-      you relevant updates.
+    <h2>2. How We Use Your Information</h2>
+
+    <p>
+      Your information is used to improve our services, connect buyers with
+      sellers, verify listings, provide customer support, and send important
+      account or platform updates.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">3. Data Security</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      We use industry-standard security measures to keep your data safe.
+    <h2>3. Cookies</h2>
+
+    <p>
+      We may use cookies and similar technologies to improve your browsing
+      experience, remember your preferences, and analyze website traffic.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">4. Contact Us</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      Questions? Reach out via our <a href="./contact.html" style="color:var(--color-primary); font-weight:600;">Contact Us</a> page.
+    <h2>4. Third-Party Services</h2>
+
+    <p>
+      Some features may rely on trusted third-party providers. Those providers
+      have their own privacy policies regarding the data they process.
     </p>
+
+    <h2>5. Data Security</h2>
+
+    <p>
+      We use industry-standard security measures to help protect your personal
+      information from unauthorized access, alteration, or disclosure.
+    </p>
+
+    <h2>6. Your Rights</h2>
+
+    <p>
+      You may request access, correction, or deletion of your personal
+      information by contacting our support team.
+    </p>
+
+    <h2>7. Contact Us</h2>
+
+    <p>
+      If you have any questions about this Privacy Policy, please visit our
+      <a href="./contact.html">Contact Us</a> page.
+    </p>
+
   </main>
 
   <div id="footer-root"></div>
@@ -46,6 +81,13 @@
   <script src="../assets/js/components/navbar.js"></script>
   <script src="../assets/js/components/footer.js"></script>
   <script src="../assets/js/components/backButton.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', () => renderPageHeader('Privacy Policy'));</script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Privacy Policy");
+    });
+  </script>
+
 </body>
-</html>
+
+  </html>
