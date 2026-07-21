@@ -11,31 +11,33 @@
 <body>
 
   <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
 
-  <main class="container" style="padding: 40px 16px; max-width:800px;">
-    <h1>Privacy Policy</h1>
-    <p style="color:var(--color-text-muted); margin:16px 0;">Last updated: July 2026</p>
+  <main class="container" style="padding: var(--spacing-2xl) var(--spacing-md); max-width:760px;">
+    <span class="section-eyebrow">Legal</span>
+    <h1 style="font-size:30px; margin:6px 0;">Privacy Policy</h1>
+    <p style="color:var(--color-text-muted); margin-bottom:var(--spacing-lg); font-size:14px;">Last updated: July 2026</p>
 
-    <h3 style="margin-top:24px;">1. Information We Collect</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">1. Information We Collect</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Hum aapka naam, email, phone number, aur property se related information collect karte hain
-      jab aap account banate hain ya property list/search karte hain.
+      We collect your name, email, phone number, and property-related information when you create
+      an account or list/search for a property.
     </p>
 
-    <h3 style="margin-top:24px;">2. How We Use It</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">2. How We Use It</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Aapki information ka use sirf hamari services behtar banane, buyers-sellers ko connect karne,
-      aur aapko relevant updates bhejne ke liye hota hai.
+      Your information is used only to improve our services, connect buyers with sellers, and send
+      you relevant updates.
     </p>
 
-    <h3 style="margin-top:24px;">3. Data Security</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">3. Data Security</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Hum industry-standard security measures use karte hain taake aapka data safe rahe.
+      We use industry-standard security measures to keep your data safe.
     </p>
 
-    <h3 style="margin-top:24px;">4. Contact Us</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">4. Contact Us</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Koi sawal ho to <a href="./contact.html" style="color:var(--color-primary);">Contact Us</a> page se rabta karein.
+      Questions? Reach out via our <a href="./contact.html" style="color:var(--color-primary); font-weight:600;">Contact Us</a> page.
     </p>
   </main>
 
@@ -43,5 +45,7 @@
 
   <script src="../assets/js/components/navbar.js"></script>
   <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => renderPageHeader('Privacy Policy'));</script>
 </body>
-  </html>
+</html>
