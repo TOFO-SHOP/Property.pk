@@ -285,24 +285,23 @@ select:focus-visible {
     margin-bottom: 12px;
 }
 
-/* Zillow-style compact horizontal property carousel */
+/* Zillow-style compact auto-sliding property carousel */
 .property-grid {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
 .property-grid::-webkit-scrollbar { display: none; }
 
 .property-card {
-  scroll-snap-align: start;
-  flex: 0 0 220px;
+  flex: 0 0 150px;
   display: block;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   overflow: hidden;
   background: var(--color-bg);
   box-shadow: var(--shadow-sm);
@@ -315,27 +314,27 @@ select:focus-visible {
 
 .property-card img {
   width: 100%;
-  height: 150px;
+  height: 100px;
   object-fit: cover;
   background: var(--color-bg-warm);
   display: block;
 }
 
-.property-card-body { padding: 12px 14px 16px; }
+.property-card-body { padding: 8px 10px 10px; }
 
 .property-card-price {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--color-ink);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .property-card-title {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--color-text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -344,30 +343,11 @@ select:focus-visible {
 .property-card-meta {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
+  gap: 4px;
+  font-size: 10.5px;
   color: var(--color-text-muted);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  white-space: nowrap;
 }
-.property-card-meta .icon-svg { width: 14px; height: 14px; flex-shrink: 0; }
-.property-card-meta span + span { margin-left: 10px; }
-
-/* Trailing "View All" card inside the carousel */
-.property-card-viewall {
-  flex: 0 0 130px;
-  scroll-snap-align: start;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: 1.5px dashed var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 13px;
-  padding: 12px;
-}
-.property-card-viewall:hover {
-  border-color: var(--color-primary);
-  background: var(--color-bg-warm);
-   }
+.property-card-meta .icon-svg { width: 11px; height: 11px; flex-shrink: 0; }
+.property-card-meta span + span { margin-left: 8px; }
