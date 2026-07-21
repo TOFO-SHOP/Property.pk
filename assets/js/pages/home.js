@@ -33,13 +33,15 @@ const query = document.getElementById('searchInput')?.value.trim();
 const city = document.getElementById('filterCity')?.value;
 const type = document.getElementById('filterType')?.value;
 const status = document.getElementById('filterStatus')?.value;
-const bedrooms = document.getElementById('filterBedrooms')?.value;
+const rooms = document.getElementById('filterRooms')?.value;
+const floor = document.getElementById('filterFloor')?.value;
 
 if (query) params.set('q', query);  
 if (city) params.set('city', city);  
 if (type) params.set('type', type);  
 if (status) params.set('status', status);  
-if (bedrooms) params.set('bedrooms', bedrooms);  
+if (rooms) params.set('rooms', rooms);
+if (floor) params.set('floor', floor); 
 
 window.location.href = `./pages/property.html?${params.toString()}`;
 
