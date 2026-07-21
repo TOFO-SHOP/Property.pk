@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Property.pk</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+
+  <div id="navbar-root"></div>
+
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <h2>Contact Us</h2>
+      <p style="text-align:center; color:var(--color-text-muted); margin-bottom:16px; font-size:14px;">
+        Koi sawal hai? Humein message bhejein.
+      </p>
+
+      <div id="contactFormMessage"></div>
+
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="contactName">Full Name</label>
+          <input type="text" id="contactName" placeholder="Aapka naam">
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" placeholder="Aapka email">
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message</label>
+          <input type="text" id="contactMessage" placeholder="Aapka message">
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+      const msgBox = document.getElementById('contactFormMessage');
+
+      if (!isNotEmpty(name) || !isEmail(email) || !isNotEmpty(message)) {
+        msgBox.innerHTML = '<p style="color:var(--color-danger); margin-bottom:12px;">Please fill all fields correctly.</p>';
+        return;
+      }
+
+      // TODO: Phase 9 mein contactApi() se backend ko bhejenge
+      msgBox.innerHTML = '<p style="color:var(--color-success); margin-bottom:12px;">Message sent! Hum jald hi contact karenge.</p>';
+      document.getElementById('contactForm').reset();
+    });
+  </script>
+</body>
+        </html>
