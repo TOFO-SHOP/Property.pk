@@ -11,30 +11,33 @@
 <body>
 
   <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
 
-  <main class="container" style="padding: 40px 16px; max-width:800px;">
-    <h1>Terms & Conditions</h1>
-    <p style="color:var(--color-text-muted); margin:16px 0;">Last updated: July 2026</p>
+  <main class="container" style="padding: var(--spacing-2xl) var(--spacing-md); max-width:760px;">
+    <span class="section-eyebrow">Legal</span>
+    <h1 style="font-size:30px; margin:6px 0;">Terms & Conditions</h1>
+    <p style="color:var(--color-text-muted); margin-bottom:var(--spacing-lg); font-size:14px;">Last updated: July 2026</p>
 
-    <h3 style="margin-top:24px;">1. Acceptance of Terms</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">1. Acceptance of Terms</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Property.pk use karke, aap in terms and conditions ko accept karte hain.
+      By using Property.pk, you agree to these terms and conditions.
     </p>
 
-    <h3 style="margin-top:24px;">2. Listing Rules</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">2. Listing Rules</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Sellers ko accurate aur genuine property information post karni hogi. Fake listings remove
-      kar di jaayengi aur account suspend ho sakta hai.
+      Sellers must post accurate and genuine property information. Fake listings will be removed
+      and accounts may be suspended.
     </p>
 
-    <h3 style="margin-top:24px;">3. User Responsibilities</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">3. User Responsibilities</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Users apni account security aur di gayi information ki accuracy ke khud zimmedar hain.
+      Users are responsible for their own account security and the accuracy of information provided.
     </p>
 
-    <h3 style="margin-top:24px;">4. Limitation of Liability</h3>
+    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">4. Limitation of Liability</h3>
     <p style="color:var(--color-text-muted); margin-top:8px;">
-      Property.pk sirf ek platform hai — buyer/seller ke darmiyan deal ki zimmedari Property.pk par nahi hai.
+      Property.pk is a platform only — the responsibility for deals between buyers and sellers does
+      not rest with Property.pk.
     </p>
   </main>
 
@@ -42,5 +45,7 @@
 
   <script src="../assets/js/components/navbar.js"></script>
   <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => renderPageHeader('Terms & Conditions'));</script>
 </body>
 </html>
