@@ -351,3 +351,7 @@ select:focus-visible {
 }
 .property-card-meta .icon-svg { width: 11px; height: 11px; flex-shrink: 0; }
 .property-card-meta span + span { margin-left: 8px; }
+.property-grid {
+  display: flex !important;
+  overflow-x: auto !important;
+}
