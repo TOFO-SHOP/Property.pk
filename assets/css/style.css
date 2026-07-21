@@ -231,3 +231,36 @@ select:focus-visible {
   flex-shrink: 0;
    }
 
+/* ======================================================
+   STATIC PAGES
+   Privacy • Terms • About • Contact
+====================================================== */
+
+.static-page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+.static-page .page-eyebrow {
+    color: var(--color-accent-dark);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.static-page h2 {
+    font-size: 22px;
+    margin: 32px 0 10px;
+}
+
+.static-page h2:first-of-type {
+    margin-top: 0;
+}
+
+.static-page p {
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+    line-height: 1.7;
+}
