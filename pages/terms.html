@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +9,69 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
+
 <body>
 
   <div id="navbar-root"></div>
   <div id="page-header-root"></div>
 
-  <main class="container" style="padding: var(--spacing-2xl) var(--spacing-md); max-width:760px;">
-    <span class="section-eyebrow">Legal</span>
-    <h1 style="font-size:30px; margin:6px 0;">Terms & Conditions</h1>
-    <p style="color:var(--color-text-muted); margin-bottom:var(--spacing-lg); font-size:14px;">Last updated: July 2026</p>
+  <main class="container static-page">
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">1. Acceptance of Terms</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      By using Property.pk, you agree to these terms and conditions.
+    <span class="page-eyebrow">Legal</span>
+
+    <h1>Terms & Conditions</h1>
+
+    <p>Last updated: July 2026</p>
+
+    <h2>1. Acceptance of Terms</h2>
+
+    <p>
+      By accessing or using Property.pk, you agree to comply with these Terms
+      & Conditions. If you do not agree with any part of these terms, please
+      do not use our platform.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">2. Listing Rules</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      Sellers must post accurate and genuine property information. Fake listings will be removed
-      and accounts may be suspended.
+    <h2>2. Listing Rules</h2>
+
+    <p>
+      Sellers must provide accurate, complete, and genuine property
+      information. Fake, misleading, duplicate, or fraudulent listings may be
+      removed without notice, and the related accounts may be suspended or
+      permanently banned.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">3. User Responsibilities</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      Users are responsible for their own account security and the accuracy of information provided.
+    <h2>3. User Responsibilities</h2>
+
+    <p>
+      Users are responsible for maintaining the security of their accounts,
+      keeping login credentials confidential, and ensuring that all
+      information provided is accurate and up to date.
     </p>
 
-    <h3 style="font-size:18px; margin-top:var(--spacing-lg);">4. Limitation of Liability</h3>
-    <p style="color:var(--color-text-muted); margin-top:8px;">
-      Property.pk is a platform only — the responsibility for deals between buyers and sellers does
-      not rest with Property.pk.
+    <h2>4. Property Transactions</h2>
+
+    <p>
+      Property.pk acts as an online marketplace that connects buyers and
+      sellers. We are not a party to any transaction and do not guarantee the
+      completion, quality, or legality of any property deal.
     </p>
+
+    <h2>5. Limitation of Liability</h2>
+
+    <p>
+      Property.pk shall not be held responsible for any direct, indirect,
+      incidental, or consequential losses resulting from the use of the
+      platform or from transactions between buyers and sellers.
+    </p>
+
+    <h2>6. Changes to These Terms</h2>
+
+    <p>
+      We reserve the right to update these Terms & Conditions at any time.
+      Continued use of the platform after changes are published constitutes
+      acceptance of the revised terms.
+    </p>
+
   </main>
 
   <div id="footer-root"></div>
@@ -46,6 +79,13 @@
   <script src="../assets/js/components/navbar.js"></script>
   <script src="../assets/js/components/footer.js"></script>
   <script src="../assets/js/components/backButton.js"></script>
-  <script>document.addEventListener('DOMContentLoaded', () => renderPageHeader('Terms & Conditions'));</script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Terms & Conditions");
+    });
+  </script>
+
 </body>
+
 </html>
