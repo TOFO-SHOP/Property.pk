@@ -6,6 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHomeSections();
 });
 
+/* ---- Safe fallbacks (agar helpers.js mein ye functions na milein) ---- */
+if (typeof formatPrice === 'undefined') {
+  window.formatPrice = (n) => 'PKR ' + Number(n || 0).toLocaleString();
+}
+if (typeof truncateText === 'undefined') {
+  window.truncateText = (str, len) => (str && str.length > len) ? str.slice(0, len) + '…' : (str || '');
+}
+if (typeof showError === 'undefined') {
+  window.showError = (elId, msg) => {
+    const el = document.getElementById(elId);
+    if (el) el.innerHTML = `<p style="padding:16px;color:var(--color-text-muted);">${msg}</p>`;
+  };
+}
+
 function populateFilterOptions() {
   const citySelect = document.getElementById('filterCity');
   const typeSelect = document.getElementById('filterType');
@@ -73,7 +87,8 @@ const CATEGORY_ICON_MAP = { House: 'house', Flat: 'flat', Apartment: 'apartment'
    ============================================ */
 function renderHomeSections() {
   const root = document.getElementById('homeSectionsRoot');
-  if (!root || typeof dummyProperties === 'undefined') return;
+  if (!root) { console.error('homeSectionsRoot not found in HTML'); return; }
+  if (typeof dummyProperties === 'undefined') { console.error('dummyProperties not loaded — check property.js is linked before home.js'); return; }
 
   root.innerHTML = `
     <section class="section" id="latestPropertiesSection">
@@ -121,30 +136,35 @@ function renderHomeSections() {
 
 function renderPropertyCards(gridId, properties) {
   const grid = document.getElementById(gridId);
-  if (!grid) return;
+  if (!grid) { console.error(`Grid #${gridId} not found`); return; }
 
-  if (properties.length === 0) {
+  if (!properties || properties.length === 0) {
     showError(gridId, 'No properties found right now.');
     return;
   }
 
-  grid.innerHTML = properties.map(p => `
-    <a href="./pages/property-details.html?id=${p.id}" class="property-card">
-      <img src="${p.image}" alt="${p.title}" loading="lazy">
-      <div class="property-card-body">
-        <div class="property-card-price">${formatPrice(p.price)}</div>
-        <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
-        <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
-        <div class="property-card-meta">
-          <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
-          <span>${ICONS.bath} ${p.bathrooms} Baths</span>
+  try {
+    grid.innerHTML = properties.map(p => `
+      <a href="./pages/property-details.html?id=${p.id}" class="property-card">
+        <img src="${p.image}" alt="${p.title}" loading="lazy">
+        <div class="property-card-body">
+          <div class="property-card-price">${formatPrice(p.price)}</div>
+          <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
+          <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
+          <div class="property-card-meta">
+            <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
+            <span>${ICONS.bath} ${p.bathrooms} Baths</span>
+          </div>
+          <div class="property-card-meta">
+            <span>${ICONS.ruler} ${p.marla ?? p.size ?? '—'} Marla</span>
+          </div>
         </div>
-        <div class="property-card-meta">
-          <span>${ICONS.ruler} ${p.marla ?? p.size ?? '—'} Marla</span>
-        </div>
-      </div>
-    </a>
-  `).join('');
+      </a>
+    `).join('');
+  } catch (err) {
+    console.error(`renderPropertyCards failed for #${gridId}:`, err);
+    return;
+  }
 
   initAutoScroll(gridId);
 }
@@ -203,6 +223,7 @@ function initAutoScroll(gridId) {
 
   setInterval(() => {
     if (paused) return;
+    if (grid.scrollWidth <= grid.clientWidth) return; // nothing to scroll
     const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
     if (atEnd) {
       grid.scrollTo({ left: 0, behavior: 'smooth' });
