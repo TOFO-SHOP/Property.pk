@@ -6,22 +6,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  /* --- Brand palette --- */
-  --color-ink: #10202e;          /* near-black navy — headings, footer */
-  --color-primary: #1f4e79;      /* deep blue — links, secondary actions */
-  --color-primary-dark: #163a5c;
-  --color-accent: #b9862f;       /* brass/gold — CTAs, price highlights */
-  --color-accent-dark: #97701f;
+  /* --- Zillow-style palette --- */
+  --color-ink: #0b1a2b;          /* near-black navy — headings, footer */
+  --color-primary: #006aff;      /* Zillow blue — links, secondary actions */
+  --color-primary-dark: #0050c0;
+  --color-accent: #006aff;       /* CTAs, price highlights */
+  --color-accent-dark: #0050c0;
 
   --color-bg: #ffffff;
-  --color-bg-warm: #f6f4ee;      /* warm paper — alternating sections */
-  --color-border: #e3e1da;
-  --color-text: #10202e;
-  --color-text-muted: #5b6672;
+  --color-bg-warm: #f7f8fa;      /* light gray — alternating sections */
+  --color-border: #e1e5ea;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7685;
 
-  --color-success: #1e7a4c;
-  --color-danger: #b3261e;
-  --color-warning: #a16d0a;
+  --color-success: #17a673;
+  --color-danger: #d0342c;
+  --color-warning: #c77a00;
 
   /* --- Type --- */
   --font-display: 'Inter', -apple-system, sans-serif;
@@ -38,9 +38,9 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 14px;
-  --shadow-sm: 0 1px 3px rgba(16,32,46,0.08);
-  --shadow-md: 0 8px 30px rgba(16,32,46,0.12);
-  --shadow-lg: 0 20px 60px rgba(16,32,46,0.18);
+  --shadow-sm: 0 1px 3px rgba(11,26,43,0.08);
+  --shadow-md: 0 8px 30px rgba(11,26,43,0.10);
+  --shadow-lg: 0 20px 60px rgba(11,26,43,0.16);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -192,7 +192,7 @@ select:focus-visible {
 
 .nav-drawer-overlay {
   position: fixed; inset: 0;
-  background: rgba(16,32,46,0.5);
+  background: rgba(11,26,43,0.5);
   opacity: 0; pointer-events: none;
   transition: opacity 0.2s ease;
   z-index: 199;
@@ -354,4 +354,4 @@ select:focus-visible {
 .property-grid {
   display: flex !important;
   overflow-x: auto !important;
-}
+   }
