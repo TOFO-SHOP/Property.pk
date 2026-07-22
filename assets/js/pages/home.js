@@ -99,15 +99,6 @@ function renderHomeSections() {
       <div class="property-grid" id="latestPropertiesGrid"></div>
     </section>
 
-    <section class="section section-alt" id="recentPropertiesSection">
-      <div class="container">
-        <div class="section-head">
-          <div><span class="section-eyebrow">Just added</span><h2 class="section-title">Recently Added</h2></div>
-        </div>
-        <div class="property-grid" id="recentPropertiesGrid"></div>
-      </div>
-    </section>
-
     <section class="section section-alt" id="propertyCategoriesSection">
       <div class="container">
         <div class="section-head">
@@ -126,10 +117,8 @@ function renderHomeSections() {
   `;
 
   const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
-  const recent = [...dummyProperties].slice(0, 8);
 
   renderPropertyCards('latestPropertiesGrid', latest);
-  renderPropertyCards('recentPropertiesGrid', recent);
   renderPropertyCategories();
   renderWhyChooseUs();
 }
@@ -223,7 +212,7 @@ function initAutoScroll(gridId) {
 
   setInterval(() => {
     if (paused) return;
-    if (grid.scrollWidth <= grid.clientWidth) return; // nothing to scroll
+    if (grid.scrollWidth <= grid.clientWidth) return;
     const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
     if (atEnd) {
       grid.scrollTo({ left: 0, behavior: 'smooth' });
@@ -231,4 +220,4 @@ function initAutoScroll(gridId) {
       grid.scrollBy({ left: 160, behavior: 'smooth' });
     }
   }, 3000);
-}
+      }
