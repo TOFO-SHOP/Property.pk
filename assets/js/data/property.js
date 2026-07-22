@@ -9,10 +9,10 @@ const dummyProperties = [
     price: 8500000,
     city: 'Lahore',
     area: 'DHA Phase 5',
-    areaSize: '5 Marla',
+    marla: 5,
     bedrooms: 3,
     bathrooms: 2,
-    image: 'https://via.placeholder.com/400x300',
+    image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop',
     postedDate: '2026-07-10'
   },
   {
@@ -23,10 +23,10 @@ const dummyProperties = [
     price: 35000,
     city: 'Karachi',
     area: 'Clifton',
-    areaSize: '3 Marla',
+    marla: 3,
     bedrooms: 2,
     bathrooms: 2,
-    image: 'https://via.placeholder.com/400x300',
+    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop',
     postedDate: '2026-07-15'
   }
 ];
