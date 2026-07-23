@@ -3,8 +3,20 @@
 document.addEventListener('DOMContentLoaded', () => {
   populateFilterOptions();
   handleSearchSubmit();
+  handleFiltersToggle();
   renderHomeSections();
 });
+
+function handleFiltersToggle() {
+  const btn = document.getElementById('filtersToggle');
+  const panel = document.getElementById('filtersPanel');
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    btn.classList.toggle('active');
+  });
+}
 
 /* ---- Safe fallbacks (agar helpers.js mein ye functions na milein) ---- */
 if (typeof formatPrice === 'undefined') {
