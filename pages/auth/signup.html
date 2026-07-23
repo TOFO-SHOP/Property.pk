@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Property.pk</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/auth.css">
+  <link rel="stylesheet" href="../../assets/css/responsive.css">
+</head>
+<body class="auth-page">
+  <header class="page-header">
+    <button class="page-header-back" onclick="window.location.href='../../index.html'" aria-label="Back">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <span class="page-header-title">Sign Up</span>
+  </header>
+
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo">Property.pk</div>
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Join Property.pk to buy, sell or rent with confidence.</p>
+
+      <div id="signupMessage"></div>
+
+      <form class="auth-form" id="signupForm">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPhone">Phone Number</label>
+          <input type="tel" id="signupPhone" placeholder="03XX-XXXXXXX" required>
+        </div>
+        <div class="form-group">
+          <label for="signupRole">I want to</label>
+          <select id="signupRole" required>
+            <option value="buyer">Buy or Rent a Property</option>
+            <option value="seller">Sell or List a Property</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <input type="password" id="signupPassword" placeholder="Min 6 characters" required>
+          </div>
+          <div class="form-group">
+            <label for="signupConfirmPassword">Confirm Password</label>
+            <input type="password" id="signupConfirmPassword" placeholder="Re-enter password" required>
+          </div>
+        </div>
+        <label class="checkbox-row">
+          <input type="checkbox" id="agreeTerms" required>
+          <span>I agree to the <a href="../terms.html">Terms & Conditions</a> and <a href="../privacy.html">Privacy Policy</a></span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+
+      <p class="auth-footer-link">Already have an account? <a href="./login.html">Log In</a></p>
+    </div>
+  </div>
+
+  <script src="../../assets/js/utils/constants.js"></script>
+  <script src="../../assets/js/utils/helpers.js"></script>
+  <script src="../../assets/js/utils/validator.js"></script>
+  <script src="../../assets/js/utils/storage.js"></script>
+  <script src="../../assets/js/api/config.js"></script>
+  <script src="../../assets/js/api/authApi.js"></script>
+  <script src="../../assets/js/pages/auth.js"></script>
+</body>
+          </html>
