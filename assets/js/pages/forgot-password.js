@@ -4,7 +4,7 @@ const EMAILJS_PUBLIC_KEY = 'aXMmc7-ZNDdNqOdHi';
 const EMAILJS_SERVICE_ID = 'service_v6f7tfa';
 const EMAILJS_TEMPLATE_ID = 'template_72t78lx';
 
-emailjs.init(EMAILJS_PUBLIC_KEY);
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 let resetEmail = null;
 let generatedOtp = null;
@@ -143,7 +143,7 @@ function handleResetForm() {
     const newPassword = document.getElementById('newPassword').value;
     const confirmNewPassword = document.getElementById('confirmNewPassword').value;
 
-    if (newPassword.length < 6) return showMessage('resetMessage', 'Password must be at least 6 characters.', 'error');
+    if (newPassword.length < 8) return showMessage('resetMessage', 'Password must be at least 8 characters.', 'error');
     if (newPassword !== confirmNewPassword) return showMessage('resetMessage', 'Passwords do not match.', 'error');
 
     // TODO: real backend call — POST /auth/reset-password { email: resetEmail, newPassword }
@@ -153,4 +153,4 @@ function handleResetForm() {
       window.location.href = './login.html';
     }, 1200);
   });
-}
+  }
