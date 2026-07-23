@@ -4,7 +4,7 @@ const EMAILJS_PUBLIC_KEY = 'aXMmc7-ZNDdNqOdHi';
 const EMAILJS_SERVICE_ID = 'service_v6f7tfa';
 const EMAILJS_TEMPLATE_ID = 'template_72t78lx';
 
-emailjs.init(EMAILJS_PUBLIC_KEY);
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 let pendingSignupData = null;
 let generatedOtp = null;
@@ -50,20 +50,16 @@ function handleSignupForm() {
     e.preventDefault();
     const name = document.getElementById('signupName').value.trim();
     const email = document.getElementById('signupEmail').value.trim();
-    const phone = document.getElementById('signupPhone').value.trim();
     const role = document.getElementById('signupRole').value;
     const password = document.getElementById('signupPassword').value;
-    const confirmPassword = document.getElementById('signupConfirmPassword').value;
     const agreed = document.getElementById('agreeTerms').checked;
 
     if (name.length < 2) return showMessage('signupMessage', 'Please enter your full name.', 'error');
     if (!isValidEmail(email)) return showMessage('signupMessage', 'Please enter a valid email address.', 'error');
-    if (phone.length < 10) return showMessage('signupMessage', 'Please enter a valid phone number.', 'error');
-    if (password.length < 6) return showMessage('signupMessage', 'Password must be at least 6 characters.', 'error');
-    if (password !== confirmPassword) return showMessage('signupMessage', 'Passwords do not match.', 'error');
+    if (password.length < 8) return showMessage('signupMessage', 'Password must be at least 8 characters.', 'error');
     if (!agreed) return showMessage('signupMessage', 'Please agree to the Terms & Conditions.', 'error');
 
-    pendingSignupData = { name, email, phone, role, password };
+    pendingSignupData = { name, email, role, password };
     generatedOtp = generateOtp();
 
     const submitBtn = form.querySelector('button[type="submit"]');
@@ -147,4 +143,4 @@ function handleResendOtp() {
       }
     }, 1000);
   });
-      }
+                                         }
