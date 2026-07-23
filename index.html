@@ -28,37 +28,43 @@
     </section>
 
     <div class="container">
-      <div class="search-filters" id="searchFilters">
-        <select id="filterCity">
-          <option value="">All Cities</option>
-        </select>
-        <select id="filterType">
-          <option value="">All Types</option>
-        </select>
-        <select id="filterStatus">
-          <option value="">Status</option>
-        </select>
-        <select id="filterRooms">
-          <option value="">Rooms</option>
-          <option value="1">1+</option>
-          <option value="2">2+</option>
-          <option value="3">3+</option>
-          <option value="4">4+</option>
-          <option value="5">5+</option>
-          <option value="6">6+</option>
-          <option value="7">7+</option>
-          <option value="8">8+</option>
-          <option value="9">9+</option>
-          <option value="10">10+</option>
-        </select>
-        <select id="filterFloor">
-          <option value="">Stories</option>
-          <option value="Single Story">Single Story</option>
-          <option value="Double Story">Double Story</option>
-          <option value="Triple Story">Triple Story</option>
-        </select>
+      <div class="filters-bar">
+        <button type="button" id="filtersToggle" class="filters-toggle-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="#fff"/><circle cx="15" cy="12" r="2" fill="#fff"/><circle cx="9" cy="18" r="2" fill="#fff"/></svg>
+          <span>Filters</span>
+        </button>
+        <div class="filters-panel" id="filtersPanel">
+          <select id="filterCity">
+            <option value="">All Cities</option>
+          </select>
+          <select id="filterType">
+            <option value="">All Types</option>
+          </select>
+          <select id="filterStatus">
+            <option value="">Status</option>
+          </select>
+          <select id="filterRooms">
+            <option value="">Rooms</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5+</option>
+            <option value="6">6+</option>
+            <option value="7">7+</option>
+            <option value="8">8+</option>
+            <option value="9">9+</option>
+            <option value="10">10+</option>
+          </select>
+          <select id="filterFloor">
+            <option value="">Stories</option>
+            <option value="Single Story">Single Story</option>
+            <option value="Double Story">Double Story</option>
+            <option value="Triple Story">Triple Story</option>
+          </select>
+        </div>
       </div>
-    </div>
+          </div>
 
     <div class="container" id="homeSectionsRoot"></div>
   </main>
