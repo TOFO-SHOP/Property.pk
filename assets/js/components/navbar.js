@@ -29,8 +29,8 @@ function renderNavbar(targetId = 'navbar-root') {
       <div class="nav-drawer-actions">
         ${isLoggedIn
           ? `<button class="btn btn-outline btn-block" id="logoutBtn">Logout</button>`
-          : `<a href="${withBase('pages/login.html')}" class="btn btn-outline btn-block">Login</a>
-             <a href="${withBase('pages/signup.html')}" class="btn btn-primary btn-block">Sign Up</a>`}
+          : `<a href="${withBase('pages/auth/login.html')}" class="btn btn-outline btn-block">Login</a>
+             <a href="${withBase('pages/auth/signup.html')}" class="btn btn-primary btn-block">Sign Up</a>`}
       </div>
     </aside>
   `;
