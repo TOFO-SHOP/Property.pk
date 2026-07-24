@@ -131,7 +131,17 @@
   font-weight: 800;
   color: #fff;
   line-height: 1.15;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+/* NEW: hero subtitle (added in index.html Step 1) */
+.hero-subtitle {
+  font-size: clamp(14px, 2.5vw, 17px);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  max-width: 480px;
+  margin: 0 auto var(--spacing-lg);
+  line-height: 1.5;
 }
 
 .hero-search-bar {
@@ -228,7 +238,7 @@
 /* ============================================
    SECTIONS
    ============================================ */
-.section { padding: var(--spacing-2xl) 0; }
+.section { padding: var(--spacing-xl) 0; }
 .section.section-alt { background: var(--color-bg-warm); }
 
 .section-head {
@@ -255,6 +265,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--spacing-lg);
+  align-items: stretch;
 }
 
 .icon-svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
@@ -331,6 +342,16 @@
 .why-card h3 { font-size: 17px; margin-bottom: var(--spacing-xs); }
 .why-card p { color: var(--color-text-muted); font-size: 14px; }
 
+/* --- Desktop enhancements (bigger categories on wide screens) --- */
+@media (min-width: 768px) {
+  .section { padding: var(--spacing-2xl) 0; }
+  .category-grid { grid-template-columns: repeat(6, 1fr); gap: var(--spacing-md); }
+  .category-card { padding: 20px 12px; }
+  .category-icon { width: 42px; height: 42px; }
+  .category-icon svg { width: 20px; height: 20px; }
+  .category-card h3 { font-size: 14px; }
+}
+
 /* ============================================
    FOOTER
    ============================================ */
@@ -353,4 +374,4 @@
   border-top: 1px solid rgba(255,255,255,0.12);
   padding-top: var(--spacing-md);
   font-size: 13px;
-}
+   }
