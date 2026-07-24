@@ -69,6 +69,17 @@ a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
 
+/* ============================================
+   GLOBAL SVG SAFETY NET
+   Koi bhi icon kabhi bhi bara na ho — default 20px.
+   (Ye woh bug fix hai jis se footer icons 342px ho rahe the)
+   ============================================ */
+svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
 ::selection {
   background: var(--color-accent);
   color: #fff;
@@ -170,6 +181,7 @@ select:focus-visible {
   flex-shrink: 0;
 }
 .page-header-back:hover { background: var(--color-border); }
+.page-header-back svg { width: 18px; height: 18px; }
 .page-header-title {
   font-family: var(--font-display);
   font-size: 18px;
@@ -177,7 +189,7 @@ select:focus-visible {
   color: var(--color-ink);
 }
 
-/* --- Navbar + Drawer --- */
+/* --- Navbar + Drawer (base) --- */
 .navbar {
   display: flex;
   align-items: center;
@@ -233,7 +245,7 @@ select:focus-visible {
 .nav-drawer-links a:hover { background: var(--color-bg-warm); }
 .nav-drawer-actions { display: flex; flex-direction: column; gap: 10px; padding-top: 20px; }
 
-/* --- Icons --- */
+/* --- Icons (explicit sizes override the global 20px default) --- */
 .icon-svg, .category-icon svg, .why-icon svg, .property-card-meta svg {
   width: 18px; height: 18px;
   fill: none;
