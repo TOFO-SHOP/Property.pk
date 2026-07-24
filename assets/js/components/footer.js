@@ -47,7 +47,7 @@ function renderFooter(targetId = 'footer-root') {
             <h4 class="footer-heading">Contact</h4>
             <ul class="footer-contact">
               <li>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
                 <a href="mailto:info@property.pk">info@property.pk</a>
               </li>
               <li>
