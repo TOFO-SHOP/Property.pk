@@ -1,5 +1,65 @@
 /* Mobile / Tablet breakpoints — sabse aakhri mein load hogi */
 
+/* ============================================
+   NAVBAR — desktop links + mobile hamburger
+   (mobile-first: default chhupe, bade screen par dikhein)
+   ============================================ */
+.navbar-links,
+.navbar-actions { display: none; }
+
+.navbar-links { align-items: center; gap: 28px; }
+.navbar-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-ink);
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.navbar-links a:hover { color: var(--color-primary); }
+.navbar-links a.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+.navbar-actions { align-items: center; gap: 12px; }
+.navbar-actions .btn { padding: 9px 18px; font-size: 14px; }
+
+@media (min-width: 900px) {
+  .navbar-links { display: flex; }
+  .navbar-actions { display: flex; }
+  .navbar-toggle { display: none; }
+}
+
+/* ============================================
+   FOOTER — columns (mobile stacked, desktop side by side)
+   ============================================ */
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (min-width: 768px) {
+  .footer-cols {
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: var(--spacing-2xl);
+  }
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* ============================================
+   EXISTING BREAKPOINTS (aap ke, waise hi)
+   ============================================ */
 @media (max-width: 992px) {
   .property-info-grid { grid-template-columns: 1fr; }
   .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
@@ -20,4 +80,7 @@
   .dashboard-cards { grid-template-columns: 1fr; }
   .auth-card { padding: var(--spacing-lg); }
   .footer-links { gap: var(--spacing-md); }
-}
+  .property-grid { grid-template-columns: 1fr; gap: var(--spacing-md); }
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-search-bar { padding: 5px 5px 5px 16px; }
+  }
