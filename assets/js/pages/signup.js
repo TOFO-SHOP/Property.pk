@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function showMessage(elId, text, type) {
   const el = document.getElementById(elId);
   if (!el) return;
-  el.innerHTML = `<p class="form-${type}">${text}</p>`;
+  el.innerHTML = `<p class="form-${type}" style="word-break:break-word;">${text}</p>`;
 }
 
 function isValidEmail(email) {
@@ -65,6 +65,7 @@ function handleSignupForm() {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending code...';
+    showMessage('signupMessage', 'Sending verification code...', 'success');
 
     sendOtpEmail(email, generatedOtp)
       .then(() => {
@@ -73,7 +74,8 @@ function handleSignupForm() {
       })
       .catch((err) => {
         console.error('EmailJS error:', err);
-        showMessage('signupMessage', 'Could not send verification code. Please try again.', 'error');
+        const details = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
+        showMessage('signupMessage', `Could not send code. Details: ${details}`, 'error');
       })
       .finally(() => {
         submitBtn.disabled = false;
@@ -128,7 +130,8 @@ function handleResendOtp() {
       .then(() => showMessage('otpMessage', 'A new code has been sent.', 'success'))
       .catch((err) => {
         console.error('EmailJS error:', err);
-        showMessage('otpMessage', 'Could not resend code. Please try again.', 'error');
+        const details = (err && (err.text || err.message)) ? (err.text || err.message) : JSON.stringify(err);
+        showMessage('otpMessage', `Could not resend. Details: ${details}`, 'error');
       });
 
     let seconds = 30;
@@ -143,4 +146,4 @@ function handleResendOtp() {
       }
     }, 1000);
   });
-                                         }
+}
