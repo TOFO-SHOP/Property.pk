@@ -3,7 +3,7 @@
    Colors/Typography sirf yahan se control hote hain
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* --- Zillow-style palette --- */
@@ -45,24 +45,34 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 html, body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
   line-height: 1.6;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-ink);
   line-height: 1.2;
+  text-wrap: balance;
 }
 
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
 
 a:focus-visible,
 button:focus-visible,
@@ -165,7 +175,7 @@ select:focus-visible {
   font-size: 18px;
   font-weight: 600;
   color: var(--color-ink);
-   }
+}
 
 /* --- Navbar + Drawer --- */
 .navbar {
@@ -229,7 +239,7 @@ select:focus-visible {
   fill: none;
   stroke: currentColor;
   flex-shrink: 0;
-   }
+}
 
 /* ======================================================
    STATIC PAGES
@@ -237,55 +247,57 @@ select:focus-visible {
 ====================================================== */
 
 .static-page {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
 }
 
 .static-page .page-eyebrow {
-    color: var(--color-accent-dark);
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  color: var(--color-accent-dark);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .static-page h2 {
-    font-size: 22px;
-    margin: 32px 0 10px;
+  font-size: 22px;
+  margin: 32px 0 10px;
 }
 
 .static-page h2:first-of-type {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .static-page p {
-    color: var(--color-text-muted);
-    margin-bottom: 4px;
-    line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+  line-height: 1.7;
 }
 
 .auth-subtitle {
-    text-align: center;
-    color: var(--color-text-muted);
-    margin-bottom: 24px;
-    font-size: 14px;
-    line-height: 1.6;
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .form-success {
-    color: var(--color-success);
-    font-size: 14px;
-    margin-bottom: 12px;
+  color: var(--color-success);
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
 .form-error {
-    color: var(--color-danger);
-    font-size: 14px;
-    margin-bottom: 12px;
+  color: var(--color-danger);
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
-/* Zillow-style compact auto-sliding property carousel */
+/* ======================================================
+   PROPERTY CARDS — Zillow-style compact carousel
+====================================================== */
 .property-grid {
   display: flex;
   gap: 12px;
@@ -351,7 +363,3 @@ select:focus-visible {
 }
 .property-card-meta .icon-svg { width: 11px; height: 11px; flex-shrink: 0; }
 .property-card-meta span + span { margin-left: 8px; }
-.property-grid {
-  display: flex !important;
-  overflow-x: auto !important;
-   }
