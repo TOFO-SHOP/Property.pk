@@ -31,34 +31,22 @@
 }
 
 /* ============================================
-   FOOTER — columns (mobile stacked, desktop side by side)
+   FOOTER
+   Grid + desktop layout home.css me define hai (.footer-inner).
+   Yahan sirf footer-bottom ka responsive behaviour.
    ============================================ */
-.footer-cols {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-xl);
-}
-.footer-bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 @media (min-width: 768px) {
-  .footer-cols {
-    grid-template-columns: 2fr 1fr 1fr 1.2fr;
-    gap: var(--spacing-2xl);
-  }
   .footer-bottom {
+    display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: var(--spacing-md);
   }
 }
 
 /* ============================================
-   EXISTING BREAKPOINTS (aap ke, waise hi)
+   EXISTING BREAKPOINTS
    ============================================ */
 @media (max-width: 992px) {
   .property-info-grid { grid-template-columns: 1fr; }
@@ -66,10 +54,8 @@
 }
 
 @media (max-width: 768px) {
-  .hero { min-height: 400px; padding-bottom: 90px; }
+  .hero { min-height: 400px; }
   .hero h1 { font-size: 28px; }
-  .search-card { margin-top: -60px; padding: var(--spacing-md); }
-  .search-bar { flex-direction: column; }
   .property-gallery { grid-template-columns: 1fr; }
   .sidebar { display: none; }
   .dashboard-layout { flex-direction: column; }
@@ -79,8 +65,7 @@
 @media (max-width: 480px) {
   .dashboard-cards { grid-template-columns: 1fr; }
   .auth-card { padding: var(--spacing-lg); }
-  .footer-links { gap: var(--spacing-md); }
   .property-grid { grid-template-columns: 1fr; gap: var(--spacing-md); }
   .category-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-search-bar { padding: 5px 5px 5px 16px; }
-  }
+   }
