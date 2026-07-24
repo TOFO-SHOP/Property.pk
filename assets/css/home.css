@@ -352,7 +352,7 @@
 }
 
 /* ============================================
-   FOOTER  (professional — icons ab chhote aur neat)
+   FOOTER  (professional — icons chhote, 4 columns)
    ============================================ */
 .footer {
   background: var(--color-ink);
@@ -362,9 +362,14 @@
 .footer-inner {
   max-width: 1180px;
   margin: 0 auto;
+}
+
+/* Columns wrapper — mobile stacked, desktop 4-up */
+.footer-cols {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .footer-brand {
@@ -374,14 +379,14 @@
   color: #fff;
   margin-bottom: var(--spacing-sm);
 }
-.footer-about {
+.footer-tagline {
   font-size: 14px;
   line-height: 1.7;
   color: rgba(255,255,255,0.6);
   max-width: 320px;
 }
 
-.footer-col h4 {
+.footer-heading {
   color: #fff;
   font-size: 15px;
   margin-bottom: var(--spacing-md);
@@ -396,7 +401,7 @@
 .footer-links a { color: rgba(255,255,255,0.7); transition: color .15s ease; }
 .footer-links a:hover { color: #fff; }
 
-/* --- Contact list — icon + text neatly aligned --- */
+/* Contact list — icon + text neatly aligned */
 .footer-contact {
   display: flex;
   flex-direction: column;
@@ -409,6 +414,8 @@
   gap: 10px;
   color: rgba(255,255,255,0.7);
 }
+.footer-contact li a { color: rgba(255,255,255,0.7); }
+.footer-contact li a:hover { color: #fff; }
 .footer-contact li svg {
   width: 18px;
   height: 18px;
@@ -418,7 +425,7 @@
   color: var(--color-primary);
 }
 
-/* --- Social icons — chhote round buttons (BUG FIX) --- */
+/* Social icons — chhote round buttons (BUG FIX) */
 .footer-social {
   display: flex;
   gap: 12px;
@@ -439,25 +446,28 @@
   background: var(--color-primary);
   transform: translateY(-2px);
 }
-.footer-social a svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
+.footer-social a svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 .footer-bottom {
   border-top: 1px solid rgba(255,255,255,0.12);
-  margin-top: var(--spacing-xl);
   padding-top: var(--spacing-md);
   font-size: 13px;
   text-align: center;
   color: rgba(255,255,255,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-/* Desktop: footer columns side by side */
+/* Desktop: 4 columns + footer-bottom row */
 @media (min-width: 768px) {
-  .footer-inner {
-    grid-template-columns: 1.5fr 1fr 1fr;
+  .footer-cols {
+    grid-template-columns: 2fr 1fr 1fr 1.3fr;
     gap: var(--spacing-2xl);
   }
-   }
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+               }
