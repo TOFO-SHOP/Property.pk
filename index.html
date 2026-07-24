@@ -3,8 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Property.pk - Find Your Dream Property</title>
 
+  <!-- Primary SEO -->
+  <title>Property.pk - Pakistan Ki Verified Properties Ek Jagah</title>
+  <meta name="description" content="Property.pk par Pakistan bhar ki verified houses, plots aur apartments dhoondein. Ghar, plot ya flat khareedne aur bechne ka aasan tareeqa.">
+  <meta name="keywords" content="property in pakistan, houses for sale, plots for sale, apartments, real estate pakistan, property.pk">
+  <meta name="author" content="Property.pk">
+  <meta name="theme-color" content="#1a56db">
+
+  <!-- Open Graph (WhatsApp / Facebook link preview) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Property.pk - Find Your Dream Property">
+  <meta property="og:description" content="Pakistan bhar ki verified properties ek hi jagah. Ghar, plot aur flat khareedein ya bechein.">
+  <meta property="og:image" content="./assets/images/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/home.css">
   <link rel="stylesheet" href="./assets/css/property.css">
@@ -15,11 +37,13 @@
   <div id="navbar-root"></div>
 
   <main>
-  <section class="hero">
+    <section class="hero">
       <div class="hero-inner">
         <h1>Find Homes.<br>Verified Listings.</h1>
+        <p class="hero-subtitle">Pakistan bhar ki verified properties ek hi jagah — ghar, plot aur flat khareedein ya bechein.</p>
+
         <form class="hero-search-bar" id="searchForm">
-          <input type="text" id="searchInput" placeholder="Search by title, city, or area...">
+          <input type="text" id="searchInput" placeholder="Search by title, city, or area..." aria-label="Search properties">
           <button type="submit" aria-label="Search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
@@ -31,16 +55,16 @@
             <span>Filters</span>
           </button>
           <div class="filters-panel" id="filtersPanel">
-            <select id="filterCity">
+            <select id="filterCity" aria-label="Filter by city">
               <option value="">All Cities</option>
             </select>
-            <select id="filterType">
+            <select id="filterType" aria-label="Filter by type">
               <option value="">All Types</option>
             </select>
-            <select id="filterStatus">
+            <select id="filterStatus" aria-label="Filter by status">
               <option value="">Status</option>
             </select>
-            <select id="filterRooms">
+            <select id="filterRooms" aria-label="Filter by rooms">
               <option value="">Rooms</option>
               <option value="1">1+</option>
               <option value="2">2+</option>
@@ -53,7 +77,7 @@
               <option value="9">9+</option>
               <option value="10">10+</option>
             </select>
-            <select id="filterFloor">
+            <select id="filterFloor" aria-label="Filter by stories">
               <option value="">Stories</option>
               <option value="Single Story">Single Story</option>
               <option value="Double Story">Double Story</option>
@@ -64,7 +88,7 @@
       </div>
     </section>
 
-    <div class="container" id="homeSectionsRoot"></div>  
+    <div class="container" id="homeSectionsRoot"></div>
   </main>
 
   <div id="footer-root"></div>
@@ -88,4 +112,4 @@
 
   <script src="./assets/js/pages/home.js"></script>
 </body>
-</html>
+              </html>
