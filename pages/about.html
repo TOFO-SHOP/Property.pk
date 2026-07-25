@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 
@@ -16,76 +17,117 @@
   <div id="navbar-root"></div>
   <div id="page-header-root"></div>
 
-  <main class="container static-page">
+  <main class="static-page">
+   <div class="static-page-card">
 
-    <span class="page-eyebrow">Who we are</span>
+    <span class="page-eyebrow">About</span>
+    <h1 style="margin-top:6px;">About Property.pk</h1>
+    <p style="color:var(--color-text-muted); font-size:13px; margin-bottom:20px;">Pakistan's Trusted Property Marketplace</p>
 
-    <h1>About Property.pk</h1>
+    <div class="lang-toggle">
+      <button type="button" class="lang-btn active" id="langEnBtn">English</button>
+      <button type="button" class="lang-btn" id="langUrBtn">Urdu</button>
+    </div>
 
-    <p>
-      Property.pk is Pakistan's trusted online real estate marketplace,
-      connecting buyers, sellers and agents with verified listings across
-      the country's major cities.
-    </p>
+    <!-- ================= ENGLISH VERSION ================= -->
+    <div class="lang-content active" id="langEn">
 
-    <div class="why-grid">
+      <p>Property.pk is a modern online property marketplace in Pakistan, built to provide buyers, sellers, landlords, and tenants with a safe, simple, and trusted platform.</p>
+      <p>We strive to make buying, selling, or renting a property easy and transparent for everyone.</p>
 
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 6v6l4 2" />
-          </svg>
-        </div>
+      <h2>Our Mission</h2>
+      <p>Our mission is to digitize Pakistan's real estate market and give people a platform where they can easily:</p>
+      <ul class="static-list">
+        <li>Buy a property.</li>
+        <li>Sell a property.</li>
+        <li>Rent out a property.</li>
+        <li>Rent a property.</li>
+      </ul>
 
-        <h3>Our Mission</h3>
+      <h2>Our Services</h2>
+      <p>On Property.pk, you can:</p>
+      <ul class="static-list">
+        <li>Publish a property listing for free.</li>
+        <li>Connect directly with buyers and tenants.</li>
+        <li>Give your property greater visibility through Premium Listing.</li>
+        <li>Access Property.pk Professional Property Services if you'd like our team to sell your property, arrange a buyer, or find a tenant and assist with the rental process.</li>
+      </ul>
 
-        <p>
-          Making property discovery simple and transparent for every Pakistani household.
-        </p>
+      <div class="highlight-box">
+        <h3>Transparency</h3>
+        <p>Honesty and transparency are our top priority. Property.pk charges no commission on free listings. Service charges apply only to clients who use Property.pk Professional Property Services, and all charges are clearly mentioned on the website in advance.</p>
       </div>
 
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </div>
+      <h2>Why Choose Property.pk?</h2>
+      <ul class="static-list">
+        <li>Easy to Use Platform</li>
+        <li>Free Property Listings</li>
+        <li>Premium Listing Options</li>
+        <li>Professional Property Services</li>
+        <li>Secure User Experience</li>
+        <li>Fast Property Search</li>
+        <li>Buyer & Seller Direct Communication</li>
+        <li>Trusted Marketplace</li>
+      </ul>
 
-        <h3>Our Team</h3>
+      <h2>Our Vision</h2>
+      <p>Our vision is to become Pakistan's most trusted and reliable property marketplace, where every user can buy, sell, or rent their property with confidence.</p>
 
-        <p>
-          Real estate specialists dedicated to helping you find the right property, faster.
-        </p>
-      </div>
-
-      <div class="why-card">
-        <div class="why-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="1.8" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="M12 2 2 7l10 5 10-5-10-5Z" />
-            <path d="M2 17l10 5 10-5" />
-            <path d="M2 12l10 5 10-5" />
-          </svg>
-        </div>
-
-        <h3>Our Vision</h3>
-
-        <p>
-          To become Pakistan's most trusted, verified property platform.
-        </p>
-      </div>
+      <h2>Contact Us</h2>
+      <p>If you need any assistance or have questions about our services, please reach out via the <a href="./contact.html">Contact Us</a> page.</p>
 
     </div>
 
+    <!-- ================= URDU (ROMAN) VERSION ================= -->
+    <div class="lang-content" id="langUr">
+
+      <p>Property.pk Pakistan ka aik modern online property marketplace hai jiska maqsad buyers, sellers, landlords aur tenants ko aik safe, simple aur trusted platform provide karna hai.</p>
+      <p>Hamari koshish hai ke property khareedna, bechna ya rent par dena har shakhs ke liye asaan aur transparent ho.</p>
+
+      <h2>Hamara Mission</h2>
+      <p>Hamara mission Pakistan ke real estate market ko digital banana aur logon ko aisa platform dena hai jahan wo asani se:</p>
+      <ul class="static-list">
+        <li>Property Buy kar saken.</li>
+        <li>Property Sell kar saken.</li>
+        <li>Property Rent par de saken.</li>
+        <li>Property Rent par hasil kar saken.</li>
+      </ul>
+
+      <h2>Hamari Services</h2>
+      <p>Property.pk par aap:</p>
+      <ul class="static-list">
+        <li>Free mein property listing publish kar sakte hain.</li>
+        <li>Buyers aur tenants se direct contact kar sakte hain.</li>
+        <li>Premium Listing ke zariye apni property ko zyada visibility de sakte hain.</li>
+        <li>Property.pk Professional Property Services hasil kar sakte hain agar aap chahte hain ke hamari team aap ki property sell kare, buyer arrange kare ya tenant dhoond kar rental process mein madad kare.</li>
+      </ul>
+
+      <div class="highlight-box">
+        <h3>Transparency</h3>
+        <p>Hamari priority honesty aur transparency hai. Free listings par Property.pk koi commission charge nahi karti. Sirf un clients se service charges liye jate hain jo Property.pk Professional Property Services istemal karte hain. Tamam charges website par pehle se wazeh tor par mention kiye jate hain.</p>
+      </div>
+
+      <h2>Why Choose Property.pk?</h2>
+      <ul class="static-list">
+        <li>Easy to Use Platform</li>
+        <li>Free Property Listings</li>
+        <li>Premium Listing Options</li>
+        <li>Professional Property Services</li>
+        <li>Secure User Experience</li>
+        <li>Fast Property Search</li>
+        <li>Buyer & Seller Direct Communication</li>
+        <li>Trusted Marketplace</li>
+      </ul>
+
+      <h2>Our Vision</h2>
+      <p>Hamari vision Pakistan ki sab se trusted aur reliable property marketplace banna hai, jahan har user confidence ke sath apni property buy, sell ya rent kar sake.</p>
+
+      <h2>Contact Us</h2>
+      <p>Agar aap ko kisi bhi qisam ki madad chahiye ya hamari services ke mutaliq sawal ho, to <a href="./contact.html">Contact Us</a> page ke zariye ham se rabta karein.</p>
+
+    </div>
+
+   </div>
   </main>
 
   <div id="footer-root"></div>
@@ -94,8 +136,10 @@
   <script src="../assets/js/utils/helpers.js"></script>
   <script src="../assets/js/utils/validator.js"></script>
   <script src="../assets/js/utils/storage.js"></script>
+
   <script src="../assets/js/api/config.js"></script>
   <script src="../assets/js/api/authApi.js"></script>
+
   <script src="../assets/js/components/navbar.js"></script>
   <script src="../assets/js/components/footer.js"></script>
   <script src="../assets/js/components/backButton.js"></script>
@@ -103,9 +147,28 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       renderPageHeader("About Us");
+
+      const enBtn = document.getElementById("langEnBtn");
+      const urBtn = document.getElementById("langUrBtn");
+      const enContent = document.getElementById("langEn");
+      const urContent = document.getElementById("langUr");
+
+      enBtn.addEventListener("click", () => {
+        enBtn.classList.add("active");
+        urBtn.classList.remove("active");
+        enContent.classList.add("active");
+        urContent.classList.remove("active");
+      });
+
+      urBtn.addEventListener("click", () => {
+        urBtn.classList.add("active");
+        enBtn.classList.remove("active");
+        urContent.classList.add("active");
+        enContent.classList.remove("active");
+      });
     });
   </script>
 
 </body>
 
-            </html>
+          </html>
