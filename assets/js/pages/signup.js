@@ -112,6 +112,7 @@ function handleOtpForm() {
 
     setTimeout(() => {
       localStorage.setItem('propertypk_user', JSON.stringify({ ...pendingSignupData, verified: true, loggedIn: true }));
+      localStorage.setItem('authToken', 'dummy_token_' + Date.now());
       window.location.href = './login.html';
     }, 600);
   });
