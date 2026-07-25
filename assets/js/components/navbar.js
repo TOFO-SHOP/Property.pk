@@ -44,6 +44,7 @@ function renderNavbar(targetId = 'navbar-root') {
         <a href="${withBase('pages/about.html')}">About Us</a>
         <a href="${withBase('pages/contact.html')}">Contact</a>
         ${isLoggedIn ? `<a href="${withBase('pages/buyer-dashboard.html')}">Dashboard</a>` : ''}
+        ${isLoggedIn ? `<a href="${withBase('pages/profile.html')}">My Profile</a>` : ''}
       </div>
       <div class="nav-drawer-actions">
         ${isLoggedIn
