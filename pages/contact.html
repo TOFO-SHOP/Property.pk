@@ -12,65 +12,66 @@
   <link rel="stylesheet" href="../assets/css/responsive.css">
 </head>
 
-<body>
+<body class="auth-page">
 
   <div id="navbar-root"></div>
   <div id="page-header-root"></div>
 
-  <main class="auth-wrapper">
+  <div class="auth-wrapper">
 
     <div class="auth-card">
 
       <span class="page-eyebrow">Support</span>
-
-      <h2>Contact Us</h2>
-
-      <p class="auth-subtitle">
+      <h1 class="auth-title" style="text-align:left; margin-top:6px;">Contact Us</h1>
+      <p class="auth-subtitle" style="text-align:left;">
         Have a question? Send us a message and we'll get back to you as soon as possible.
       </p>
 
       <div id="contactFormMessage"></div>
 
-      <form id="contactForm">
+      <form class="auth-form" id="contactForm">
 
         <div class="form-group">
           <label for="contactName">Full Name</label>
-          <input
-            type="text"
-            id="contactName"
-            placeholder="Your full name"
-            required>
+          <input type="text" id="contactName" placeholder="Your full name" required>
         </div>
 
         <div class="form-group">
+          <label>How should we reach you?</label>
+          <div class="contact-method-toggle">
+            <label class="contact-method-option">
+              <input type="radio" name="contactMethod" value="email">
+              <span>Email</span>
+            </label>
+            <label class="contact-method-option">
+              <input type="radio" name="contactMethod" value="phone">
+              <span>Phone</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="contactEmailGroup" style="display:none;">
           <label for="contactEmail">Email Address</label>
-          <input
-            type="email"
-            id="contactEmail"
-            placeholder="your@email.com"
-            required>
+          <input type="email" id="contactEmail" placeholder="your@email.com">
+        </div>
+
+        <div class="form-group" id="contactPhoneGroup" style="display:none;">
+          <label for="contactPhone">Phone Number</label>
+          <input type="tel" id="contactPhone" placeholder="03XX-XXXXXXX">
         </div>
 
         <div class="form-group">
           <label for="contactMessage">Message</label>
-          <textarea
-            id="contactMessage"
-            rows="5"
-            placeholder="Write your message here..."
-            required></textarea>
+          <textarea id="contactMessage" rows="5" placeholder="Write your message here..." required></textarea>
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary btn-block">
-          Send Message
-        </button>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
 
       </form>
 
     </div>
 
-  </main>
+  </div>
 
   <div id="footer-root"></div>
 
@@ -92,28 +93,69 @@
 
       const form = document.getElementById("contactForm");
       const msgBox = document.getElementById("contactFormMessage");
+      const methodRadios = document.querySelectorAll('input[name="contactMethod"]');
+      const emailGroup = document.getElementById("contactEmailGroup");
+      const phoneGroup = document.getElementById("contactPhoneGroup");
+      const emailInput = document.getElementById("contactEmail");
+      const phoneInput = document.getElementById("contactPhone");
+
+      methodRadios.forEach(radio => {
+        radio.addEventListener("change", () => {
+          if (radio.value === "email" && radio.checked) {
+            emailGroup.style.display = "flex";
+            phoneGroup.style.display = "none";
+            emailInput.required = true;
+            phoneInput.required = false;
+            phoneInput.value = "";
+          } else if (radio.value === "phone" && radio.checked) {
+            phoneGroup.style.display = "flex";
+            emailGroup.style.display = "none";
+            phoneInput.required = true;
+            emailInput.required = false;
+            emailInput.value = "";
+          }
+        });
+      });
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const name = document.getElementById("contactName").value.trim();
-        const email = document.getElementById("contactEmail").value.trim();
         const message = document.getElementById("contactMessage").value.trim();
+        const selectedMethod = document.querySelector('input[name="contactMethod"]:checked');
 
-        if (!isNotEmpty(name) || !isEmail(email) || !isNotEmpty(message)) {
-          msgBox.innerHTML =
-            '<p class="form-error">Please fill in all fields correctly.</p>';
+        if (!selectedMethod) {
+          alert("Please select either Email or Phone so we can reply to you.");
           return;
         }
 
-        msgBox.innerHTML =
-          '<p class="form-success">Your message has been sent successfully. We will contact you soon.</p>';
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+
+        if (!isNotEmpty(name) || !isNotEmpty(message)) {
+          msgBox.innerHTML = '<p class="form-error">Please fill in all fields correctly.</p>';
+          return;
+        }
+
+        if (selectedMethod.value === "email" && !isEmail(email)) {
+          msgBox.innerHTML = '<p class="form-error">Please enter a valid email address.</p>';
+          return;
+        }
+
+        if (selectedMethod.value === "phone" && phone.length < 10) {
+          msgBox.innerHTML = '<p class="form-error">Please enter a valid phone number.</p>';
+          return;
+        }
+
+        msgBox.innerHTML = '<p class="form-success">Your message has been sent successfully. We will contact you soon.</p>';
 
         form.reset();
+        emailGroup.style.display = "none";
+        phoneGroup.style.display = "none";
       });
     });
   </script>
 
 </body>
 
-</html>
+    </html>
