@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard - Property.pk</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+  <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
+
+  <main class="dashboard-page">
+
+    <div class="dashboard-header">
+      <span class="page-eyebrow">Buyer Dashboard</span>
+      <h1 id="dashboardWelcomeName">Welcome back</h1>
+    </div>
+
+    <div class="dashboard-stats">
+      <div class="stat-card"><div class="stat-number" id="statSaved">0</div><div class="stat-label">Saved Properties</div></div>
+      <div class="stat-card"><div class="stat-number" id="statRecent">0</div><div class="stat-label">Recently Viewed</div></div>
+      <div class="stat-card"><div class="stat-number" id="statInquiries">0</div><div class="stat-label">Inquiries</div></div>
+    </div>
+
+    <div class="dashboard-tabs">
+      <button class="dashboard-tab-btn active" data-target="tabSaved">Saved Properties</button>
+      <button class="dashboard-tab-btn" data-target="tabRecent">Recently Viewed</button>
+      <button class="dashboard-tab-btn" data-target="tabInquiries">My Inquiries</button>
+      <button class="dashboard-tab-btn" data-target="tabNotifications">Notifications</button>
+    </div>
+
+    <div class="dashboard-tab-content active" id="tabSaved">
+      <div class="dashboard-property-grid" id="tabSavedGrid"></div>
+    </div>
+
+    <div class="dashboard-tab-content" id="tabRecent">
+      <div class="dashboard-property-grid" id="tabRecentGrid"></div>
+    </div>
+
+    <div class="dashboard-tab-content" id="tabInquiries">
+      <div id="tabInquiriesList"></div>
+    </div>
+
+    <div class="dashboard-tab-content" id="tabNotifications">
+      <div id="tabNotificationsList"></div>
+    </div>
+
+    <div class="dashboard-settings-link">
+      <a href="./profile.html" class="btn btn-outline btn-block">Account Settings</a>
+    </div>
+
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/data/property.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script src="../assets/js/pages/buyer-dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("My Dashboard");
+    });
+  </script>
+</body>
+
+    </html>
