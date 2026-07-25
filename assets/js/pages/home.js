@@ -121,18 +121,20 @@ function renderHomeSections() {
     </section>
 
     <section class="section" id="whyChooseUsSection">
-      <div class="section-head">
+      <button class="section-head why-toggle" id="whyToggleBtn" type="button">
         <div><span class="section-eyebrow">The Property.pk difference</span><h2 class="section-title">Why Choose Us</h2></div>
-      </div>
+        <svg class="why-toggle-arrow" id="whyToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
       <div class="why-grid" id="whyChooseUsGrid"></div>
     </section>
   `;
 
   const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
 
-  renderPropertyCards('latestPropertiesGrid', latest);
+renderPropertyCards('latestPropertiesGrid', latest);
   renderPropertyCategories();
   renderWhyChooseUs();
+  handleWhyToggle();
 }
 
 function renderPropertyCards(gridId, properties) {
@@ -200,6 +202,18 @@ function renderWhyChooseUs() {
       <p>${p.desc}</p>
     </div>
   `).join('');
+}
+
+function handleWhyToggle() {
+  const btn = document.getElementById('whyToggleBtn');
+  const grid = document.getElementById('whyChooseUsGrid');
+  const arrow = document.getElementById('whyToggleArrow');
+  if (!btn || !grid) return;
+
+  btn.addEventListener('click', () => {
+    grid.classList.toggle('open');
+    arrow.classList.toggle('rotated');
+  });
 }
 
 /* ============================================
