@@ -37,6 +37,7 @@ function handleLoginForm() {
     // TODO: replace with real API call once backend is connected
     setTimeout(() => {
       localStorage.setItem('propertypk_user', JSON.stringify({ email, loggedIn: true }));
+      localStorage.setItem('authToken', 'dummy_token_' + Date.now());
       window.location.href = '../../index.html';
     }, 600);
   });
