@@ -319,27 +319,59 @@
 .category-icon svg { width: 17px; height: 17px; }
 .category-card h3 { font-size: 12.5px; font-family: var(--font-body); font-weight: 600; }
 
-/* --- Why choose us --- */
+/* --- Why choose us — collapsible accordion --- */
+.why-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.why-toggle-arrow {
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.why-toggle-arrow.rotated { transform: rotate(180deg); }
+
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.35s ease;
 }
-.why-card { text-align: left; }
+.why-grid.open {
+  max-height: 800px;
+  opacity: 1;
+  margin-top: var(--spacing-md);
+}
+
+.why-card {
+  text-align: left;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
 .why-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: var(--color-primary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0,106,255,0.22);
 }
-.why-icon svg { width: 22px; height: 22px; }
-.why-card h3 { font-size: 17px; margin-bottom: var(--spacing-xs); }
-.why-card p { color: var(--color-text-muted); font-size: 14px; }
+.why-icon svg { width: 15px; height: 15px; }
+.why-card h3 { font-size: 14.5px; margin-bottom: 4px; }
+.why-card p { color: var(--color-text-muted); font-size: 12.5px; line-height: 1.5; }
 
 /* --- Desktop enhancements (bigger categories on wide screens) --- */
 @media (min-width: 768px) {
