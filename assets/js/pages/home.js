@@ -148,8 +148,13 @@ function renderPropertyCards(gridId, properties) {
 
   try {
     grid.innerHTML = properties.map(p => `
-      <a href="./pages/property-details.html?id=${p.id}" class="property-card">
-        <img src="${p.image}" alt="${p.title}" loading="lazy">
+      <a href="./pages/property-details.html?id=${p.id}" class="property-card" onclick="recordRecentlyViewed(${p.id})">
+        <div class="property-card-media">
+          <img src="${p.image}" alt="${p.title}" loading="lazy">
+          <button class="save-heart-btn" data-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
+            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          </button>
+        </div>
         <div class="property-card-body">
           <div class="property-card-price">${formatPrice(p.price)}</div>
           <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
@@ -170,7 +175,42 @@ function renderPropertyCards(gridId, properties) {
   }
 
   initAutoScroll(gridId);
+  updateHeartIcons();
 }
+
+/* ============================================
+   SAVE / RECENTLY VIEWED (localStorage)
+   ============================================ */
+function getSavedProperties() {
+  return JSON.parse(localStorage.getItem('propertypk_saved') || '[]');
+}
+
+function toggleSaveProperty(id) {
+  let saved = getSavedProperties();
+  if (saved.includes(id)) {
+    saved = saved.filter(x => x !== id);
+  } else {
+    saved.push(id);
+  }
+  localStorage.setItem('propertypk_saved', JSON.stringify(saved));
+  updateHeartIcons();
+}
+
+function updateHeartIcons() {
+  const saved = getSavedProperties();
+  document.querySelectorAll('.save-heart-btn').forEach(btn => {
+    const id = Number(btn.dataset.id);
+    btn.classList.toggle('saved', saved.includes(id));
+  });
+}
+
+function recordRecentlyViewed(id) {
+  let recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]');
+  recent = recent.filter(x => x !== id);
+  recent.unshift(id);
+  recent = recent.slice(0, 10);
+  localStorage.setItem('propertypk_recent_viewed', JSON.stringify(recent));
+    }
 
 function renderPropertyCategories() {
   const grid = document.getElementById('propertyCategoriesGrid');
