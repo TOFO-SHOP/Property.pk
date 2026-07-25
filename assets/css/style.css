@@ -375,3 +375,67 @@ select:focus-visible {
 }
 .property-card-meta .icon-svg { width: 11px; height: 11px; flex-shrink: 0; }
 .property-card-meta span + span { margin-left: 8px; }
+
+/* --- Static page enhancements (Terms, Privacy) --- */
+.static-page h1 {
+  font-size: 26px;
+}
+
+.static-list {
+  margin: 0 0 16px 20px;
+  padding: 0;
+}
+.static-list li {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.highlight-box {
+  background: var(--color-bg-warm);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin: 16px 0;
+}
+.highlight-box h3 {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: var(--color-ink);
+}
+.highlight-box p {
+  margin-bottom: 0;
+}
+
+.static-page a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+     }
+
+/* --- Language toggle (Terms/Privacy pages) --- */
+.lang-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.lang-btn {
+  padding: 8px 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.lang-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.lang-content { display: none; }
+.lang-content.active { display: block; }
