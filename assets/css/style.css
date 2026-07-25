@@ -459,3 +459,34 @@ select:focus-visible {
 
 .lang-content { display: none; }
 .lang-content.active { display: block; }
+
+/* --- Save/heart button on property cards --- */
+.property-card-media {
+  position: relative;
+}
+.save-heart-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+.save-heart-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--color-text-muted);
+}
+.save-heart-btn.saved svg {
+  fill: #e0245e;
+  stroke: #e0245e;
+               }
