@@ -134,52 +134,36 @@
   text-align: center;
 }
 
-/* --- OTP input boxes --- */
-.otp-inputs {
+/* --- Support/Contact card polish --- */
+.support-card {
+  padding-top: var(--spacing-2xl);
+}
+
+.support-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
   display: flex;
-  gap: 8px;
+  align-items: center;
   justify-content: center;
-  margin: 24px 0 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 16px rgba(0,106,255,0.28);
 }
-.otp-digit {
-  width: 44px;
-  height: 54px;
-  text-align: center;
-  font-size: 22px;
+.support-icon svg { width: 24px; height: 24px; }
+
+.page-eyebrow {
+  display: block;
+  font-size: 12px;
   font-weight: 700;
-  font-family: var(--font-display);
-  color: var(--color-ink);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: #fff;
-}
-.otp-digit:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0,106,255,0.12);
-}
-
-.otp-resend {
-  text-align: center;
-  font-size: 13px;
-  color: var(--color-text-muted);
-  margin-top: 16px;
-}
-.otp-resend button {
-  background: none;
-  border: none;
-  padding: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-primary);
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
+  margin-bottom: 4px;
 }
-.otp-resend button:disabled {
-  color: var(--color-text-muted);
-  cursor: not-allowed;
-                     }
 
-/* --- Contact method toggle (Email / Phone) --- */
+/* --- Contact method toggle (Email / Phone) with icons --- */
 .contact-method-toggle {
   display: flex;
   gap: 10px;
@@ -189,20 +173,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
-  border: 1px solid var(--color-border);
+  gap: 8px;
+  padding: 13px 12px;
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-muted);
+  background: var(--color-bg-warm);
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.contact-method-option svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
 }
 .contact-method-option input {
   display: none;
 }
 .contact-method-option:has(input:checked) {
   border-color: var(--color-primary);
-  background: rgba(0,106,255,0.06);
+  background: rgba(0,106,255,0.08);
   color: var(--color-primary);
-    }
+  }
