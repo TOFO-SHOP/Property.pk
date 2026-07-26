@@ -5,6 +5,7 @@ let currentFilter = 'All';
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth();
   renderWelcome();
+  renderKycBanner();
   renderStats();
   renderListings();
   handleFilterTabs();
@@ -23,10 +24,38 @@ function saveMyListings(listings) {
   localStorage.setItem('propertypk_my_listings', JSON.stringify(listings));
 }
 
+function getKycStatus() {
+  const kyc = JSON.parse(localStorage.getItem('propertypk_kyc') || 'null');
+  return kyc ? kyc.status : 'Not Submitted';
+}
+
 function renderWelcome() {
   const user = JSON.parse(localStorage.getItem('propertypk_user') || '{}');
   const el = document.getElementById('sellerWelcomeName');
   if (el) el.textContent = user.name ? `Welcome back, ${user.name.split(' ')[0]}` : 'Welcome back';
+}
+
+function renderKycBanner() {
+  const status = getKycStatus();
+  const el = document.getElementById('kycBanner');
+  if (!el) return;
+
+  if (status === 'Verified') {
+    el.innerHTML = `
+      <div class="kyc-banner kyc-banner-verified">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 11 4.6-2.6 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>You're a Verified Seller. Your listings appear in the Verified section.</span>
+      </div>
+    `;
+  } else {
+    el.innerHTML = `
+      <div class="kyc-banner kyc-banner-unverified">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>Your account isn't verified yet. Unverified listings get less visibility.</span>
+        <a href="./kyc.html" class="btn btn-primary btn-mini-cta">Complete KYC</a>
+      </div>
+    `;
+  }
 }
 
 function renderStats() {
@@ -48,6 +77,10 @@ function statusBadgeClass(status) {
 }
 
 function listingCardHTML(l) {
+  const verifiedTag = l.verified
+    ? `<span class="status-badge badge-verified">Verified Listing</span>`
+    : `<span class="status-badge badge-unverified">Unverified Listing</span>`;
+
   return `
     <div class="listing-row">
       <img src="${l.image}" alt="${l.title}">
@@ -58,6 +91,7 @@ function listingCardHTML(l) {
         </div>
         <p class="listing-row-meta">${l.city}, ${l.area} · ${safeFormatPrice(l.price)}</p>
         <p class="listing-row-meta">${l.bedrooms} Rooms · ${l.bathrooms} Baths · ${l.marla} Marla · ${l.views || 0} views</p>
+        <div style="margin-top:6px;">${verifiedTag}</div>
         <div class="listing-row-actions">
           <button class="btn-mini" onclick="markAsSold(${l.id})">Mark Sold</button>
           <button class="btn-mini btn-mini-danger" onclick="deleteListing(${l.id})">Delete</button>
@@ -110,4 +144,4 @@ function deleteListing(id) {
   saveMyListings(listings);
   renderStats();
   renderListings();
-}
+    }
