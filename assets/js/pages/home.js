@@ -1,4 +1,4 @@
-/* Home page logic — Hero Search + Filters + Property Sections */
+/* Home page — Hero Search + Filters + Property Sections */
 
 document.addEventListener('DOMContentLoaded', () => {
   populateFilterOptions();
@@ -13,14 +13,20 @@ function handleFiltersToggle() {
   if (!btn || !panel) return;
 
   btn.addEventListener('click', () => {
-    panel.classList.toggle('open');
-    btn.classList.toggle('active');
+    const isOpen = panel.classList.toggle('open');
+    btn.classList.toggle('active', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
   });
 }
 
-/* ---- Safe fallbacks (agar helpers.js mein ye functions na milein) ---- */
+/* ---- Safe fallbacks ---- */
 if (typeof formatPrice === 'undefined') {
-  window.formatPrice = (n) => 'PKR ' + Number(n || 0).toLocaleString();
+  window.formatPrice = (n) => {
+    const num = Number(n || 0);
+    if (num >= 1e7) return 'PKR ' + (num / 1e7).toFixed(2) + ' Crore';
+    if (num >= 1e5) return 'PKR ' + (num / 1e5).toFixed(2) + ' Lakh';
+    return 'PKR ' + num.toLocaleString();
+  };
 }
 if (typeof truncateText === 'undefined') {
   window.truncateText = (str, len) => (str && str.length > len) ? str.slice(0, len) + '…' : (str || '');
@@ -28,7 +34,7 @@ if (typeof truncateText === 'undefined') {
 if (typeof showError === 'undefined') {
   window.showError = (elId, msg) => {
     const el = document.getElementById(elId);
-    if (el) el.innerHTML = `<p style="padding:16px;color:var(--color-text-muted);">${msg}</p>`;
+    if (el) el.innerHTML = `<p style="padding:16px;color:var(--color-text-muted);text-align:center;">${msg}</p>`;
   };
 }
 
@@ -55,26 +61,22 @@ function handleSearchSubmit() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    const query = document.getElementById('searchInput')?.value.trim();
-    const city = document.getElementById('filterCity')?.value;
-    const type = document.getElementById('filterType')?.value;
-    const status = document.getElementById('filterStatus')?.value;
-    const rooms = document.getElementById('filterRooms')?.value;
-    const floor = document.getElementById('filterFloor')?.value;
-
-    if (query) params.set('q', query);
-    if (city) params.set('city', city);
-    if (type) params.set('type', type);
-    if (status) params.set('status', status);
-    if (rooms) params.set('rooms', rooms);
-    if (floor) params.set('floor', floor);
+    const fields = {
+      q: document.getElementById('searchInput')?.value.trim(),
+      city: document.getElementById('filterCity')?.value,
+      type: document.getElementById('filterType')?.value,
+      status: document.getElementById('filterStatus')?.value,
+      rooms: document.getElementById('filterRooms')?.value,
+      floor: document.getElementById('filterFloor')?.value,
+    };
+    Object.entries(fields).forEach(([k, v]) => { if (v) params.set(k, v); });
 
     window.location.href = `./pages/property.html?${params.toString()}`;
   });
 }
 
 /* ============================================
-   SVG ICONS (no emojis)
+   SVG ICONS
    ============================================ */
 const ICONS = {
   bed: `<svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6"/><path d="M3 18h18"/><path d="M3 12V6a2 2 0 0 1 2-2h4v6"/></svg>`,
@@ -95,18 +97,21 @@ const ICONS = {
 const CATEGORY_ICON_MAP = { House: 'house', Flat: 'flat', Apartment: 'apartment', Plot: 'plot', Commercial: 'commercial' };
 
 /* ============================================
-   SECTION RENDERING
+   SECTIONS
    ============================================ */
 function renderHomeSections() {
   const root = document.getElementById('homeSectionsRoot');
-  if (!root) { console.error('homeSectionsRoot not found in HTML'); return; }
+  if (!root) { console.error('homeSectionsRoot not found'); return; }
   if (typeof dummyProperties === 'undefined') { console.error('dummyProperties not loaded — check property.js is linked before home.js'); return; }
 
   root.innerHTML = `
     <section class="section" id="latestPropertiesSection">
       <div class="section-head">
-        <div><span class="section-eyebrow">Fresh on the market</span><h2 class="section-title">Latest Properties</h2></div>
-        <a class="section-link" href="./pages/property.html">View all</a>
+        <div>
+          <span class="section-eyebrow">Fresh on the market</span>
+          <h2 class="section-title">Latest Properties</h2>
+        </div>
+        <a class="section-link" href="./pages/property.html">View all →</a>
       </div>
       <div class="property-grid" id="latestPropertiesGrid"></div>
     </section>
@@ -114,24 +119,32 @@ function renderHomeSections() {
     <section class="section section-alt" id="propertyCategoriesSection">
       <div class="container">
         <div class="section-head">
-          <div><span class="section-eyebrow">Browse by type</span><h2 class="section-title">Property Categories</h2></div>
+          <div>
+            <span class="section-eyebrow">Browse by type</span>
+            <h2 class="section-title">Property Categories</h2>
+          </div>
         </div>
         <div class="category-grid" id="propertyCategoriesGrid"></div>
       </div>
     </section>
 
     <section class="section" id="whyChooseUsSection">
-      <button class="section-head why-toggle" id="whyToggleBtn" type="button">
-        <div><span class="section-eyebrow">The Property.pk difference</span><h2 class="section-title">Why Choose Us</h2></div>
+      <button class="section-head why-toggle" id="whyToggleBtn" type="button" aria-expanded="false">
+        <div>
+          <span class="section-eyebrow">The Property.pk difference</span>
+          <h2 class="section-title">Why Choose Us</h2>
+        </div>
         <svg class="why-toggle-arrow" id="whyToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="why-grid" id="whyChooseUsGrid"></div>
     </section>
   `;
 
-  const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
+  const latest = [...dummyProperties]
+    .sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate))
+    .slice(0, 8);
 
-renderPropertyCards('latestPropertiesGrid', latest);
+  renderPropertyCards('latestPropertiesGrid', latest);
   renderPropertyCategories();
   renderWhyChooseUs();
   handleWhyToggle();
@@ -151,13 +164,15 @@ function renderPropertyCards(gridId, properties) {
       <a href="./pages/property-details.html?id=${p.id}" class="property-card" onclick="recordRecentlyViewed(${p.id})">
         <div class="property-card-media">
           <img src="${p.image}" alt="${p.title}" loading="lazy">
-          <button class="save-heart-btn" data-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
+          ${p.status ? `<span class="property-card-badge">${p.status}</span>` : ''}
+          <button class="save-heart-btn" data-id="${p.id}" aria-label="Save property"
+                  onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
           </button>
         </div>
         <div class="property-card-body">
           <div class="property-card-price">${formatPrice(p.price)}</div>
-          <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
+          <h3 class="property-card-title">${truncateText(p.title, 32)}</h3>
           <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
           <div class="property-card-meta">
             <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
@@ -179,19 +194,16 @@ function renderPropertyCards(gridId, properties) {
 }
 
 /* ============================================
-   SAVE / RECENTLY VIEWED (localStorage)
+   SAVE / RECENTLY VIEWED
    ============================================ */
 function getSavedProperties() {
-  return JSON.parse(localStorage.getItem('propertypk_saved') || '[]');
+  try { return JSON.parse(localStorage.getItem('propertypk_saved') || '[]'); }
+  catch { return []; }
 }
 
 function toggleSaveProperty(id) {
   let saved = getSavedProperties();
-  if (saved.includes(id)) {
-    saved = saved.filter(x => x !== id);
-  } else {
-    saved.push(id);
-  }
+  saved = saved.includes(id) ? saved.filter(x => x !== id) : [...saved, id];
   localStorage.setItem('propertypk_saved', JSON.stringify(saved));
   updateHeartIcons();
 }
@@ -205,12 +217,11 @@ function updateHeartIcons() {
 }
 
 function recordRecentlyViewed(id) {
-  let recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]');
-  recent = recent.filter(x => x !== id);
-  recent.unshift(id);
-  recent = recent.slice(0, 10);
+  let recent = [];
+  try { recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]'); } catch {}
+  recent = [id, ...recent.filter(x => x !== id)].slice(0, 10);
   localStorage.setItem('propertypk_recent_viewed', JSON.stringify(recent));
-    }
+}
 
 function renderPropertyCategories() {
   const grid = document.getElementById('propertyCategoriesGrid');
@@ -251,28 +262,30 @@ function handleWhyToggle() {
   if (!btn || !grid) return;
 
   btn.addEventListener('click', () => {
-    grid.classList.toggle('open');
-    arrow.classList.toggle('rotated');
+    const isOpen = grid.classList.toggle('open');
+    arrow?.classList.toggle('rotated', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
   });
 }
 
 /* ============================================
-   AUTO-SCROLL CAROUSEL
+   AUTO-SCROLL CAROUSEL (only when overflow)
    ============================================ */
 function initAutoScroll(gridId) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
 
+  // Respect reduced motion preference
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   let paused = false;
   let resumeTimer = null;
 
-  grid.addEventListener('pointerdown', () => {
-    paused = true;
-    clearTimeout(resumeTimer);
-  });
-  grid.addEventListener('pointerup', () => {
-    resumeTimer = setTimeout(() => { paused = false; }, 2000);
-  });
+  const pause = () => { paused = true; clearTimeout(resumeTimer); };
+  const resumeSoon = () => { resumeTimer = setTimeout(() => { paused = false; }, 2000); };
+
+  grid.addEventListener('pointerdown', pause);
+  grid.addEventListener('pointerup', resumeSoon);
   grid.addEventListener('mouseenter', () => { paused = true; });
   grid.addEventListener('mouseleave', () => { paused = false; });
 
@@ -280,10 +293,8 @@ function initAutoScroll(gridId) {
     if (paused) return;
     if (grid.scrollWidth <= grid.clientWidth) return;
     const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
-    if (atEnd) {
-      grid.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      grid.scrollBy({ left: 160, behavior: 'smooth' });
+    if (atEnd) grid.scrollTo({ left: 0, behavior: 'smooth' });
+    else grid.scrollBy({ left: 200, behavior: 'smooth' });
+  }, 3500);
     }
-  }, 3000);
-      }
+      
