@@ -37,58 +37,71 @@
   <div id="navbar-root"></div>
 
   <main>
-    <section class="hero">
-      <div class="hero-overlay"></div>
+<section class="hero">
       <div class="hero-inner">
-        <span class="hero-badge">Verified Listings</span>
         <h1>Find Homes.<br>Verified Listings.</h1>
-        <p class="hero-subtitle">Pakistan bhar ki verified properties ek hi jagah &mdash; ghar, plot aur flat khareedein ya bechein.</p>
-
-        <form class="hero-search-bar" id="searchForm" role="search">
-          <input type="text" id="searchInput" placeholder="Search by title, city, or area..." aria-label="Search properties">
+        <form class="hero-search-bar" id="searchForm">
+          <input type="text" id="searchInput" placeholder="Search by title, city, or area...">
           <button type="submit" aria-label="Search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
         </form>
 
         <div class="filters-bar">
-          <button type="button" id="filtersToggle" class="filters-toggle-btn" aria-expanded="false" aria-controls="filtersPanel">
+          <button type="button" id="filtersToggle" class="filters-toggle-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="#fff"/><circle cx="15" cy="12" r="2" fill="#fff"/><circle cx="9" cy="18" r="2" fill="#fff"/></svg>
             <span>Filters</span>
           </button>
           <div class="filters-panel" id="filtersPanel">
-            <select id="filterCity" aria-label="Filter by city">
-              <option value="">All Cities</option>
-            </select>
-            <select id="filterType" aria-label="Filter by type">
-              <option value="">All Types</option>
-            </select>
-            <select id="filterStatus" aria-label="Filter by status">
+            <select id="filterCity"><option value="">All Cities</option></select>
+            <select id="filterType"><option value="">All Types</option></select>
+            <select id="filterStatus">
               <option value="">Status</option>
+              <option value="For Sale">For Sale</option>
+              <option value="For Rent">For Rent</option>
             </select>
-            <select id="filterRooms" aria-label="Filter by rooms">
-              <option value="">Rooms</option>
-              <option value="1">1+</option>
-              <option value="2">2+</option>
-              <option value="3">3+</option>
+
+            <div class="price-filter-group">
+              <label class="price-filter-label">Price Range (PKR)</label>
+              <div class="price-histogram">
+                <span style="height:30%"></span><span style="height:45%"></span><span style="height:60%"></span>
+                <span style="height:80%"></span><span style="height:100%"></span><span style="height:90%"></span>
+                <span style="height:70%"></span><span style="height:55%"></span><span style="height:40%"></span>
+                <span style="height:30%"></span><span style="height:20%"></span><span style="height:15%"></span>
+              </div>
+              <div class="dual-slider">
+                <div class="dual-slider-track"></div>
+                <div class="dual-slider-range" id="priceSliderRange"></div>
+                <input type="range" id="priceMinSlider" min="0" max="50000000" step="100000" value="0">
+                <input type="range" id="priceMaxSlider" min="0" max="50000000" step="100000" value="50000000">
+              </div>
+              <div class="price-slider-labels">
+                <span id="priceMinLabel">Rs 0</span>
+                <span id="priceMaxLabel">Rs 5 Crore+</span>
+              </div>
+            </div>
+
+            <select id="filterRooms">
+              <option value="">Bedrooms</option>
+              <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
+              <option value="4">4+</option><option value="5">5+</option>
+            </select>
+            <select id="filterBathrooms">
+              <option value="">Bathrooms</option>
+              <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
               <option value="4">4+</option>
-              <option value="5">5+</option>
-              <option value="6">6+</option>
-              <option value="7">7+</option>
-              <option value="8">8+</option>
-              <option value="9">9+</option>
-              <option value="10">10+</option>
             </select>
-            <select id="filterFloor" aria-label="Filter by stories">
+            <select id="filterFloor">
               <option value="">Stories</option>
               <option value="Single Story">Single Story</option>
               <option value="Double Story">Double Story</option>
               <option value="Triple Story">Triple Story</option>
             </select>
+            <button type="button" class="btn btn-primary btn-block" id="applyFiltersBtn">Search Properties</button>
           </div>
         </div>
       </div>
-    </section>
+                                      </section>
 
     <div class="container" id="homeSectionsRoot"></div>
   </main>
