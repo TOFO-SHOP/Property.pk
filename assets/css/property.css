@@ -15,7 +15,7 @@
   grid-auto-rows: 1fr;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-xl);
-  max-height: 460px;
+  max-height: 480px;
 }
 .property-gallery img {
   width: 100%;
@@ -23,6 +23,13 @@
   border-radius: var(--radius-md);
   object-fit: cover;
   background: var(--color-bg-warm);
+  cursor: pointer;
+  transition: transform .3s ease, box-shadow .3s ease, opacity .2s ease;
+}
+.property-gallery img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 10px 30px rgba(16,32,46,0.15);
+  opacity: 0.95;
 }
 .property-gallery img:first-child {
   grid-row: span 2;
@@ -36,15 +43,15 @@
   align-items: start;
 }
 
-.property-title-row {
-  margin-bottom: var(--spacing-md);
-}
+.property-title-row { margin-bottom: var(--spacing-md); }
+
 .property-price {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: clamp(24px, 4vw, 32px);
   font-weight: 800;
   color: var(--color-ink);
   margin-bottom: var(--spacing-xs);
+  letter-spacing: -0.02em;
 }
 .property-location {
   display: flex;
@@ -54,7 +61,7 @@
   font-size: 15px;
 }
 
-/* --- Key facts (beds/baths/area) --- */
+/* --- Key facts --- */
 .property-facts {
   display: flex;
   flex-wrap: wrap;
@@ -67,14 +74,14 @@
 .property-fact {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text);
 }
 .property-fact svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   color: var(--color-primary);
   stroke: currentColor;
   fill: none;
@@ -84,32 +91,40 @@
 .property-description {
   color: var(--color-text-muted);
   line-height: 1.8;
+  font-size: 15px;
   margin-bottom: var(--spacing-lg);
 }
 
-/* --- Seller / agent card (sticky sidebar) --- */
+/* --- Seller / agent card --- */
 .seller-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--spacing-lg);
   text-align: center;
-  box-shadow: var(--shadow-sm);
+  background: #fff;
+  box-shadow: 0 6px 20px rgba(16,32,46,0.06);
   position: sticky;
   top: 90px;
+  transition: box-shadow .2s ease;
 }
+.seller-card:hover { box-shadow: 0 10px 30px rgba(16,32,46,0.10); }
+
 .seller-avatar {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto var(--spacing-sm);
   background: var(--color-bg-warm);
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .seller-name {
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--color-ink);
-  font-size: 17px;
+  font-size: 18px;
+  letter-spacing: -0.01em;
 }
 .seller-role {
   color: var(--color-text-muted);
@@ -123,3 +138,4 @@
   gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
   }
+  
