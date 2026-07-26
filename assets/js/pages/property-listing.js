@@ -76,7 +76,10 @@ function getFilteredProperties() {
   const type = document.getElementById('filterType').value;
   const status = document.getElementById('filterStatus').value;
   const rooms = document.getElementById('filterRooms').value;
+  const bathrooms = document.getElementById('filterBathrooms').value;
   const floor = document.getElementById('filterFloor').value;
+  const minPrice = document.getElementById('filterMinPrice').value;
+  const maxPrice = document.getElementById('filterMaxPrice').value;
 
   let results = [...dummyProperties];
 
@@ -91,7 +94,10 @@ function getFilteredProperties() {
   if (type) results = results.filter(p => p.type === type);
   if (status) results = results.filter(p => p.status === status);
   if (rooms) results = results.filter(p => p.bedrooms >= Number(rooms));
+  if (bathrooms) results = results.filter(p => p.bathrooms >= Number(bathrooms));
   if (floor) results = results.filter(p => p.floors === floor);
+  if (minPrice) results = results.filter(p => p.price >= Number(minPrice));
+  if (maxPrice) results = results.filter(p => p.price <= Number(maxPrice));
 
   const sortBy = document.getElementById('listingSort').value;
   if (sortBy === 'newest') results.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
@@ -153,4 +159,4 @@ function toggleListingSave(id) {
   }
   localStorage.setItem('propertypk_saved', JSON.stringify(saved));
   renderResults();
-      }
+    }
