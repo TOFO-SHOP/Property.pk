@@ -190,11 +190,58 @@ function handleShareProperty(property) {
 
 function handleReportListing() {
   const btn = document.getElementById('reportBtn');
-  if (!btn) return;
+  const overlay = document.getElementById('reportModalOverlay');
+  const closeBtn = document.getElementById('reportModalClose');
+  const form = document.getElementById('reportForm');
+  if (!btn || !overlay || !form) return;
+
   btn.addEventListener('click', () => {
-    alert('Thank you for flagging this listing. Our team will review it shortly.');
+    overlay.classList.add('open');
   });
-}
+
+  closeBtn.addEventListener('click', () => {
+    overlay.classList.remove('open');
+  });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const reason = document.getElementById('reportReason').value;
+    const explanation = document.getElementById('reportExplanation').value.trim();
+    const msgBox = document.getElementById('reportMessage');
+
+    if (!reason) {
+      msgBox.innerHTML = '<p class="form-error">Please select a reason.</p>';
+      return;
+    }
+    if (!explanation) {
+      msgBox.innerHTML = '<p class="form-error">Please explain the issue before submitting.</p>';
+      return;
+    }
+
+    // TODO: replace with real API call (POST /reports) once backend + Admin Panel (Phase 8) exist
+    const reports = JSON.parse(localStorage.getItem('propertypk_reports') || '[]');
+    reports.unshift({
+      propertyId: currentProperty.id,
+      propertyTitle: currentProperty.title,
+      reason: reason,
+      explanation: explanation,
+      date: new Date().toISOString().slice(0, 10)
+    });
+    localStorage.setItem('propertypk_reports', JSON.stringify(reports));
+
+    msgBox.innerHTML = '<p class="form-success">Thank you. Your report has been submitted and will be reviewed.</p>';
+    form.reset();
+
+    setTimeout(() => {
+      overlay.classList.remove('open');
+      msgBox.innerHTML = '';
+    }, 1800);
+  });
+      }
 
 function renderSimilarProperties(property) {
   const similar = dummyProperties.filter(p => p.id !== property.id && p.city === property.city);
