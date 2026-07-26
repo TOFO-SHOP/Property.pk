@@ -115,7 +115,40 @@ function renderDetails(p) {
         </form>
       </div>
 
-      <button class="report-listing-link" id="reportBtn">Report this listing</button>
+<button class="report-listing-link" id="reportBtn">Report this listing</button>
+
+      <div id="reportModalOverlay" class="report-modal-overlay">
+        <div class="report-modal">
+          <div class="report-modal-header">
+            <h3>Why do you want to report this listing?</h3>
+            <button type="button" class="report-modal-close" id="reportModalClose" aria-label="Close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+            </button>
+          </div>
+
+          <div id="reportMessage"></div>
+
+          <form id="reportForm">
+            <div class="form-group">
+              <label for="reportReason">Reason</label>
+              <select id="reportReason" required>
+                <option value="">Select a reason</option>
+                <option value="Fake listing">Fake listing</option>
+                <option value="Incorrect information">Incorrect information</option>
+                <option value="Duplicate listing">Duplicate listing</option>
+                <option value="Already sold/rented">Already sold or rented</option>
+                <option value="Scam or fraud">Scam or fraud</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="reportExplanation">Please explain</label>
+              <textarea id="reportExplanation" rows="4" placeholder="Provide more details about the issue..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Report</button>
+          </form>
+        </div>
+      </div>
 
       <h2 class="details-section-title" style="margin-top:32px;">Similar Properties</h2>
       <div class="property-grid" id="similarPropertiesGrid"></div>
