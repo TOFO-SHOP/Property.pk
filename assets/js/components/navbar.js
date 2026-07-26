@@ -16,7 +16,8 @@ function renderNavbar(targetId = 'navbar-root') {
         <li><a href="${withBase('pages/property.html')}" class="${isActive('property.html')}">Properties</a></li>
         <li><a href="${withBase('pages/about.html')}" class="${isActive('about.html')}">About Us</a></li>
         <li><a href="${withBase('pages/contact.html')}" class="${isActive('contact.html')}">Contact</a></li>
-        ${isLoggedIn ? `<li><a href="${withBase('pages/buyer-dashboard.html')}" class="${isActive('buyer-dashboard.html')}">Dashboard</a></li>` : ''}
+        ${isLoggedIn ? `<li><a href="${withBase('pages/buyer-dashboard.html')}" class="${isActive('buyer-dashboard.html')}">Buyer Dashboard</a></li>` : ''}
+        ${isLoggedIn ? `<li><a href="${withBase('pages/seller-dashboard.html')}" class="${isActive('seller-dashboard.html')}">Seller Dashboard</a></li>` : ''}
       </ul>
 
       <!-- Desktop actions -->
@@ -55,7 +56,8 @@ function renderNavbar(targetId = 'navbar-root') {
         <a href="${withBase('pages/property.html')}" class="${isActive('property.html')}">Properties</a>
         <a href="${withBase('pages/about.html')}" class="${isActive('about.html')}">About Us</a>
         <a href="${withBase('pages/contact.html')}" class="${isActive('contact.html')}">Contact</a>
-        ${isLoggedIn ? `<a href="${withBase('pages/buyer-dashboard.html')}" class="${isActive('buyer-dashboard.html')}">Dashboard</a>` : ''}
+        ${isLoggedIn ? `<a href="${withBase('pages/buyer-dashboard.html')}" class="${isActive('buyer-dashboard.html')}">Buyer Dashboard</a>` : ''}
+        ${isLoggedIn ? `<a href="${withBase('pages/seller-dashboard.html')}" class="${isActive('seller-dashboard.html')}">Seller Dashboard</a>` : ''}
         ${isLoggedIn ? `<a href="${withBase('pages/profile.html')}" class="${isActive('profile.html')}">My Profile</a>` : ''}
       </div>
 
@@ -122,4 +124,3 @@ function isActive(fileName) {
 }
 
 document.addEventListener('DOMContentLoaded', () => renderNavbar());
-  
