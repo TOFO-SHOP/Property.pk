@@ -574,3 +574,100 @@
   }
      }
    
+/* --- Zillow-style dual price range slider --- */
+.price-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 0;
+}
+.price-filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.price-histogram {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 36px;
+  margin-bottom: 4px;
+}
+.price-histogram span {
+  flex: 1;
+  background: var(--color-border);
+  border-radius: 2px 2px 0 0;
+}
+
+.dual-slider {
+  position: relative;
+  height: 20px;
+  margin-bottom: 4px;
+}
+.dual-slider-track {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+}
+.dual-slider-range {
+  position: absolute;
+  top: 8px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+.dual-slider input[type="range"] {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  margin: 0;
+  height: 20px;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: none;
+}
+.dual-slider input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  height: 4px;
+  background: transparent;
+}
+.dual-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  margin-top: -7px;
+}
+.dual-slider input[type="range"]::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+.dual-slider input[type="range"]::-moz-range-track {
+  height: 4px;
+  background: transparent;
+}
+
+.price-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
