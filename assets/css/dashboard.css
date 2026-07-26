@@ -189,3 +189,66 @@
   color: var(--color-text);
 }
 .btn-mini-danger { color: var(--color-danger); border-color: var(--color-danger); }
+
+/* --- KYC upload boxes --- */
+.upload-box {
+  display: block;
+  cursor: pointer;
+}
+.upload-box-preview {
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+  text-align: center;
+  overflow: hidden;
+}
+.upload-box-preview svg { width: 26px; height: 26px; }
+.upload-box-preview.has-image {
+  padding: 0;
+  border-style: solid;
+}
+.upload-box-preview.has-image img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+/* --- KYC status banner --- */
+.kyc-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.kyc-banner svg { width: 20px; height: 20px; flex-shrink: 0; }
+.kyc-banner span { flex: 1; }
+
+.kyc-banner-verified {
+  background: #d9f2e6;
+  color: #17a673;
+}
+.kyc-banner-unverified {
+  background: #fff4d6;
+  color: #a16d0a;
+}
+.btn-mini-cta {
+  padding: 6px 14px;
+  font-size: 12px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* --- Verified/Unverified listing badges --- */
+.badge-verified { background: #d9f2e6; color: #17a673; }
+.badge-unverified { background: #f1f1f1; color: #6b7685; }
