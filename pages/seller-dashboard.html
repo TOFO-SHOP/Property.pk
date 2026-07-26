@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard - Property.pk</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+  <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
+
+  <main class="dashboard-page">
+
+    <div class="dashboard-header">
+      <span class="page-eyebrow">Seller Dashboard</span>
+      <h1 id="sellerWelcomeName">Welcome back</h1>
+    </div>
+
+    <div class="dashboard-stats">
+      <div class="stat-card"><div class="stat-number" id="statTotal">0</div><div class="stat-label">Total Listings</div></div>
+      <div class="stat-card"><div class="stat-number" id="statViews">0</div><div class="stat-label">Total Views</div></div>
+      <div class="stat-card"><div class="stat-number" id="statSold">0</div><div class="stat-label">Sold</div></div>
+    </div>
+
+    <div class="dashboard-settings-link" style="padding-top:0;">
+      <a href="./add-property.html" class="btn btn-primary btn-block">+ Add New Property</a>
+    </div>
+
+    <div class="dashboard-tabs">
+      <button class="dashboard-tab-btn active" data-filter="All">All</button>
+      <button class="dashboard-tab-btn" data-filter="Pending">Pending</button>
+      <button class="dashboard-tab-btn" data-filter="Approved">Approved</button>
+      <button class="dashboard-tab-btn" data-filter="Sold">Sold</button>
+      <button class="dashboard-tab-btn" data-filter="Rejected">Rejected</button>
+    </div>
+
+    <div id="myListingsContainer"></div>
+
+    <div class="dashboard-settings-link">
+      <a href="./profile.html" class="btn btn-outline btn-block">Profile Settings</a>
+    </div>
+
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script src="../assets/js/pages/seller-dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Seller Dashboard");
+    });
+  </script>
+</body>
+
+    </html>
