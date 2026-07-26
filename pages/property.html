@@ -48,10 +48,23 @@
         <option value="For Sale">For Sale</option>
         <option value="For Rent">For Rent</option>
       </select>
+     <div class="price-filter-group">
+        <label class="price-filter-label">Price Range (PKR)</label>
+        <div class="price-inputs-row">
+          <input type="number" id="filterMinPrice" placeholder="Min">
+          <span>–</span>
+          <input type="number" id="filterMaxPrice" placeholder="Max">
+        </div>
+      </div>
       <select id="filterRooms">
-        <option value="">Rooms</option>
+        <option value="">Bedrooms</option>
         <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
         <option value="4">4+</option><option value="5">5+</option>
+      </select>
+      <select id="filterBathrooms">
+        <option value="">Bathrooms</option>
+        <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
+        <option value="4">4+</option>
       </select>
       <select id="filterFloor">
         <option value="">Stories</option>
