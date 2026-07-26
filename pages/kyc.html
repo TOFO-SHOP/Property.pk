@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Verification (KYC) - Property.pk</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+  <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
+
+  <main class="static-page">
+   <div class="static-page-card">
+
+    <span class="page-eyebrow">Seller Verification</span>
+    <h1 style="margin-top:6px;">Complete Your KYC</h1>
+    <p class="auth-subtitle" style="text-align:left; margin-bottom:24px;">Verified sellers get a "Verified" badge and appear higher in search results. This information is kept private and secure.</p>
+
+    <div id="kycMessage"></div>
+
+    <form class="auth-form" id="kycForm">
+
+      <div class="form-group">
+        <label for="kycCnic">CNIC Number</label>
+        <input type="text" id="kycCnic" placeholder="XXXXX-XXXXXXX-X" maxlength="15" required>
+      </div>
+
+      <div class="form-group">
+        <label>CNIC Front Photo</label>
+        <label class="upload-box" for="kycCnicFront">
+          <div class="upload-box-preview" id="previewCnicFront">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="9" cy="12" r="2"/><path d="m21 15-4-4-9 9"/></svg>
+            <span>Tap to upload CNIC front</span>
+          </div>
+          <input type="file" id="kycCnicFront" accept="image/*" required style="display:none;">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>CNIC Back Photo</label>
+        <label class="upload-box" for="kycCnicBack">
+          <div class="upload-box-preview" id="previewCnicBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="9" cy="12" r="2"/><path d="m21 15-4-4-9 9"/></svg>
+            <span>Tap to upload CNIC back</span>
+          </div>
+          <input type="file" id="kycCnicBack" accept="image/*" required style="display:none;">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label>Selfie Photo</label>
+        <label class="upload-box" for="kycSelfie">
+          <div class="upload-box-preview" id="previewSelfie">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+            <span>Tap to upload a clear selfie</span>
+          </div>
+          <input type="file" id="kycSelfie" accept="image/*" required style="display:none;">
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit for Verification</button>
+
+    </form>
+
+   </div>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script src="../assets/js/pages/kyc.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Seller Verification");
+    });
+  </script>
+</body>
+
+          </html>
