@@ -1,11 +1,9 @@
-/* Property Listing / Search Results page logic */
+/* Property Listing / Search Results page logic — filters come from home page via URL params */
+
+let activeFilters = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-  populateFilterOptions();
-  prefillFromUrlParams();
-  handleFiltersToggle();
-  handleSearchForm();
-  handleApplyFilters();
+  loadFiltersFromUrl();
   handleSortChange();
   renderResults();
 });
@@ -14,54 +12,19 @@ function safeFormatPrice(price) {
   return typeof formatPrice === 'function' ? formatPrice(price) : 'PKR ' + Number(price || 0).toLocaleString();
 }
 
-function populateFilterOptions() {
-  const citySelect = document.getElementById('filterCity');
-  const typeSelect = document.getElementById('filterType');
-  if (citySelect && typeof CITIES !== 'undefined') {
-    CITIES.forEach(city => citySelect.appendChild(new Option(city, city)));
-  }
-  if (typeSelect && typeof PROPERTY_TYPES !== 'undefined') {
-    PROPERTY_TYPES.forEach(type => typeSelect.appendChild(new Option(type, type)));
-  }
-}
-
-function prefillFromUrlParams() {
+function loadFiltersFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  if (params.get('q')) document.getElementById('listingSearchInput').value = params.get('q');
-  if (params.get('city')) document.getElementById('filterCity').value = params.get('city');
-  if (params.get('type')) document.getElementById('filterType').value = params.get('type');
-  if (params.get('status')) document.getElementById('filterStatus').value = params.get('status');
-  if (params.get('rooms')) document.getElementById('filterRooms').value = params.get('rooms');
-  if (params.get('floor')) document.getElementById('filterFloor').value = params.get('floor');
-}
-
-function handleFiltersToggle() {
-  const btn = document.getElementById('listingFiltersToggle');
-  const panel = document.getElementById('listingFiltersPanel');
-  if (!btn || !panel) return;
-  btn.addEventListener('click', () => {
-    panel.classList.toggle('open');
-    btn.classList.toggle('active');
-  });
-}
-
-function handleSearchForm() {
-  const form = document.getElementById('listingSearchForm');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    renderResults();
-  });
-}
-
-function handleApplyFilters() {
-  const btn = document.getElementById('applyFiltersBtn');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    document.getElementById('listingFiltersPanel').classList.remove('open');
-    document.getElementById('listingFiltersToggle').classList.remove('active');
-    renderResults();
-  });
+  activeFilters = {
+    q: params.get('q') || '',
+    city: params.get('city') || '',
+    type: params.get('type') || '',
+    status: params.get('status') || '',
+    rooms: params.get('rooms') || '',
+    bathrooms: params.get('bathrooms') || '',
+    floor: params.get('floor') || '',
+    minPrice: params.get('minPrice') || '',
+    maxPrice: params.get('maxPrice') || ''
+  };
 }
 
 function handleSortChange() {
@@ -71,17 +34,9 @@ function handleSortChange() {
 }
 
 function getFilteredProperties() {
-  const query = (document.getElementById('listingSearchInput').value || '').trim().toLowerCase();
-  const city = document.getElementById('filterCity').value;
-  const type = document.getElementById('filterType').value;
-  const status = document.getElementById('filterStatus').value;
-  const rooms = document.getElementById('filterRooms').value;
-  const bathrooms = document.getElementById('filterBathrooms').value;
-  const floor = document.getElementById('filterFloor').value;
-  const minPrice = document.getElementById('filterMinPrice').value;
-  const maxPrice = document.getElementById('filterMaxPrice').value;
-
   let results = [...dummyProperties];
+  const f = activeFilters;
+  const query = (f.q || '').toLowerCase();
 
   if (query) {
     results = results.filter(p =>
@@ -90,14 +45,14 @@ function getFilteredProperties() {
       p.area.toLowerCase().includes(query)
     );
   }
-  if (city) results = results.filter(p => p.city === city);
-  if (type) results = results.filter(p => p.type === type);
-  if (status) results = results.filter(p => p.status === status);
-  if (rooms) results = results.filter(p => p.bedrooms >= Number(rooms));
-  if (bathrooms) results = results.filter(p => p.bathrooms >= Number(bathrooms));
-  if (floor) results = results.filter(p => p.floors === floor);
-  if (minPrice) results = results.filter(p => p.price >= Number(minPrice));
-  if (maxPrice) results = results.filter(p => p.price <= Number(maxPrice));
+  if (f.city) results = results.filter(p => p.city === f.city);
+  if (f.type) results = results.filter(p => p.type === f.type);
+  if (f.status) results = results.filter(p => p.status === f.status);
+  if (f.rooms) results = results.filter(p => p.bedrooms >= Number(f.rooms));
+  if (f.bathrooms) results = results.filter(p => p.bathrooms >= Number(f.bathrooms));
+  if (f.floor) results = results.filter(p => p.floors === f.floor);
+  if (f.minPrice) results = results.filter(p => p.price >= Number(f.minPrice));
+  if (f.maxPrice) results = results.filter(p => p.price <= Number(f.maxPrice));
 
   const sortBy = document.getElementById('listingSort').value;
   if (sortBy === 'newest') results.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
@@ -138,7 +93,7 @@ function emptyResultsState() {
   return `
     <div class="empty-state">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <p>No properties match your search. Try adjusting your filters.</p>
+      <p>No properties match your search.</p>
     </div>
   `;
 }
