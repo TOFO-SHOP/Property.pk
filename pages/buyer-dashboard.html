@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manage your saved properties, recently viewed listings, and inquiries on Property.pk buyer dashboard.">
+  <meta name="theme-color" content="#0a7d3b">
+  <meta name="robots" content="noindex,nofollow">
+  <meta property="og:title" content="My Dashboard - Property.pk">
+  <meta property="og:description" content="Your personal Property.pk buyer dashboard.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <title>My Dashboard - Property.pk</title>
+
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/auth.css">
@@ -19,39 +26,39 @@
 
   <main class="dashboard-page">
 
-    <div class="dashboard-header">
+    <header class="dashboard-header">
       <span class="page-eyebrow">Buyer Dashboard</span>
       <h1 id="dashboardWelcomeName">Welcome back</h1>
-    </div>
+    </header>
 
-    <div class="dashboard-stats">
+    <section class="dashboard-stats" aria-label="Account summary">
       <div class="stat-card"><div class="stat-number" id="statSaved">0</div><div class="stat-label">Saved Properties</div></div>
       <div class="stat-card"><div class="stat-number" id="statRecent">0</div><div class="stat-label">Recently Viewed</div></div>
       <div class="stat-card"><div class="stat-number" id="statInquiries">0</div><div class="stat-label">Inquiries</div></div>
+    </section>
+
+    <div class="dashboard-tabs" role="tablist" aria-label="Dashboard sections">
+      <button class="dashboard-tab-btn active" data-target="tabSaved" role="tab" aria-selected="true" aria-controls="tabSaved">Saved Properties</button>
+      <button class="dashboard-tab-btn" data-target="tabRecent" role="tab" aria-selected="false" aria-controls="tabRecent">Recently Viewed</button>
+      <button class="dashboard-tab-btn" data-target="tabInquiries" role="tab" aria-selected="false" aria-controls="tabInquiries">My Inquiries</button>
+      <button class="dashboard-tab-btn" data-target="tabNotifications" role="tab" aria-selected="false" aria-controls="tabNotifications">Notifications</button>
     </div>
 
-    <div class="dashboard-tabs">
-      <button class="dashboard-tab-btn active" data-target="tabSaved">Saved Properties</button>
-      <button class="dashboard-tab-btn" data-target="tabRecent">Recently Viewed</button>
-      <button class="dashboard-tab-btn" data-target="tabInquiries">My Inquiries</button>
-      <button class="dashboard-tab-btn" data-target="tabNotifications">Notifications</button>
-    </div>
-
-    <div class="dashboard-tab-content active" id="tabSaved">
+    <section class="dashboard-tab-content active" id="tabSaved" role="tabpanel" aria-label="Saved Properties">
       <div class="dashboard-property-grid" id="tabSavedGrid"></div>
-    </div>
+    </section>
 
-    <div class="dashboard-tab-content" id="tabRecent">
+    <section class="dashboard-tab-content" id="tabRecent" role="tabpanel" aria-label="Recently Viewed">
       <div class="dashboard-property-grid" id="tabRecentGrid"></div>
-    </div>
+    </section>
 
-    <div class="dashboard-tab-content" id="tabInquiries">
+    <section class="dashboard-tab-content" id="tabInquiries" role="tabpanel" aria-label="My Inquiries">
       <div id="tabInquiriesList"></div>
-    </div>
+    </section>
 
-    <div class="dashboard-tab-content" id="tabNotifications">
+    <section class="dashboard-tab-content" id="tabNotifications" role="tabpanel" aria-label="Notifications">
       <div id="tabNotificationsList"></div>
-    </div>
+    </section>
 
     <div class="dashboard-settings-link">
       <a href="./profile.html" class="btn btn-outline btn-block">Account Settings</a>
@@ -78,5 +85,5 @@
     });
   </script>
 </body>
-
-    </html>
+  </html>
+  
