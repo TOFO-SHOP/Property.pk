@@ -1,6 +1,9 @@
+/* Footer — brand, links, contact, socials */
+
 function renderFooter(targetId = 'footer-root') {
   const target = document.getElementById(targetId);
   if (!target) return;
+
   const year = new Date().getFullYear();
   const base = typeof withBase === 'function' ? withBase : (p) => './' + p;
 
@@ -13,13 +16,13 @@ function renderFooter(targetId = 'footer-root') {
             <div class="footer-brand">Property.pk</div>
             <p class="footer-tagline">Pakistan bhar ki verified properties ek hi jagah. Ghar, plot aur flat khareedne aur bechne ka bharosemand tareeqa.</p>
             <div class="footer-social">
-              <a href="#" aria-label="Facebook">
+              <a href="#" aria-label="Facebook" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.8h2.8L15.7 15h-2.3v7A10 10 0 0 0 22 12Z"/></svg>
               </a>
-              <a href="#" aria-label="Instagram">
+              <a href="#" aria-label="Instagram" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
               </a>
-              <a href="#" aria-label="WhatsApp">
+              <a href="https://wa.me/923700132413" aria-label="WhatsApp" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm5.5 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.7s.7-1.9 .9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.1.2-.3.3-.1.6.1.3.7 1.1 1.4 1.7.9.8 1.7 1 2 1.2.2.1.4.1.6-.1l.6-.7c.2-.2.3-.2.6-.1l1.9.9c.3.1.5.2.5.4.1.2.1.9-.1 1.4Z"/></svg>
               </a>
             </div>
@@ -73,3 +76,4 @@ function renderFooter(targetId = 'footer-root') {
 }
 
 document.addEventListener('DOMContentLoaded', () => renderFooter());
+                
