@@ -44,10 +44,14 @@ function handleAddPropertyForm() {
 
     const user = JSON.parse(localStorage.getItem('propertypk_user') || '{}');
 
+    const kyc = JSON.parse(localStorage.getItem('propertypk_kyc') || 'null');
+    const isVerifiedSeller = kyc && kyc.status === 'Verified';
+
     const listing = {
       id: Date.now(),
       status: document.getElementById('apStatus').value,
       approvalStatus: 'Pending',
+      verified: isVerifiedSeller,
       type: document.getElementById('apType').value,
       title: document.getElementById('apTitle').value.trim(),
       description: document.getElementById('apDescription').value.trim(),
