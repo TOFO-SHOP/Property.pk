@@ -390,3 +390,51 @@
   margin-top: 20px;
   padding: 10px;
   }
+
+/* --- Report Listing Modal --- */
+.report-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11,26,43,0.5);
+  z-index: 400;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+.report-modal-overlay.open { display: flex; }
+
+.report-modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.report-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.report-modal-header h3 {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.report-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+.report-modal-close svg { width: 18px; height: 18px; }
+
+#reportForm .form-group { margin-bottom: 14px; }
