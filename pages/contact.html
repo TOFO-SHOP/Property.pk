@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact the Property.pk support team — send us your question by email or phone and we'll get back to you shortly.">
+  <meta name="theme-color" content="#0a7d3b">
+  <meta property="og:title" content="Contact Us - Property.pk">
+  <meta property="og:description" content="Get in touch with Property.pk support.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
   <title>Contact Us - Property.pk</title>
 
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -21,54 +26,54 @@
 
     <div class="auth-card support-card">
 
-      <div class="support-icon">
+      <div class="support-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5Z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5Z"/></svg>
       </div>
 
       <span class="page-eyebrow">Support</span>
-      <h1 class="auth-title" style="text-align:left;">Contact Us</h1>
-      <p class="auth-subtitle" style="text-align:left;">
+      <h1 class="auth-title auth-title-left">Contact Us</h1>
+      <p class="auth-subtitle auth-subtitle-left">
         Have a question? Send us a message and we'll get back to you as soon as possible.
       </p>
 
-      <div id="contactFormMessage"></div>
+      <div id="contactFormMessage" role="status" aria-live="polite"></div>
 
-      <form class="auth-form" id="contactForm">
+      <form class="auth-form" id="contactForm" novalidate>
 
         <div class="form-group">
           <label for="contactName">Full Name</label>
-          <input type="text" id="contactName" placeholder="Your full name" required>
+          <input type="text" id="contactName" placeholder="Your full name" autocomplete="name" maxlength="100" required>
         </div>
 
-        <div class="form-group">
-          <label>How should we reach you?</label>
+        <fieldset class="form-group">
+          <legend>How should we reach you?</legend>
           <div class="contact-method-toggle">
             <label class="contact-method-option">
               <input type="radio" name="contactMethod" value="email">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
               <span>Email</span>
             </label>
             <label class="contact-method-option">
               <input type="radio" name="contactMethod" value="phone">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               <span>Phone</span>
             </label>
           </div>
-        </div>
+        </fieldset>
 
         <div class="form-group" id="contactEmailGroup" style="display:none;">
           <label for="contactEmail">Email Address</label>
-          <input type="email" id="contactEmail" placeholder="your@email.com">
+          <input type="email" id="contactEmail" placeholder="your@email.com" autocomplete="email" maxlength="255">
         </div>
 
         <div class="form-group" id="contactPhoneGroup" style="display:none;">
           <label for="contactPhone">Phone Number</label>
-          <input type="tel" id="contactPhone" placeholder="03XX-XXXXXXX">
+          <input type="tel" id="contactPhone" placeholder="03XX-XXXXXXX" autocomplete="tel" inputmode="tel" pattern="[0-9\-\s\+]{10,15}">
         </div>
 
         <div class="form-group">
           <label for="contactMessage">Message</label>
-          <textarea id="contactMessage" rows="5" placeholder="Write your message here..." required></textarea>
+          <textarea id="contactMessage" rows="5" maxlength="1000" placeholder="Write your message here..." required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Send Message</button>
@@ -131,7 +136,7 @@
         const selectedMethod = document.querySelector('input[name="contactMethod"]:checked');
 
         if (!selectedMethod) {
-          alert("Please select either Email or Phone so we can reply to you.");
+          msgBox.innerHTML = '<p class="form-error">Please select either Email or Phone so we can reply to you.</p>';
           return;
         }
 
@@ -163,5 +168,5 @@
   </script>
 
 </body>
-
-</html>
+            </html>
+            
