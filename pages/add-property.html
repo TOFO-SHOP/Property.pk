@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Property - Property.pk</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+  <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
+
+  <main class="static-page">
+   <div class="static-page-card">
+
+    <span class="page-eyebrow">Seller Tools</span>
+    <h1 style="margin-top:6px;">Add Property</h1>
+    <p class="auth-subtitle" style="text-align:left; margin-bottom:24px;">Provide accurate details to help buyers find your property.</p>
+
+    <div id="apMessage"></div>
+
+    <form class="auth-form" id="addPropertyForm">
+
+      <h2 style="font-size:16px; margin-top:0;">Basic Information</h2>
+
+      <div class="form-group">
+        <label for="apStatus">Listing Type</label>
+        <select id="apStatus" required>
+          <option value="For Sale">For Sale</option>
+          <option value="For Rent">For Rent</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="apType">Property Type</label>
+        <select id="apType" required>
+          <option value="House">House</option>
+          <option value="Flat">Flat</option>
+          <option value="Apartment">Apartment</option>
+          <option value="Plot">Plot</option>
+          <option value="Commercial">Commercial</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="apTitle">Listing Title</label>
+        <input type="text" id="apTitle" placeholder="e.g. Luxury 3 Bed Apartment" required>
+      </div>
+
+      <div class="form-group">
+        <label for="apDescription">Description</label>
+        <textarea id="apDescription" rows="4" placeholder="Describe the property, condition, nearby landmarks, etc." required></textarea>
+      </div>
+
+      <h2 style="font-size:16px;">Location</h2>
+
+      <div class="form-group">
+        <label for="apCity">City</label>
+        <select id="apCity" required>
+          <option value="">Select city</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="apArea">Area / Neighborhood</label>
+        <input type="text" id="apArea" placeholder="e.g. DHA Phase 5" required>
+      </div>
+
+      <h2 style="font-size:16px;">Price & Size</h2>
+
+      <div class="form-group">
+        <label for="apPrice">Price (PKR)</label>
+        <input type="number" id="apPrice" placeholder="e.g. 8500000" required min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="apMarla">Size (Marla)</label>
+        <input type="number" id="apMarla" placeholder="e.g. 5" required min="1">
+      </div>
+
+      <div class="form-group">
+        <label for="apBedrooms">Bedrooms</label>
+        <input type="number" id="apBedrooms" placeholder="e.g. 3" required min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="apBathrooms">Bathrooms</label>
+        <input type="number" id="apBathrooms" placeholder="e.g. 2" required min="0">
+      </div>
+
+      <div class="form-group">
+        <label for="apFloors">Stories</label>
+        <select id="apFloors">
+          <option value="Single Story">Single Story</option>
+          <option value="Double Story">Double Story</option>
+          <option value="Triple Story">Triple Story</option>
+        </select>
+      </div>
+
+      <h2 style="font-size:16px;">Amenities</h2>
+
+      <div class="amenities-grid">
+        <label class="amenity-check"><input type="checkbox" id="apParking"><span>Parking</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apGas"><span>Gas</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apElectricityBackup"><span>Electricity Backup</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apWaterSupply"><span>Water Supply</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apSecurity"><span>Security / Guard</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apElevator"><span>Elevator</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apGarden"><span>Garden / Lawn</span></label>
+        <label class="amenity-check"><input type="checkbox" id="apFurnished"><span>Furnished</span></label>
+      </div>
+
+      <h2 style="font-size:16px;">Photos</h2>
+
+      <div class="form-group">
+        <label for="apImages">Image URLs (comma-separated)</label>
+        <textarea id="apImages" rows="3" placeholder="https://example.com/photo1.jpg, https://example.com/photo2.jpg" required></textarea>
+      </div>
+
+      <h2 style="font-size:16px;">Contact Information</h2>
+
+      <div class="form-group">
+        <label for="apPhone">Contact Phone</label>
+        <input type="tel" id="apPhone" placeholder="03XX-XXXXXXX" required>
+      </div>
+
+      <div class="form-group">
+        <label for="apWhatsapp">WhatsApp Number (optional)</label>
+        <input type="tel" id="apWhatsapp" placeholder="03XX-XXXXXXX">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit Listing</button>
+
+    </form>
+
+   </div>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script src="../assets/js/pages/add-property.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Add Property");
+    });
+  </script>
+</body>
+
+  </html>
