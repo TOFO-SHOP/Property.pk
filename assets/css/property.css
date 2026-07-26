@@ -438,3 +438,32 @@
 .report-modal-close svg { width: 18px; height: 18px; }
 
 #reportForm .form-group { margin-bottom: 14px; }
+
+/* --- Price range filter (Zillow-style) --- */
+.price-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.price-filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.price-inputs-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.price-inputs-row input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 13px;
+  background: #fff;
+  color: var(--color-text);
+}
+.price-inputs-row input:focus { outline: none; border-color: var(--color-primary); }
+.price-inputs-row span { color: var(--color-text-muted); font-size: 13px; }
