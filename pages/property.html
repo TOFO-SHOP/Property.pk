@@ -19,18 +19,7 @@
 
   <main class="listing-page">
 
-    <div class="listing-search-bar">
-      <form id="listingSearchForm">
-        <input type="text" id="listingSearchInput" placeholder="Search by title, city, or area...">
-      </form>
-    </div>
-
     <div class="listing-controls">
-      <button type="button" id="listingFiltersToggle" class="filters-toggle-btn filters-toggle-btn-light">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="var(--color-primary)"/><circle cx="15" cy="12" r="2" fill="var(--color-primary)"/><circle cx="9" cy="18" r="2" fill="var(--color-primary)"/></svg>
-        <span>Filters</span>
-      </button>
-
       <select id="listingSort" class="listing-sort-select">
         <option value="newest">Newest</option>
         <option value="oldest">Oldest</option>
@@ -38,41 +27,6 @@
         <option value="price-high">Price: High to Low</option>
         <option value="bedrooms">Most Bedrooms</option>
       </select>
-    </div>
-
-    <div class="filters-panel" id="listingFiltersPanel">
-      <select id="filterCity"><option value="">All Cities</option></select>
-      <select id="filterType"><option value="">All Types</option></select>
-      <select id="filterStatus">
-        <option value="">Status</option>
-        <option value="For Sale">For Sale</option>
-        <option value="For Rent">For Rent</option>
-      </select>
-     <div class="price-filter-group">
-        <label class="price-filter-label">Price Range (PKR)</label>
-        <div class="price-inputs-row">
-          <input type="number" id="filterMinPrice" placeholder="Min">
-          <span>–</span>
-          <input type="number" id="filterMaxPrice" placeholder="Max">
-        </div>
-      </div>
-      <select id="filterRooms">
-        <option value="">Bedrooms</option>
-        <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
-        <option value="4">4+</option><option value="5">5+</option>
-      </select>
-      <select id="filterBathrooms">
-        <option value="">Bathrooms</option>
-        <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
-        <option value="4">4+</option>
-      </select>
-      <select id="filterFloor">
-        <option value="">Stories</option>
-        <option value="Single Story">Single Story</option>
-        <option value="Double Story">Double Story</option>
-        <option value="Triple Story">Triple Story</option>
-      </select>
-      <button type="button" class="btn btn-primary btn-block" id="applyFiltersBtn">Apply Filters</button>
     </div>
 
     <div class="listing-results-count" id="listingResultsCount"></div>
@@ -101,4 +55,4 @@
   </script>
 </body>
 
-  </html>
+                                       </html>
