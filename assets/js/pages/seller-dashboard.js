@@ -93,6 +93,7 @@ function listingCardHTML(l) {
         <p class="listing-row-meta">${l.bedrooms} Rooms · ${l.bathrooms} Baths · ${l.marla} Marla · ${l.views || 0} views</p>
         <div style="margin-top:6px;">${verifiedTag}</div>
         <div class="listing-row-actions">
+          <a class="btn-mini" href="./edit-property.html?id=${l.id}">Edit</a>
           <button class="btn-mini" onclick="markAsSold(${l.id})">Mark Sold</button>
           <button class="btn-mini btn-mini-danger" onclick="deleteListing(${l.id})">Delete</button>
         </div>
