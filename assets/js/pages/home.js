@@ -1,32 +1,17 @@
-/* Home page — Hero Search + Filters + Property Sections */
+/* Home page logic — Hero Search + Filters + Property Sections */
 
 document.addEventListener('DOMContentLoaded', () => {
   populateFilterOptions();
   handleSearchSubmit();
   handleFiltersToggle();
+  handlePriceSlider();
+  handleApplyFilters();
   renderHomeSections();
 });
 
-function handleFiltersToggle() {
-  const btn = document.getElementById('filtersToggle');
-  const panel = document.getElementById('filtersPanel');
-  if (!btn || !panel) return;
-
-  btn.addEventListener('click', () => {
-    const isOpen = panel.classList.toggle('open');
-    btn.classList.toggle('active', isOpen);
-    btn.setAttribute('aria-expanded', String(isOpen));
-  });
-}
-
 /* ---- Safe fallbacks ---- */
 if (typeof formatPrice === 'undefined') {
-  window.formatPrice = (n) => {
-    const num = Number(n || 0);
-    if (num >= 1e7) return 'PKR ' + (num / 1e7).toFixed(2) + ' Crore';
-    if (num >= 1e5) return 'PKR ' + (num / 1e5).toFixed(2) + ' Lakh';
-    return 'PKR ' + num.toLocaleString();
-  };
+  window.formatPrice = (n) => 'PKR ' + Number(n || 0).toLocaleString();
 }
 if (typeof truncateText === 'undefined') {
   window.truncateText = (str, len) => (str && str.length > len) ? str.slice(0, len) + '…' : (str || '');
@@ -34,23 +19,19 @@ if (typeof truncateText === 'undefined') {
 if (typeof showError === 'undefined') {
   window.showError = (elId, msg) => {
     const el = document.getElementById(elId);
-    if (el) el.innerHTML = `<p style="padding:16px;color:var(--color-text-muted);text-align:center;">${msg}</p>`;
+    if (el) el.innerHTML = `<p style="padding:16px;color:var(--color-text-muted);">${msg}</p>`;
   };
 }
 
 function populateFilterOptions() {
   const citySelect = document.getElementById('filterCity');
   const typeSelect = document.getElementById('filterType');
-  const statusSelect = document.getElementById('filterStatus');
 
   if (citySelect && typeof CITIES !== 'undefined') {
     CITIES.forEach(city => citySelect.appendChild(new Option(city, city)));
   }
   if (typeSelect && typeof PROPERTY_TYPES !== 'undefined') {
     PROPERTY_TYPES.forEach(type => typeSelect.appendChild(new Option(type, type)));
-  }
-  if (statusSelect && typeof PROPERTY_STATUS !== 'undefined') {
-    PROPERTY_STATUS.forEach(status => statusSelect.appendChild(new Option(status, status)));
   }
 }
 
@@ -61,15 +42,92 @@ function handleSearchSubmit() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    const fields = {
-      q: document.getElementById('searchInput')?.value.trim(),
-      city: document.getElementById('filterCity')?.value,
-      type: document.getElementById('filterType')?.value,
-      status: document.getElementById('filterStatus')?.value,
-      rooms: document.getElementById('filterRooms')?.value,
-      floor: document.getElementById('filterFloor')?.value,
-    };
-    Object.entries(fields).forEach(([k, v]) => { if (v) params.set(k, v); });
+    const query = document.getElementById('searchInput')?.value.trim();
+    if (query) params.set('q', query);
+    window.location.href = `./pages/property.html?${params.toString()}`;
+  });
+}
+
+function handleFiltersToggle() {
+  const btn = document.getElementById('filtersToggle');
+  const panel = document.getElementById('filtersPanel');
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    btn.classList.toggle('active');
+  });
+}
+
+/* ---- Zillow-style dual price range slider ---- */
+function formatPakPriceShort(value) {
+  value = Number(value);
+  if (value >= 50000000) return 'Rs 5 Crore+';
+  if (value >= 10000000) return 'Rs ' + (value / 10000000).toFixed(value % 10000000 === 0 ? 0 : 1) + ' Crore';
+  if (value >= 100000) return 'Rs ' + (value / 100000).toFixed(value % 100000 === 0 ? 0 : 1) + ' Lac';
+  if (value === 0) return 'Rs 0';
+  return 'Rs ' + value.toLocaleString();
+}
+
+function handlePriceSlider() {
+  const minSlider = document.getElementById('priceMinSlider');
+  const maxSlider = document.getElementById('priceMaxSlider');
+  const rangeEl = document.getElementById('priceSliderRange');
+  const minLabel = document.getElementById('priceMinLabel');
+  const maxLabel = document.getElementById('priceMaxLabel');
+  if (!minSlider || !maxSlider) return;
+
+  function update() {
+    let minVal = Number(minSlider.value);
+    let maxVal = Number(maxSlider.value);
+
+    if (minVal > maxVal - 100000) {
+      minVal = maxVal - 100000;
+      minSlider.value = minVal;
+    }
+
+    const range = Number(minSlider.max) - Number(minSlider.min);
+    const minPercent = ((minVal - minSlider.min) / range) * 100;
+    const maxPercent = ((maxVal - minSlider.min) / range) * 100;
+
+    if (rangeEl) {
+      rangeEl.style.left = minPercent + '%';
+      rangeEl.style.width = (maxPercent - minPercent) + '%';
+    }
+    if (minLabel) minLabel.textContent = formatPakPriceShort(minVal);
+    if (maxLabel) maxLabel.textContent = maxVal >= Number(maxSlider.max) ? 'Rs 5 Crore+' : formatPakPriceShort(maxVal);
+  }
+
+  minSlider.addEventListener('input', update);
+  maxSlider.addEventListener('input', update);
+  update();
+}
+
+function handleApplyFilters() {
+  const btn = document.getElementById('applyFiltersBtn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const params = new URLSearchParams();
+    const query = document.getElementById('searchInput')?.value.trim();
+    const city = document.getElementById('filterCity')?.value;
+    const type = document.getElementById('filterType')?.value;
+    const status = document.getElementById('filterStatus')?.value;
+    const minPrice = document.getElementById('priceMinSlider')?.value;
+    const maxPrice = document.getElementById('priceMaxSlider')?.value;
+    const rooms = document.getElementById('filterRooms')?.value;
+    const bathrooms = document.getElementById('filterBathrooms')?.value;
+    const floor = document.getElementById('filterFloor')?.value;
+
+    if (query) params.set('q', query);
+    if (city) params.set('city', city);
+    if (type) params.set('type', type);
+    if (status) params.set('status', status);
+    if (minPrice && Number(minPrice) > 0) params.set('minPrice', minPrice);
+    if (maxPrice && Number(maxPrice) < 50000000) params.set('maxPrice', maxPrice);
+    if (rooms) params.set('rooms', rooms);
+    if (bathrooms) params.set('bathrooms', bathrooms);
+    if (floor) params.set('floor', floor);
 
     window.location.href = `./pages/property.html?${params.toString()}`;
   });
@@ -97,21 +155,18 @@ const ICONS = {
 const CATEGORY_ICON_MAP = { House: 'house', Flat: 'flat', Apartment: 'apartment', Plot: 'plot', Commercial: 'commercial' };
 
 /* ============================================
-   SECTIONS
+   SECTION RENDERING
    ============================================ */
 function renderHomeSections() {
   const root = document.getElementById('homeSectionsRoot');
-  if (!root) { console.error('homeSectionsRoot not found'); return; }
-  if (typeof dummyProperties === 'undefined') { console.error('dummyProperties not loaded — check property.js is linked before home.js'); return; }
+  if (!root) return;
+  if (typeof dummyProperties === 'undefined') return;
 
   root.innerHTML = `
     <section class="section" id="latestPropertiesSection">
       <div class="section-head">
-        <div>
-          <span class="section-eyebrow">Fresh on the market</span>
-          <h2 class="section-title">Latest Properties</h2>
-        </div>
-        <a class="section-link" href="./pages/property.html">View all →</a>
+        <div><span class="section-eyebrow">Fresh on the market</span><h2 class="section-title">Latest Properties</h2></div>
+        <a class="section-link" href="./pages/property.html">View all</a>
       </div>
       <div class="property-grid" id="latestPropertiesGrid"></div>
     </section>
@@ -119,30 +174,22 @@ function renderHomeSections() {
     <section class="section section-alt" id="propertyCategoriesSection">
       <div class="container">
         <div class="section-head">
-          <div>
-            <span class="section-eyebrow">Browse by type</span>
-            <h2 class="section-title">Property Categories</h2>
-          </div>
+          <div><span class="section-eyebrow">Browse by type</span><h2 class="section-title">Property Categories</h2></div>
         </div>
         <div class="category-grid" id="propertyCategoriesGrid"></div>
       </div>
     </section>
 
     <section class="section" id="whyChooseUsSection">
-      <button class="section-head why-toggle" id="whyToggleBtn" type="button" aria-expanded="false">
-        <div>
-          <span class="section-eyebrow">The Property.pk difference</span>
-          <h2 class="section-title">Why Choose Us</h2>
-        </div>
+      <button class="section-head why-toggle" id="whyToggleBtn" type="button">
+        <div><span class="section-eyebrow">The Property.pk difference</span><h2 class="section-title">Why Choose Us</h2></div>
         <svg class="why-toggle-arrow" id="whyToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="why-grid" id="whyChooseUsGrid"></div>
     </section>
   `;
 
-  const latest = [...dummyProperties]
-    .sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate))
-    .slice(0, 8);
+  const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
 
   renderPropertyCards('latestPropertiesGrid', latest);
   renderPropertyCategories();
@@ -152,7 +199,7 @@ function renderHomeSections() {
 
 function renderPropertyCards(gridId, properties) {
   const grid = document.getElementById(gridId);
-  if (!grid) { console.error(`Grid #${gridId} not found`); return; }
+  if (!grid) return;
 
   if (!properties || properties.length === 0) {
     showError(gridId, 'No properties found right now.');
@@ -164,15 +211,13 @@ function renderPropertyCards(gridId, properties) {
       <a href="./pages/property-details.html?id=${p.id}" class="property-card" onclick="recordRecentlyViewed(${p.id})">
         <div class="property-card-media">
           <img src="${p.image}" alt="${p.title}" loading="lazy">
-          ${p.status ? `<span class="property-card-badge">${p.status}</span>` : ''}
-          <button class="save-heart-btn" data-id="${p.id}" aria-label="Save property"
-                  onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
+          <button class="save-heart-btn" data-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
             <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
           </button>
         </div>
         <div class="property-card-body">
           <div class="property-card-price">${formatPrice(p.price)}</div>
-          <h3 class="property-card-title">${truncateText(p.title, 32)}</h3>
+          <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
           <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
           <div class="property-card-meta">
             <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
@@ -191,36 +236,6 @@ function renderPropertyCards(gridId, properties) {
 
   initAutoScroll(gridId);
   updateHeartIcons();
-}
-
-/* ============================================
-   SAVE / RECENTLY VIEWED
-   ============================================ */
-function getSavedProperties() {
-  try { return JSON.parse(localStorage.getItem('propertypk_saved') || '[]'); }
-  catch { return []; }
-}
-
-function toggleSaveProperty(id) {
-  let saved = getSavedProperties();
-  saved = saved.includes(id) ? saved.filter(x => x !== id) : [...saved, id];
-  localStorage.setItem('propertypk_saved', JSON.stringify(saved));
-  updateHeartIcons();
-}
-
-function updateHeartIcons() {
-  const saved = getSavedProperties();
-  document.querySelectorAll('.save-heart-btn').forEach(btn => {
-    const id = Number(btn.dataset.id);
-    btn.classList.toggle('saved', saved.includes(id));
-  });
-}
-
-function recordRecentlyViewed(id) {
-  let recent = [];
-  try { recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]'); } catch {}
-  recent = [id, ...recent.filter(x => x !== id)].slice(0, 10);
-  localStorage.setItem('propertypk_recent_viewed', JSON.stringify(recent));
 }
 
 function renderPropertyCategories() {
@@ -262,30 +277,62 @@ function handleWhyToggle() {
   if (!btn || !grid) return;
 
   btn.addEventListener('click', () => {
-    const isOpen = grid.classList.toggle('open');
-    arrow?.classList.toggle('rotated', isOpen);
-    btn.setAttribute('aria-expanded', String(isOpen));
+    grid.classList.toggle('open');
+    arrow.classList.toggle('rotated');
   });
 }
 
 /* ============================================
-   AUTO-SCROLL CAROUSEL (only when overflow)
+   SAVE / RECENTLY VIEWED
+   ============================================ */
+function getSavedProperties() {
+  return JSON.parse(localStorage.getItem('propertypk_saved') || '[]');
+}
+
+function toggleSaveProperty(id) {
+  let saved = getSavedProperties();
+  if (saved.includes(id)) {
+    saved = saved.filter(x => x !== id);
+  } else {
+    saved.push(id);
+  }
+  localStorage.setItem('propertypk_saved', JSON.stringify(saved));
+  updateHeartIcons();
+}
+
+function updateHeartIcons() {
+  const saved = getSavedProperties();
+  document.querySelectorAll('.save-heart-btn').forEach(btn => {
+    const id = Number(btn.dataset.id);
+    btn.classList.toggle('saved', saved.includes(id));
+  });
+}
+
+function recordRecentlyViewed(id) {
+  let recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]');
+  recent = recent.filter(x => x !== id);
+  recent.unshift(id);
+  recent = recent.slice(0, 10);
+  localStorage.setItem('propertypk_recent_viewed', JSON.stringify(recent));
+}
+
+/* ============================================
+   AUTO-SCROLL CAROUSEL
    ============================================ */
 function initAutoScroll(gridId) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
 
-  // Respect reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
   let paused = false;
   let resumeTimer = null;
 
-  const pause = () => { paused = true; clearTimeout(resumeTimer); };
-  const resumeSoon = () => { resumeTimer = setTimeout(() => { paused = false; }, 2000); };
-
-  grid.addEventListener('pointerdown', pause);
-  grid.addEventListener('pointerup', resumeSoon);
+  grid.addEventListener('pointerdown', () => {
+    paused = true;
+    clearTimeout(resumeTimer);
+  });
+  grid.addEventListener('pointerup', () => {
+    resumeTimer = setTimeout(() => { paused = false; }, 2000);
+  });
   grid.addEventListener('mouseenter', () => { paused = true; });
   grid.addEventListener('mouseleave', () => { paused = false; });
 
@@ -293,8 +340,10 @@ function initAutoScroll(gridId) {
     if (paused) return;
     if (grid.scrollWidth <= grid.clientWidth) return;
     const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
-    if (atEnd) grid.scrollTo({ left: 0, behavior: 'smooth' });
-    else grid.scrollBy({ left: 200, behavior: 'smooth' });
-  }, 3500);
+    if (atEnd) {
+      grid.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      grid.scrollBy({ left: 160, behavior: 'smooth' });
     }
-      
+  }, 3000);
+    }
