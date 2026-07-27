@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a2540">
+  <meta name="description" content="Edit your property listing on Property.pk. Update title, price, location, photos and amenities to keep your listing accurate.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Edit Property - Property.pk">
+  <meta property="og:description" content="Update your property listing details on Property.pk.">
+  <meta name="twitter:card" content="summary">
+
+  <title>Edit Property - Property.pk</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/home.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+
+<body>
+
+  <div id="navbar-root"></div>
+  <div id="page-header-root"></div>
+
+  <main class="static-page" id="mainContent">
+    <section class="static-page-card" aria-labelledby="editPropertyTitle">
+
+      <span class="page-eyebrow">Seller Tools</span>
+      <h1 id="editPropertyTitle" style="margin-top:6px;">Edit Property</h1>
+      <p class="auth-subtitle" style="text-align:left; margin-bottom:24px;">Update your listing details below.</p>
+
+      <div id="epMessage" role="status" aria-live="polite"></div>
+
+      <form class="auth-form" id="editPropertyForm" novalidate>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Basic Information</legend>
+
+          <div class="form-group">
+            <label for="epStatus">Listing Type</label>
+            <select id="epStatus" name="status" required autocomplete="off">
+              <option value="For Sale">For Sale</option>
+              <option value="For Rent">For Rent</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="epType">Property Type</label>
+            <select id="epType" name="type" required autocomplete="off">
+              <option value="House">House</option>
+              <option value="Flat">Flat</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Plot">Plot</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="epTitle">Listing Title</label>
+            <input type="text" id="epTitle" name="title" required maxlength="120" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="epDescription">Description</label>
+            <textarea id="epDescription" name="description" rows="4" required maxlength="2000"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Location</legend>
+
+          <div class="form-group">
+            <label for="epCity">City</label>
+            <select id="epCity" name="city" required autocomplete="address-level2">
+              <option value="">Select city</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="epArea">Area / Neighborhood</label>
+            <input type="text" id="epArea" name="area" required maxlength="120" autocomplete="address-level3">
+          </div>
+        </fieldset>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Price &amp; Size</legend>
+
+          <div class="form-group">
+            <label for="epPrice">Price (PKR)</label>
+            <input type="number" id="epPrice" name="price" required min="1" inputmode="numeric">
+          </div>
+
+          <div class="form-group">
+            <label for="epMarla">Size (Marla)</label>
+            <input type="number" id="epMarla" name="marla" required min="1" inputmode="numeric">
+          </div>
+
+          <div class="form-group">
+            <label for="epBedrooms">Bedrooms</label>
+            <input type="number" id="epBedrooms" name="bedrooms" required min="0" inputmode="numeric">
+          </div>
+
+          <div class="form-group">
+            <label for="epBathrooms">Bathrooms</label>
+            <input type="number" id="epBathrooms" name="bathrooms" required min="0" inputmode="numeric">
+          </div>
+
+          <div class="form-group">
+            <label for="epFloors">Stories</label>
+            <select id="epFloors" name="floors" autocomplete="off">
+              <option value="Single Story">Single Story</option>
+              <option value="Double Story">Double Story</option>
+              <option value="Triple Story">Triple Story</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Amenities</legend>
+
+          <div class="amenities-grid" role="group" aria-label="Available amenities">
+            <label class="amenity-check"><input type="checkbox" id="epParking"><span>Parking</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epGas"><span>Gas</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epElectricityBackup"><span>Electricity Backup</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epWaterSupply"><span>Water Supply</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epSecurity"><span>Security / Guard</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epElevator"><span>Elevator</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epGarden"><span>Garden / Lawn</span></label>
+            <label class="amenity-check"><input type="checkbox" id="epFurnished"><span>Furnished</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Photos</legend>
+
+          <div class="form-group">
+            <label for="epImages">Image URLs (comma-separated)</label>
+            <textarea id="epImages" name="images" rows="3" required
+              placeholder="https://example.com/photo1.jpg, https://example.com/photo2.jpg"></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset style="border:0; padding:0; margin:0;">
+          <legend style="font-size:16px; font-weight:600; margin:0 0 12px;">Contact Information</legend>
+
+          <div class="form-group">
+            <label for="epPhone">Contact Phone</label>
+            <input type="tel" id="epPhone" name="phone" required autocomplete="tel"
+              pattern="[0-9+\-\s]{7,20}" placeholder="03XX-XXXXXXX">
+          </div>
+
+          <div class="form-group">
+            <label for="epWhatsapp">WhatsApp Number (optional)</label>
+            <input type="tel" id="epWhatsapp" name="whatsapp" autocomplete="tel"
+              pattern="[0-9+\-\s]{7,20}" placeholder="03XX-XXXXXXX">
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+
+      </form>
+
+    </section>
+  </main>
+
+  <div id="footer-root"></div>
+
+  <script src="../assets/js/utils/constants.js"></script>
+  <script src="../assets/js/utils/helpers.js"></script>
+  <script src="../assets/js/utils/validator.js"></script>
+  <script src="../assets/js/utils/storage.js"></script>
+  <script src="../assets/js/api/config.js"></script>
+  <script src="../assets/js/api/authApi.js"></script>
+  <script src="../assets/js/components/navbar.js"></script>
+  <script src="../assets/js/components/footer.js"></script>
+  <script src="../assets/js/components/backButton.js"></script>
+  <script src="../assets/js/pages/edit-property.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      renderPageHeader("Edit Property");
+    });
+  </script>
+</body>
+
+</html>
