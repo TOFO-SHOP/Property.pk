@@ -28,7 +28,7 @@
 }
 .property-gallery img:hover {
   transform: scale(1.01);
-  box-shadow: 0 10px 30px rgba(16,32,46,0.15);
+  box-shadow: 0 10px 30px rgba(11,18,32,0.15);
   opacity: 0.95;
 }
 .property-gallery img:first-child {
@@ -102,12 +102,12 @@
   padding: var(--spacing-lg);
   text-align: center;
   background: #fff;
-  box-shadow: 0 6px 20px rgba(16,32,46,0.06);
+  box-shadow: 0 6px 20px rgba(11,18,32,0.06);
   position: sticky;
   top: 90px;
   transition: box-shadow .2s ease;
 }
-.seller-card:hover { box-shadow: 0 10px 30px rgba(16,32,46,0.10); }
+.seller-card:hover { box-shadow: 0 10px 30px rgba(11,18,32,0.10); }
 
 .seller-avatar {
   width: 72px;
@@ -137,8 +137,8 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
-  }
-  
+}
+
 /* ============================================
    LISTING PAGE (Search Results)
    ============================================ */
@@ -214,7 +214,7 @@
   position: absolute;
   bottom: 6px;
   left: 6px;
-  background: rgba(11,26,43,0.85);
+  background: rgba(11,18,32,0.85);
   color: #fff;
   font-size: 10px;
   font-weight: 700;
@@ -389,14 +389,14 @@
   cursor: pointer;
   margin-top: 20px;
   padding: 10px;
-  }
+}
 
 /* --- Report Listing Modal --- */
 .report-modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(11,26,43,0.5);
+  background: rgba(11,18,32,0.5);
   z-index: 400;
   align-items: center;
   justify-content: center;
