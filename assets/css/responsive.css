@@ -1,27 +1,42 @@
-/* Mobile / Tablet breakpoints — sabse aakhri mein load hogi */
+/* ============================================
+   RESPONSIVE — Mobile / Tablet breakpoints
+   Loads last so it overrides base styles cleanly
+   ============================================ */
 
 /* ============================================
    NAVBAR — desktop links + mobile hamburger
    ============================================ */
 .navbar-links,
-.navbar-actions { display: none; }
+.navbar-actions {
+  display: none;
+}
 
-.navbar-links { align-items: center; gap: 30px; }
+.navbar-links {
+  align-items: center;
+  gap: 30px;
+}
 .navbar-links a {
   font-size: 15px;
   font-weight: 500;
   color: var(--color-ink);
   padding: 6px 0;
   border-bottom: 2px solid transparent;
-  transition: color .15s ease, border-color .15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 .navbar-links a:hover { color: var(--color-primary); }
 .navbar-links a.active {
   color: var(--color-primary);
   border-bottom-color: var(--color-primary);
 }
-.navbar-actions { align-items: center; gap: 12px; }
-.navbar-actions .btn { padding: 10px 20px; font-size: 14px; }
+
+.navbar-actions {
+  align-items: center;
+  gap: 12px;
+}
+.navbar-actions .btn {
+  padding: 10px 20px;
+  font-size: 14px;
+}
 
 @media (min-width: 900px) {
   .navbar-links { display: flex; }
@@ -30,7 +45,7 @@
 }
 
 /* ============================================
-   FOOTER bottom row
+   FOOTER — bottom row layout on larger screens
    ============================================ */
 @media (min-width: 768px) {
   .footer-bottom {
@@ -43,7 +58,7 @@
 }
 
 /* ============================================
-   BREAKPOINTS
+   BREAKPOINT: ≤ 992px — tablets
    ============================================ */
 @media (max-width: 992px) {
   .property-info-grid { grid-template-columns: 1fr; }
@@ -51,28 +66,37 @@
   .seller-card { position: static; }
 }
 
+/* ============================================
+   BREAKPOINT: ≤ 768px — small tablets / large phones
+   ============================================ */
 @media (max-width: 768px) {
   .hero { min-height: 420px; }
   .hero h1 { font-size: 30px; }
+
   .property-gallery {
     grid-template-columns: 1fr;
     max-height: none;
   }
   .property-gallery img:first-child { grid-row: auto; }
+
   .sidebar { display: none; }
   .dashboard-layout { flex-direction: column; }
   .section-head { flex-direction: column; align-items: flex-start; gap: 6px; }
   .property-facts { gap: var(--spacing-md); }
 }
 
+/* ============================================
+   BREAKPOINT: ≤ 480px — phones
+   ============================================ */
 @media (max-width: 480px) {
   .dashboard-cards { grid-template-columns: 1fr; }
   .auth-card { padding: var(--spacing-lg); }
-  .property-grid { grid-template-columns: 1fr; gap: var(--spacing-md); }
+
   .category-grid { grid-template-columns: repeat(2, 1fr); }
+
   .hero-search-bar { padding: 5px 5px 5px 18px; }
   .hero { padding: var(--spacing-xl) var(--spacing-sm); }
+
   .property-price { font-size: 24px; }
   .footer { padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md); }
-                 }
-                    
+   }
