@@ -46,7 +46,7 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(16,32,46,0.55);
+  background: rgba(11,18,32,0.55);
   backdrop-filter: blur(3px);
   z-index: 300;
   animation: fadeIn .2s ease;
@@ -67,7 +67,7 @@
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  box-shadow: -10px 0 40px rgba(16,32,46,0.15);
+  box-shadow: -10px 0 40px rgba(11,18,32,0.15);
   overflow-y: auto;
   max-height: 100vh;
   max-height: 100dvh;
@@ -136,7 +136,7 @@
   justify-content: center;
   padding: var(--spacing-2xl) var(--spacing-md);
   background:
-    linear-gradient(180deg, rgba(11,26,43,0.30) 0%, rgba(11,26,43,0.65) 100%),
+    linear-gradient(180deg, rgba(11,18,32,0.30) 0%, rgba(11,18,32,0.65) 100%),
     url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
 }
 
@@ -334,13 +334,13 @@
   align-items: flex-end;
   padding: var(--spacing-md);
   color: #fff;
-  background: linear-gradient(180deg, rgba(16,32,46,0.1), rgba(16,32,46,0.8)), var(--city-bg, var(--color-ink)) center/cover;
+  background: linear-gradient(180deg, rgba(11,18,32,0.1), rgba(11,18,32,0.8)), var(--city-bg, var(--color-ink)) center/cover;
   cursor: pointer;
   transition: transform .3s ease, box-shadow .3s ease;
 }
 .city-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(16,32,46,0.25);
+  box-shadow: 0 12px 30px rgba(11,18,32,0.25);
 }
 .city-card h3 { color: #fff; font-size: 19px; margin-bottom: 2px; letter-spacing: -0.01em; }
 .city-card p { font-size: 12.5px; opacity: 0.9; font-family: var(--font-body); }
@@ -363,7 +363,7 @@
 }
 .category-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 8px 20px rgba(0,106,255,0.12);
+  box-shadow: 0 8px 20px rgba(43,75,216,0.12);
   transform: translateY(-2px);
 }
 .category-icon {
@@ -424,7 +424,7 @@
 }
 .why-card:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 8px 20px rgba(0,106,255,0.10);
+  box-shadow: 0 8px 20px rgba(43,75,216,0.10);
   transform: translateY(-2px);
 }
 .why-icon {
@@ -437,7 +437,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  box-shadow: 0 6px 14px rgba(0,106,255,0.28);
+  box-shadow: 0 6px 14px rgba(43,75,216,0.28);
 }
 .why-icon svg { width: 16px; height: 16px; }
 .why-card h3 { font-size: 15px; margin-bottom: 6px; letter-spacing: -0.01em; }
@@ -457,7 +457,7 @@
    FOOTER
    ============================================ */
 .footer {
-  background: linear-gradient(180deg, var(--color-ink) 0%, #0a1622 100%);
+  background: linear-gradient(180deg, var(--color-ink) 0%, #05070d 100%);
   color: rgba(255,255,255,0.7);
   padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-lg);
 }
@@ -572,8 +572,8 @@
     justify-content: space-between;
     align-items: center;
   }
-     }
-   
+}
+
 /* --- Zillow-style dual price range slider --- */
 .price-filter-group {
   display: flex;
@@ -670,4 +670,4 @@
   font-size: 12px;
   font-weight: 600;
   color: var(--color-ink);
-}
+   }
