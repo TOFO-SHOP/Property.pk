@@ -100,3 +100,45 @@
   .property-price { font-size: 24px; }
   .footer { padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md); }
    }
+
+/* ============================================
+   FAILSAFE — Home page property carousel
+   Forces compact horizontal-slide cards no matter
+   what other stylesheets declare, since this file
+   loads last and always wins.
+   ============================================ */
+#latestPropertiesGrid,
+#similarPropertiesGrid {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 12px !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+#latestPropertiesGrid::-webkit-scrollbar,
+#similarPropertiesGrid::-webkit-scrollbar {
+  display: none !important;
+}
+
+#latestPropertiesGrid .property-card,
+#similarPropertiesGrid .property-card {
+  flex: 0 0 150px !important;
+  width: 150px !important;
+}
+
+#latestPropertiesGrid .property-card img,
+#similarPropertiesGrid .property-card img {
+  height: 100px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Any icon inside a property card is capped — prevents huge unstyled SVGs */
+.property-card svg {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+   }
