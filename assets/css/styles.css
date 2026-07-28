@@ -1,9 +1,6 @@
 /* ============================================
-
    DESIGN SYSTEM — Property.pk
-
    Colors/Typography sirf yahan se control hote hain
-
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -78,8 +75,9 @@ ul { list-style: none; }
 
 img { max-width: 100%; display: block; }
 
-/* Global SVG safety net — only applies to bare SVGs without a class */
-svg:not([class]) {
+/* Global SVG safety net — applies to EVERY svg by default; more specific
+   .icon-svg / component rules below still win due to higher selector specificity */
+svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
@@ -996,4 +994,4 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-                                }
+   }
