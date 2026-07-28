@@ -104,7 +104,7 @@
 
 .dashboard-settings-link {
   padding: var(--spacing-lg);
-  }
+}
 
 /* --- Add Property: amenities checkboxes --- */
 .amenities-grid {
@@ -173,10 +173,10 @@
   white-space: nowrap;
   flex-shrink: 0;
 }
-.badge-pending { background: #fff4d6; color: #a16d0a; }
-.badge-approved { background: #d9f2e6; color: #17a673; }
-.badge-sold { background: #e0e7ff; color: #4338ca; }
-.badge-rejected { background: #fde2e1; color: #d0342c; }
+.badge-pending { background: #fdf1d9; color: #b5730a; }
+.badge-approved { background: #d7f4ea; color: #12946f; }
+.badge-sold { background: #e2e7fb; color: #2b4bd8; }
+.badge-rejected { background: #fbe1e0; color: #d1342b; }
 
 .btn-mini {
   padding: 6px 12px;
@@ -235,12 +235,12 @@
 .kyc-banner span { flex: 1; }
 
 .kyc-banner-verified {
-  background: #d9f2e6;
-  color: #17a673;
+  background: #d7f4ea;
+  color: #12946f;
 }
 .kyc-banner-unverified {
-  background: #fff4d6;
-  color: #a16d0a;
+  background: #fdf1d9;
+  color: #b5730a;
 }
 .btn-mini-cta {
   padding: 6px 14px;
@@ -250,5 +250,5 @@
 }
 
 /* --- Verified/Unverified listing badges --- */
-.badge-verified { background: #d9f2e6; color: #17a673; }
-.badge-unverified { background: #f1f1f1; color: #6b7685; }
+.badge-verified { background: #d7f4ea; color: #12946f; }
+.badge-unverified { background: #f1f2f5; color: #64748b; }
