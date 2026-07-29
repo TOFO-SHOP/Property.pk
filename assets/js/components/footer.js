@@ -76,4 +76,3 @@ function renderFooter(targetId = 'footer-root') {
 }
 
 document.addEventListener('DOMContentLoaded', () => renderFooter());
-                
