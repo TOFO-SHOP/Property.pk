@@ -1,11 +1,17 @@
-/* Home page logic — Hero Search + Filters + Property Sections */
+/* Home page logic — Hero Search + City Modal + Browse Panel + Filters + Property Sections */
 
 document.addEventListener('DOMContentLoaded', () => {
   populateFilterOptions();
   handleSearchSubmit();
+  handleStatusToggle();
+  handleCityModal();
+  handleBrowseTabs();
+  handleBrowseChips();
+  renderBrowseGrid();
   handleFiltersToggle();
   handlePriceSlider();
   handleApplyFilters();
+  handleBottomSearchBtn();
   renderHomeSections();
 });
 
@@ -23,6 +29,18 @@ if (typeof showError === 'undefined') {
   };
 }
 
+/* ============================================
+   STATE
+   ============================================ */
+const homeState = {
+  status: 'For Sale',   // Buy / Rent
+  browseType: 'House',  // House / Plot / Commercial
+  city: 'Lahore'
+};
+
+/* ============================================
+   FILTER DROPDOWNS (advanced panel)
+   ============================================ */
 function populateFilterOptions() {
   const citySelect = document.getElementById('filterCity');
   const typeSelect = document.getElementById('filterType');
@@ -41,13 +59,253 @@ function handleSearchSubmit() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const params = new URLSearchParams();
-    const query = document.getElementById('searchInput')?.value.trim();
-    if (query) params.set('q', query);
-    window.location.href = `./pages/property.html?${params.toString()}`;
+    goToPropertyPage();
   });
 }
 
+function goToPropertyPage() {
+  const params = new URLSearchParams();
+  const query = document.getElementById('searchInput')?.value.trim();
+  if (query) params.set('q', query);
+  if (homeState.status) params.set('status', homeState.status);
+  if (homeState.browseType) params.set('type', homeState.browseType);
+  if (homeState.city) params.set('city', homeState.city);
+  window.location.href = `./pages/property.html?${params.toString()}`;
+}
+
+function handleBottomSearchBtn() {
+  const btn = document.getElementById('bottomSearchBtn');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    document.getElementById('searchInput')?.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ============================================
+   BUY / RENT STATUS TOGGLE
+   ============================================ */
+function handleStatusToggle() {
+  const toggle = document.getElementById('statusToggle');
+  if (!toggle) return;
+
+  toggle.querySelectorAll('.status-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      toggle.querySelectorAll('.status-pill').forEach(p => {
+        p.classList.remove('active');
+        p.setAttribute('aria-selected', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-selected', 'true');
+      homeState.status = pill.dataset.status;
+
+      const statusSelect = document.getElementById('filterStatus');
+      if (statusSelect) statusSelect.value = homeState.status;
+
+      updateSearchPlaceholder();
+      renderBrowseGrid();
+    });
+  });
+}
+
+function updateSearchPlaceholder() {
+  const input = document.getElementById('searchInput');
+  if (!input) return;
+  const labelMap = { House: 'Houses', Plot: 'Plots', Commercial: 'Commercial' };
+  input.placeholder = `Search for ${labelMap[homeState.browseType] || 'Properties'}`;
+}
+
+/* ============================================
+   CITY SELECT MODAL
+   ============================================ */
+function handleCityModal() {
+  const overlay = document.getElementById('cityModalOverlay');
+  const openBtn = document.getElementById('cityPillBtn');
+  const closeBtn = document.getElementById('cityModalClose');
+  const searchInput = document.getElementById('citySearchInput');
+  const popularGrid = document.getElementById('popularCitiesGrid');
+  const allList = document.getElementById('allCitiesList');
+  if (!overlay || !openBtn) return;
+
+  const popularCities = ['Karachi', 'Lahore', 'Islamabad', 'Rawalpindi'];
+  const allCities = (typeof CITIES !== 'undefined' && CITIES.length) ? CITIES : popularCities;
+
+  function renderPopular() {
+    popularGrid.innerHTML = popularCities.map(city => `
+      <button type="button" data-city="${city}" class="${city === homeState.city ? 'active' : ''}">
+        <span class="city-modal-city-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 9h1"/><path d="M14 9h1"/><path d="M9 13h1"/><path d="M14 13h1"/></svg>
+        </span>
+        <span>${city}</span>
+      </button>
+    `).join('');
+
+    popularGrid.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => selectCity(btn.dataset.city));
+    });
+  }
+
+  function renderAll(filter = '') {
+    const list = allCities
+      .filter(c => c.toLowerCase().includes(filter.toLowerCase()))
+      .slice(0, 200);
+
+    allList.innerHTML = list.map(city => `<button type="button" data-city="${city}">${city}</button>`).join('')
+      || `<p style="padding:12px 4px;color:var(--color-text-muted);font-size:14px;">No cities found.</p>`;
+
+    allList.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => selectCity(btn.dataset.city));
+    });
+  }
+
+  function selectCity(city) {
+    homeState.city = city;
+    document.getElementById('cityPillLabel').textContent = city;
+    document.getElementById('currentCityLabel').textContent = city;
+    const citySelect = document.getElementById('filterCity');
+    if (citySelect) citySelect.value = city;
+    closeModal();
+  }
+
+  function openModal() {
+    renderPopular();
+    renderAll();
+    if (searchInput) searchInput.value = '';
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  searchInput?.addEventListener('input', (e) => renderAll(e.target.value));
+}
+
+/* ============================================
+   BROWSE PROPERTIES TABS + CHIPS + GRID
+   ============================================ */
+function handleBrowseTabs() {
+  const tabs = document.getElementById('browseTabs');
+  if (!tabs) return;
+
+  tabs.querySelectorAll('.browse-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.querySelectorAll('.browse-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      homeState.browseType = tab.dataset.type;
+
+      const typeSelect = document.getElementById('filterType');
+      if (typeSelect) typeSelect.value = homeState.browseType;
+
+      updateSearchPlaceholder();
+      renderBrowseGrid();
+    });
+  });
+}
+
+function handleBrowseChips() {
+  const row = document.getElementById('browseChipRow');
+  if (!row) return;
+
+  row.querySelectorAll('.browse-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      row.querySelectorAll('.browse-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      renderBrowseGrid(chip.dataset.filter);
+    });
+  });
+}
+
+/* Quick-shortcut data shown inside the Browse Properties card,
+   grouped by tab (Homes / Plots / Commercial) and by chip (Popular / Type / Location / Area Size) */
+const BROWSE_SHORTCUTS = {
+  House: {
+    popular: [
+      { title: '5 Marla', sub: 'Houses' }, { title: '10 Marla', sub: 'Houses' }, { title: '1 Kanal', sub: 'Houses' },
+      { title: 'New', sub: 'Houses' }, { title: 'Low Price', sub: 'Houses' }, { title: 'For Rent', sub: 'Houses' }
+    ],
+    type: [
+      { title: 'Single Story', sub: 'Houses' }, { title: 'Double Story', sub: 'Houses' }, { title: 'Upper Portion', sub: 'Houses' },
+      { title: 'Lower Portion', sub: 'Houses' }, { title: 'Farm House', sub: 'Houses' }, { title: 'Penthouse', sub: 'Houses' }
+    ],
+    location: [
+      { title: 'DHA', sub: 'Lahore' }, { title: 'Bahria Town', sub: 'Lahore' }, { title: 'Gulberg', sub: 'Lahore' },
+      { title: 'Johar Town', sub: 'Lahore' }, { title: 'DHA', sub: 'Karachi' }, { title: 'Bahria Town', sub: 'Karachi' }
+    ],
+    area: [
+      { title: '3 Marla', sub: 'Houses' }, { title: '5 Marla', sub: 'Houses' }, { title: '7 Marla', sub: 'Houses' },
+      { title: '10 Marla', sub: 'Houses' }, { title: '1 Kanal', sub: 'Houses' }, { title: '2 Kanal', sub: 'Houses' }
+    ]
+  },
+  Plot: {
+    popular: [
+      { title: '5 Marla', sub: 'Residential Plots' }, { title: '10 Marla', sub: 'Residential Plots' }, { title: '1 Kanal', sub: 'Residential Plots' },
+      { title: '3 Marla', sub: 'Residential Plots' }, { title: 'On Installments', sub: 'Residential Plots' }, { title: 'On Installments', sub: 'Commercial Plots' }
+    ],
+    type: [
+      { title: 'Residential', sub: 'Plots' }, { title: 'Commercial', sub: 'Plots' }, { title: 'Agricultural', sub: 'Plots' },
+      { title: 'Industrial', sub: 'Plots' }, { title: 'Farm House', sub: 'Land' }, { title: 'File', sub: 'Plots' }
+    ],
+    location: [
+      { title: 'Bahria Town', sub: 'Lahore' }, { title: 'DHA', sub: 'Lahore' }, { title: 'Bahria Town', sub: 'Karachi' },
+      { title: 'DHA', sub: 'Islamabad' }, { title: 'Gwadar', sub: 'Balochistan' }, { title: 'Multan Road', sub: 'Lahore' }
+    ],
+    area: [
+      { title: '2 Marla', sub: 'Plots' }, { title: '3 Marla', sub: 'Plots' }, { title: '5 Marla', sub: 'Plots' },
+      { title: '10 Marla', sub: 'Plots' }, { title: '1 Kanal', sub: 'Plots' }, { title: '4 Kanal', sub: 'Plots' }
+    ]
+  },
+  Commercial: {
+    popular: [
+      { title: 'Small', sub: 'Offices' }, { title: 'New', sub: 'Offices' }, { title: 'On Installments', sub: 'Shops' },
+      { title: 'Small', sub: 'Shops' }, { title: 'New', sub: 'Shops' }, { title: 'Running', sub: 'Shops' }
+    ],
+    type: [
+      { title: 'Office', sub: 'Space' }, { title: 'Shop', sub: 'Commercial' }, { title: 'Warehouse', sub: 'Commercial' },
+      { title: 'Factory', sub: 'Commercial' }, { title: 'Building', sub: 'Commercial' }, { title: 'Plaza', sub: 'Commercial' }
+    ],
+    location: [
+      { title: 'Main Boulevard', sub: 'Lahore' }, { title: 'I.I. Chundrigar', sub: 'Karachi' }, { title: 'Blue Area', sub: 'Islamabad' },
+      { title: 'DHA', sub: 'Lahore' }, { title: 'Gulberg', sub: 'Lahore' }, { title: 'Bahria Town', sub: 'Karachi' }
+    ],
+    area: [
+      { title: 'Under 500 sqft', sub: 'Shops' }, { title: '500-1000 sqft', sub: 'Shops' }, { title: '1-2 Marla', sub: 'Offices' },
+      { title: '3-5 Marla', sub: 'Offices' }, { title: '1 Kanal', sub: 'Buildings' }, { title: '2 Kanal+', sub: 'Buildings' }
+    ]
+  }
+};
+
+function renderBrowseGrid(filter) {
+  const grid = document.getElementById('browseGrid');
+  if (!grid) return;
+
+  const activeFilter = filter || document.querySelector('.browse-chip.active')?.dataset.filter || 'popular';
+  const items = (BROWSE_SHORTCUTS[homeState.browseType] || BROWSE_SHORTCUTS.House)[activeFilter] || [];
+
+  grid.innerHTML = items.map(item => `
+    <button type="button" class="browse-card" data-title="${item.title}">
+      <div class="browse-card-title">${item.title}</div>
+      <div class="browse-card-sub">${item.sub}</div>
+    </button>
+  `).join('');
+
+  grid.querySelectorAll('.browse-card').forEach(card => {
+    card.addEventListener('click', () => goToPropertyPage());
+  });
+}
+
+/* ============================================
+   ADVANCED FILTERS PANEL
+   ============================================ */
 function handleFiltersToggle() {
   const btn = document.getElementById('filtersToggle');
   const panel = document.getElementById('filtersPanel');
@@ -55,11 +313,9 @@ function handleFiltersToggle() {
 
   btn.addEventListener('click', () => {
     panel.classList.toggle('open');
-    btn.classList.toggle('active');
   });
 }
 
-/* ---- Zillow-style dual price range slider ---- */
 function formatPakPriceShort(value) {
   value = Number(value);
   if (value >= 50000000) return 'Rs 5 Crore+';
@@ -110,9 +366,9 @@ function handleApplyFilters() {
   btn.addEventListener('click', () => {
     const params = new URLSearchParams();
     const query = document.getElementById('searchInput')?.value.trim();
-    const city = document.getElementById('filterCity')?.value;
-    const type = document.getElementById('filterType')?.value;
-    const status = document.getElementById('filterStatus')?.value;
+    const city = document.getElementById('filterCity')?.value || homeState.city;
+    const type = document.getElementById('filterType')?.value || homeState.browseType;
+    const status = document.getElementById('filterStatus')?.value || homeState.status;
     const minPrice = document.getElementById('priceMinSlider')?.value;
     const maxPrice = document.getElementById('priceMaxSlider')?.value;
     const rooms = document.getElementById('filterRooms')?.value;
@@ -155,7 +411,7 @@ const ICONS = {
 const CATEGORY_ICON_MAP = { House: 'house', Flat: 'flat', Apartment: 'apartment', Plot: 'plot', Commercial: 'commercial' };
 
 /* ============================================
-   SECTION RENDERING
+   SECTION RENDERING (Latest / Categories / Why Us)
    ============================================ */
 function renderHomeSections() {
   const root = document.getElementById('homeSectionsRoot');
@@ -165,185 +421,4 @@ function renderHomeSections() {
   root.innerHTML = `
     <section class="section" id="latestPropertiesSection">
       <div class="section-head">
-        <div><span class="section-eyebrow">Fresh on the market</span><h2 class="section-title">Latest Properties</h2></div>
-        <a class="section-link" href="./pages/property.html">View all</a>
-      </div>
-      <div class="property-grid" id="latestPropertiesGrid"></div>
-    </section>
-
-    <section class="section section-alt" id="propertyCategoriesSection">
-      <div class="container">
-        <div class="section-head">
-          <div><span class="section-eyebrow">Browse by type</span><h2 class="section-title">Property Categories</h2></div>
-        </div>
-        <div class="category-grid" id="propertyCategoriesGrid"></div>
-      </div>
-    </section>
-
-    <section class="section" id="whyChooseUsSection">
-      <button class="section-head why-toggle" id="whyToggleBtn" type="button">
-        <div><span class="section-eyebrow">The Property.pk difference</span><h2 class="section-title">Why Choose Us</h2></div>
-        <svg class="why-toggle-arrow" id="whyToggleArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="why-grid" id="whyChooseUsGrid"></div>
-    </section>
-  `;
-
-  const latest = [...dummyProperties].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate)).slice(0, 8);
-
-  renderPropertyCards('latestPropertiesGrid', latest);
-  renderPropertyCategories();
-  renderWhyChooseUs();
-  handleWhyToggle();
-}
-
-function renderPropertyCards(gridId, properties) {
-  const grid = document.getElementById(gridId);
-  if (!grid) return;
-
-  if (!properties || properties.length === 0) {
-    showError(gridId, 'No properties found right now.');
-    return;
-  }
-
-  try {
-    grid.innerHTML = properties.map(p => `
-      <a href="./pages/property-details.html?id=${p.id}" class="property-card" onclick="recordRecentlyViewed(${p.id})">
-        <div class="property-card-media">
-          <img src="${p.image}" alt="${p.title}" loading="lazy">
-          <button class="save-heart-btn" data-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation(); toggleSaveProperty(${p.id});">
-            <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
-          </button>
-        </div>
-        <div class="property-card-body">
-          <div class="property-card-price">${formatPrice(p.price)}</div>
-          <h3 class="property-card-title">${truncateText(p.title, 28)}</h3>
-          <div class="property-card-meta">${ICONS.pin}<span>${p.city}, ${p.area}</span></div>
-          <div class="property-card-meta">
-            <span>${ICONS.bed} ${p.bedrooms} Rooms</span>
-            <span>${ICONS.bath} ${p.bathrooms} Baths</span>
-          </div>
-          <div class="property-card-meta">
-            <span>${ICONS.ruler} ${p.marla ?? p.size ?? '—'} Marla</span>
-          </div>
-        </div>
-      </a>
-    `).join('');
-  } catch (err) {
-    console.error(`renderPropertyCards failed for #${gridId}:`, err);
-    return;
-  }
-
-  initAutoScroll(gridId);
-  updateHeartIcons();
-}
-
-function renderPropertyCategories() {
-  const grid = document.getElementById('propertyCategoriesGrid');
-  if (!grid || typeof PROPERTY_TYPES === 'undefined') return;
-
-  grid.innerHTML = PROPERTY_TYPES.map(type => `
-    <a href="./pages/property.html?type=${encodeURIComponent(type)}" class="category-card">
-      <div class="category-icon">${ICONS[CATEGORY_ICON_MAP[type]] || ICONS.flat}</div>
-      <h3>${type}</h3>
-    </a>
-  `).join('');
-}
-
-function renderWhyChooseUs() {
-  const grid = document.getElementById('whyChooseUsGrid');
-  if (!grid) return;
-
-  const points = [
-    { icon: ICONS.shield, title: 'Verified Listings', desc: 'Every property is manually reviewed before it goes live.' },
-    { icon: ICONS.handshake, title: 'Trusted Network', desc: 'Deal only with verified buyers, sellers and agents.' },
-    { icon: ICONS.search, title: 'Powerful Search', desc: 'Filter by city, price, type and more to find the right fit fast.' },
-    { icon: ICONS.headset, title: 'Dedicated Support', desc: 'Our team is on hand whenever you need help.' }
-  ];
-
-  grid.innerHTML = points.map(p => `
-    <div class="why-card">
-      <div class="why-icon">${p.icon}</div>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-    </div>
-  `).join('');
-}
-
-function handleWhyToggle() {
-  const btn = document.getElementById('whyToggleBtn');
-  const grid = document.getElementById('whyChooseUsGrid');
-  const arrow = document.getElementById('whyToggleArrow');
-  if (!btn || !grid) return;
-
-  btn.addEventListener('click', () => {
-    grid.classList.toggle('open');
-    arrow.classList.toggle('rotated');
-  });
-}
-
-/* ============================================
-   SAVE / RECENTLY VIEWED
-   ============================================ */
-function getSavedProperties() {
-  return JSON.parse(localStorage.getItem('propertypk_saved') || '[]');
-}
-
-function toggleSaveProperty(id) {
-  let saved = getSavedProperties();
-  if (saved.includes(id)) {
-    saved = saved.filter(x => x !== id);
-  } else {
-    saved.push(id);
-  }
-  localStorage.setItem('propertypk_saved', JSON.stringify(saved));
-  updateHeartIcons();
-}
-
-function updateHeartIcons() {
-  const saved = getSavedProperties();
-  document.querySelectorAll('.save-heart-btn').forEach(btn => {
-    const id = Number(btn.dataset.id);
-    btn.classList.toggle('saved', saved.includes(id));
-  });
-}
-
-function recordRecentlyViewed(id) {
-  let recent = JSON.parse(localStorage.getItem('propertypk_recent_viewed') || '[]');
-  recent = recent.filter(x => x !== id);
-  recent.unshift(id);
-  recent = recent.slice(0, 10);
-  localStorage.setItem('propertypk_recent_viewed', JSON.stringify(recent));
-}
-
-/* ============================================
-   AUTO-SCROLL CAROUSEL
-   ============================================ */
-function initAutoScroll(gridId) {
-  const grid = document.getElementById(gridId);
-  if (!grid) return;
-
-  let paused = false;
-  let resumeTimer = null;
-
-  grid.addEventListener('pointerdown', () => {
-    paused = true;
-    clearTimeout(resumeTimer);
-  });
-  grid.addEventListener('pointerup', () => {
-    resumeTimer = setTimeout(() => { paused = false; }, 2000);
-  });
-  grid.addEventListener('mouseenter', () => { paused = true; });
-  grid.addEventListener('mouseleave', () => { paused = false; });
-
-  setInterval(() => {
-    if (paused) return;
-    if (grid.scrollWidth <= grid.clientWidth) return;
-    const atEnd = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 5;
-    if (atEnd) {
-      grid.scrollTo({ left: 0, behavior: 'smooth' });
-    } else {
-      grid.scrollBy({ left: 160, behavior: 'smooth' });
-    }
-  }, 3000);
-    }
+        <div>
