@@ -39,17 +39,9 @@
   <main>
 
     <!-- ============ HERO (Zameen-style) ============ -->
+    <!-- Note: logo/hamburger/account are rendered by navbar.js into #navbar-root above.
+         This section only holds the colored hero band (skyline + Buy/Rent + search). -->
     <section class="hero-v2">
-      <div class="hero-v2-topbar">
-        <button class="hero-v2-menu-btn" id="menuBtn" aria-label="Menu">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-        </button>
-        <div class="hero-v2-logo">Property<span>.pk</span></div>
-        <button class="hero-v2-id-btn" aria-label="My Account">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
-        </button>
-      </div>
-
       <!-- decorative skyline -->
       <svg class="hero-v2-skyline" viewBox="0 0 720 160" preserveAspectRatio="none" aria-hidden="true">
         <rect x="0" y="70" width="40" height="90" fill="rgba(255,255,255,0.08)"/>
@@ -131,6 +123,12 @@
 
           <div class="price-filter-group">
             <label class="price-filter-label">Price Range (PKR)</label>
+            <div class="price-histogram">
+              <span style="height:30%"></span><span style="height:45%"></span><span style="height:60%"></span>
+              <span style="height:80%"></span><span style="height:100%"></span><span style="height:90%"></span>
+              <span style="height:70%"></span><span style="height:55%"></span><span style="height:40%"></span>
+              <span style="height:30%"></span><span style="height:20%"></span><span style="height:15%"></span>
+            </div>
             <div class="dual-slider">
               <div class="dual-slider-track"></div>
               <div class="dual-slider-range" id="priceSliderRange"></div>
@@ -237,5 +235,5 @@
 
   <script src="./assets/js/pages/home.js"></script>
 </body>
-  </html>
-                                                                                                                       
+          </html>
+          
