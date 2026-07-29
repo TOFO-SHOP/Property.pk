@@ -37,76 +37,185 @@
   <div id="navbar-root"></div>
 
   <main>
-<section class="hero">
-      <div class="hero-inner">
-        <h1>Find Homes.<br>Verified Listings.</h1>
+
+    <!-- ============ HERO (Zameen-style) ============ -->
+    <section class="hero-v2">
+      <div class="hero-v2-topbar">
+        <button class="hero-v2-menu-btn" id="menuBtn" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+        <div class="hero-v2-logo">Property<span>.pk</span></div>
+        <button class="hero-v2-id-btn" aria-label="My Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+        </button>
+      </div>
+
+      <!-- decorative skyline -->
+      <svg class="hero-v2-skyline" viewBox="0 0 720 160" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="0" y="70" width="40" height="90" fill="rgba(255,255,255,0.08)"/>
+        <rect x="45" y="50" width="30" height="110" fill="rgba(255,255,255,0.10)"/>
+        <rect x="80" y="90" width="45" height="70" fill="rgba(255,255,255,0.07)"/>
+        <polygon points="150,160 170,60 190,160" fill="rgba(255,255,255,0.12)"/>
+        <rect x="210" y="60" width="18" height="100" fill="rgba(255,255,255,0.10)"/>
+        <rect x="235" y="40" width="14" height="120" fill="rgba(255,255,255,0.14)"/>
+        <rect x="470" y="55" width="16" height="105" fill="rgba(255,255,255,0.12)"/>
+        <rect x="495" y="75" width="34" height="85" fill="rgba(255,255,255,0.08)"/>
+        <rect x="540" y="95" width="26" height="65" fill="rgba(255,255,255,0.10)"/>
+        <rect x="580" y="65" width="20" height="95" fill="rgba(255,255,255,0.09)"/>
+        <rect x="615" y="85" width="46" height="75" fill="rgba(255,255,255,0.07)"/>
+        <rect x="670" y="55" width="20" height="105" fill="rgba(255,255,255,0.11)"/>
+      </svg>
+
+      <div class="hero-v2-inner">
+        <div class="status-toggle" role="tablist" id="statusToggle">
+          <button type="button" class="status-pill active" data-status="For Sale" role="tab" aria-selected="true">Buy</button>
+          <button type="button" class="status-pill" data-status="For Rent" role="tab" aria-selected="false">Rent</button>
+        </div>
+
         <form class="hero-search-bar" id="searchForm">
-          <input type="text" id="searchInput" placeholder="Search by title, city, or area...">
-          <button type="submit" aria-label="Search">
+          <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search for Houses">
+          <button type="button" class="city-pill" id="cityPillBtn">
+            <span id="cityPillLabel">Lahore</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 6 15 12 9 18" fill="none"/></svg>
+          </button>
+          <button type="submit" class="hero-search-submit" aria-label="Search">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
         </form>
-
-        <div class="filters-bar">
-          <button type="button" id="filtersToggle" class="filters-toggle-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="#fff"/><circle cx="15" cy="12" r="2" fill="#fff"/><circle cx="9" cy="18" r="2" fill="#fff"/></svg>
-            <span>Filters</span>
-          </button>
-          <div class="filters-panel" id="filtersPanel">
-            <select id="filterCity"><option value="">All Cities</option></select>
-            <select id="filterType"><option value="">All Types</option></select>
-            <select id="filterStatus">
-              <option value="">Status</option>
-              <option value="For Sale">For Sale</option>
-              <option value="For Rent">For Rent</option>
-            </select>
-
-            <div class="price-filter-group">
-              <label class="price-filter-label">Price Range (PKR)</label>
-              <div class="price-histogram">
-                <span style="height:30%"></span><span style="height:45%"></span><span style="height:60%"></span>
-                <span style="height:80%"></span><span style="height:100%"></span><span style="height:90%"></span>
-                <span style="height:70%"></span><span style="height:55%"></span><span style="height:40%"></span>
-                <span style="height:30%"></span><span style="height:20%"></span><span style="height:15%"></span>
-              </div>
-              <div class="dual-slider">
-                <div class="dual-slider-track"></div>
-                <div class="dual-slider-range" id="priceSliderRange"></div>
-                <input type="range" id="priceMinSlider" min="0" max="50000000" step="100000" value="0">
-                <input type="range" id="priceMaxSlider" min="0" max="50000000" step="100000" value="50000000">
-              </div>
-              <div class="price-slider-labels">
-                <span id="priceMinLabel">Rs 0</span>
-                <span id="priceMaxLabel">Rs 5 Crore+</span>
-              </div>
-            </div>
-
-            <select id="filterRooms">
-              <option value="">Bedrooms</option>
-              <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
-              <option value="4">4+</option><option value="5">5+</option>
-            </select>
-            <select id="filterBathrooms">
-              <option value="">Bathrooms</option>
-              <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
-              <option value="4">4+</option>
-            </select>
-            <select id="filterFloor">
-              <option value="">Stories</option>
-              <option value="Single Story">Single Story</option>
-              <option value="Double Story">Double Story</option>
-              <option value="Triple Story">Triple Story</option>
-            </select>
-            <button type="button" class="btn btn-primary btn-block" id="applyFiltersBtn">Search Properties</button>
-          </div>
-        </div>
       </div>
-                                      </section>
+    </section>
+
+    <!-- ============ BROWSE PROPERTIES PANEL ============ -->
+    <div class="container">
+      <section class="browse-panel">
+        <h2 class="browse-panel-title">Browse Properties</h2>
+
+        <div class="browse-tabs" role="tablist" id="browseTabs">
+          <button type="button" class="browse-tab active" data-type="House" role="tab" aria-selected="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+            <span>Homes</span>
+          </button>
+          <button type="button" class="browse-tab" data-type="Plot" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7 7"/><path d="M21 3l-7 7"/><rect x="4" y="4" width="16" height="16" rx="1"/></svg>
+            <span>Plots</span>
+          </button>
+          <button type="button" class="browse-tab" data-type="Commercial" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/></svg>
+            <span>Commercial</span>
+          </button>
+        </div>
+
+        <div class="browse-chip-row" id="browseChipRow">
+          <button type="button" class="browse-chip active" data-filter="popular">Popular</button>
+          <button type="button" class="browse-chip" data-filter="type">Type</button>
+          <button type="button" class="browse-chip" data-filter="location">Location</button>
+          <button type="button" class="browse-chip" data-filter="area">Area Size</button>
+        </div>
+
+        <div class="browse-grid" id="browseGrid"></div>
+
+        <button type="button" class="browse-advanced-toggle" id="filtersToggle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="6" r="2" fill="var(--color-primary)"/><circle cx="15" cy="12" r="2" fill="var(--color-primary)"/><circle cx="9" cy="18" r="2" fill="var(--color-primary)"/></svg>
+          <span>Advanced Filters</span>
+        </button>
+
+        <div class="filters-panel" id="filtersPanel">
+          <select id="filterCity"><option value="">All Cities</option></select>
+          <select id="filterType"><option value="">All Types</option></select>
+          <select id="filterStatus">
+            <option value="">Status</option>
+            <option value="For Sale">For Sale</option>
+            <option value="For Rent">For Rent</option>
+          </select>
+
+          <div class="price-filter-group">
+            <label class="price-filter-label">Price Range (PKR)</label>
+            <div class="dual-slider">
+              <div class="dual-slider-track"></div>
+              <div class="dual-slider-range" id="priceSliderRange"></div>
+              <input type="range" id="priceMinSlider" min="0" max="50000000" step="100000" value="0">
+              <input type="range" id="priceMaxSlider" min="0" max="50000000" step="100000" value="50000000">
+            </div>
+            <div class="price-slider-labels">
+              <span id="priceMinLabel">Rs 0</span>
+              <span id="priceMaxLabel">Rs 5 Crore+</span>
+            </div>
+          </div>
+
+          <select id="filterRooms">
+            <option value="">Bedrooms</option>
+            <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
+            <option value="4">4+</option><option value="5">5+</option>
+          </select>
+          <select id="filterBathrooms">
+            <option value="">Bathrooms</option>
+            <option value="1">1+</option><option value="2">2+</option><option value="3">3+</option>
+            <option value="4">4+</option>
+          </select>
+          <select id="filterFloor">
+            <option value="">Stories</option>
+            <option value="Single Story">Single Story</option>
+            <option value="Double Story">Double Story</option>
+            <option value="Triple Story">Triple Story</option>
+          </select>
+          <button type="button" class="btn btn-primary btn-block" id="applyFiltersBtn">Search Properties</button>
+        </div>
+      </section>
+    </div>
 
     <div class="container" id="homeSectionsRoot"></div>
   </main>
 
   <div id="footer-root"></div>
+
+  <!-- ============ CITY SELECT MODAL ============ -->
+  <div class="city-modal-overlay" id="cityModalOverlay">
+    <div class="city-modal">
+      <div class="city-modal-head">
+        <div>
+          <h3>Select City</h3>
+          <span class="city-modal-current">Current: <b id="currentCityLabel">Lahore</b></span>
+        </div>
+        <button type="button" id="cityModalClose" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="city-modal-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="citySearchInput" placeholder="Search City">
+      </div>
+      <div class="city-modal-body">
+        <h4>Popular Cities</h4>
+        <div class="city-modal-popular-grid" id="popularCitiesGrid"></div>
+        <h4>All Cities</h4>
+        <div class="city-modal-all-list" id="allCitiesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BOTTOM NAV (mobile) ============ -->
+  <nav class="bottom-nav">
+    <a href="./index.html" class="bottom-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="./pages/property.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+      <span>Properties</span>
+    </a>
+    <button type="button" class="bottom-nav-fab" id="bottomSearchBtn" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <a href="./pages/property.html?saved=1" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+      <span>Saved</span>
+    </a>
+    <a href="./pages/profile.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+      <span>Profile</span>
+    </a>
+  </nav>
 
   <!-- Scripts -->
   <script src="./assets/js/utils/constants.js"></script>
@@ -129,4 +238,4 @@
   <script src="./assets/js/pages/home.js"></script>
 </body>
   </html>
-  
+                                                                                                                       
